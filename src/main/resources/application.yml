@@ -1,0 +1,8 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://{DATABASE_URL}:3306/{SCHEMA_NAME}
+    username: {USERNAME}
+    password: {PASSWORD}
