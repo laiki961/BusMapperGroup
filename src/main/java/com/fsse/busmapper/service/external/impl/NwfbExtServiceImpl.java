@@ -30,7 +30,7 @@ public class NwfbExtServiceImpl implements NwfbExtService {
     public CtbRouteStopResponseExtDto getRouteStopForSpecificBus(String route, String dir) {
         CtbRouteStopResponseExtDto responseExtDto = restTemplate.getForObject(
                 "https://rt.data.gov.hk/" +
-                "v1/transport/citybus-nwfb/routestop/CTB" + route + dir,
+                "v1/transport/citybus-nwfb/route-stop/CTB/" + route + "/" + dir,
                 CtbRouteStopResponseExtDto.class
         );
         return responseExtDto;
@@ -40,7 +40,7 @@ public class NwfbExtServiceImpl implements NwfbExtService {
     public CtbRouteResponseExtDto getBusOriNDest(String route) {
         CtbRouteResponseExtDto responseExtDto = restTemplate.getForObject(
                 "https://rt.data.gov.hk/" +
-                        "v1/transport/citybusnwfb/route/CTB/" + route,
+                        "v1/transport/citybus-nwfb/route/CTB/" + route,
                 CtbRouteResponseExtDto.class
         );
         return responseExtDto;
