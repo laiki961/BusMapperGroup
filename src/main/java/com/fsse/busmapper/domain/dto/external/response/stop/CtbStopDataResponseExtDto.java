@@ -1,10 +1,14 @@
 package com.fsse.busmapper.domain.dto.external.response.stop;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class CtbStopDataResponseExtDto {
     private String stop;
     private String name_en;
+    @JsonProperty("lat")
     private String lat;
-    private String lon;
+    @JsonProperty("long")
+    private String longitude;
 
     public String getStop() {
         return stop;
@@ -30,12 +34,12 @@ public class CtbStopDataResponseExtDto {
         this.lat = lat;
     }
 
-    public String getLon() {
-        return lon;
+    public String getLongitude() {
+        return longitude;
     }
 
-    public void setLon(String lon) {
-        this.lon = lon;
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     @Override
@@ -43,8 +47,8 @@ public class CtbStopDataResponseExtDto {
         return "CtbStopDataResponseExtDto{" +
                 "stop='" + stop + '\'' +
                 ", name_en='" + name_en + '\'' +
-                ", lat='" + lat + '\'' +
-                ", lon='" + lon + '\'' +
+                ", latitude='" + lat + '\'' +
+                ", longitude='" + longitude + '\'' +
                 '}';
     }
 }
