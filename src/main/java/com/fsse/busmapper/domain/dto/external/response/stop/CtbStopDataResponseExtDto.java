@@ -6,9 +6,9 @@ public class CtbStopDataResponseExtDto {
     private String stop;
     private String name_en;
     @JsonProperty("lat")
-    private String lat;
+    private Double lat;
     @JsonProperty("long")
-    private String longitude;
+    private Double longitude;
 
     public String getStop() {
         return stop;
@@ -26,19 +26,19 @@ public class CtbStopDataResponseExtDto {
         this.name_en = name_en;
     }
 
-    public String getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(String lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
