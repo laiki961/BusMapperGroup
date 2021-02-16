@@ -1,4 +1,4 @@
-package com.fsse.busmapper.domain;
+package com.fsse.busmapper.domain.entity;
 
 import javax.persistence.*;
 

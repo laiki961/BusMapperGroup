@@ -1,6 +1,7 @@
-package com.fsse.busmapper.domain;
+package com.fsse.busmapper.domain.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Stop {
@@ -12,6 +13,8 @@ public class Stop {
     private String latitude;
     @Column(name = "longitude", columnDefinition = "DECIMAL(16,13)")
     private String longitude;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "stop")
+    List<RouteStop> routeStops;
 
     public String getStopId() {
         return stopId;

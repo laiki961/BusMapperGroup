@@ -1,8 +1,5 @@
 package com.fsse.busmapper.domain.dto.external.response.stop;
 
-import com.fsse.busmapper.domain.Stop;
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class CtbStopResponseExtDto {
     private String type;
     private CtbStopDataResponseExtDto data;

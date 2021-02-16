@@ -1,19 +1,19 @@
-package com.fsse.busmapper.domain;
+package com.fsse.busmapper.domain.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class RouteStop {
     @Id
     private String routeId;
     @Column
-    private String direction;
+    private String dir;
     @Column
     private int seq;
-    @Column
-    private String stopId;
+    @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Stop stop;
+
 
     public String getRouteId() {
         return routeId;
@@ -24,11 +24,11 @@ public class RouteStop {
     }
 
     public String getDirection() {
-        return direction;
+        return dir;
     }
 
     public void setDirection(String direction) {
-        this.direction = direction;
+        this.dir = dir;
     }
 
     public int getSeq() {
@@ -39,21 +39,30 @@ public class RouteStop {
         this.seq = seq;
     }
 
-    public String getStopId() {
-        return stopId;
+    public String getDir() {
+        return dir;
     }
 
-    public void setStopId(String stopId) {
-        this.stopId = stopId;
+    public void setDir(String dir) {
+        this.dir = dir;
     }
+
+    public Stop getStop() {
+        return stop;
+    }
+
+    public void setStop(Stop stop) {
+        this.stop = stop;
+    }
+
 
     @Override
     public String toString() {
         return "RouteStop{" +
                 "routeId='" + routeId + '\'' +
-                ", direction='" + direction + '\'' +
+                ", direction='" + dir + '\'' +
                 ", seq=" + seq +
-                ", stopId='" + stopId + '\'' +
+                ", stopId='" + stop + '\'' +
                 '}';
     }
 }
