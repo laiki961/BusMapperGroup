@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface RouteStopRepositary extends CrudRepository<RouteStop, String> {
-    List<RouteStop> findByRouteStop(List<String> routeStop);
+    List<RouteStop> findByRouteId(String routeId);
 }

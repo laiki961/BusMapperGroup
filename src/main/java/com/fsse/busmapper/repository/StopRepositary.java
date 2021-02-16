@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface StopRepositary extends CrudRepository <Stop, String>{
-    List<Stop> findByStop(List<String> stop);
+    List<Stop> findByStopId(String stopId);
 }
