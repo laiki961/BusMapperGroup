@@ -1,20 +1,27 @@
 package com.fsse.busmapper.domain.entity;
 
+import com.fsse.busmapper.domain.RouteStop;
+import com.fsse.busmapper.domain.Stop;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-public class Stop {
+public class StopEntity {
+
     @Id
     private String stopId;
     @Column
     private String stopname;
     @Column(name = "latitude", columnDefinition = "DECIMAL(15,13)")
-    private String latitude;
+    private Double latitude;
     @Column(name = "longitude", columnDefinition = "DECIMAL(16,13)")
-    private String longitude;
+    private Double longitude;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "stop")
-    List<RouteStop> routeStops;
+    List<RouteStopEntity> routeStopEntities;
+
 
     public String getStopId() {
         return stopId;
@@ -32,19 +39,19 @@ public class Stop {
         this.stopname = stopname;
     }
 
-    public String getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 

@@ -3,6 +3,7 @@ package com.fsse.busmapper.domain.dto.external.response.route;
 public class CtbRouteDataResponseExtDto {
     private String co;
     private String route;
+    private String orig_en;
     private String dest_en;
 
     public String getCo() {
@@ -21,6 +22,14 @@ public class CtbRouteDataResponseExtDto {
         this.route = route;
     }
 
+    public String getOrig_en() {
+        return orig_en;
+    }
+
+    public void setOrig_en(String orig_en) {
+        this.orig_en = orig_en;
+    }
+
     public String getDest_en() {
         return dest_en;
     }
@@ -34,6 +43,7 @@ public class CtbRouteDataResponseExtDto {
         return "CtbRouteDataResponseExtDto{" +
                 "co='" + co + '\'' +
                 ", route='" + route + '\'' +
+                ", orig_en='" + orig_en + '\'' +
                 ", dest_en='" + dest_en + '\'' +
                 '}';
     }

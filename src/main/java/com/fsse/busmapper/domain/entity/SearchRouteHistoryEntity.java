@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "SearchRouteHistory")
-public class SearchRouteHistory {
+public class SearchRouteHistoryEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
