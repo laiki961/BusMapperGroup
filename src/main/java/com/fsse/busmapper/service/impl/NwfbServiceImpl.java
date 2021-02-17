@@ -11,6 +11,7 @@ import com.fsse.busmapper.repository.RouteStopRepository;
 import com.fsse.busmapper.repository.StopRepository;
 import com.fsse.busmapper.service.NwfbService;
 import com.fsse.busmapper.service.external.NwfbExtService;
+import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +35,7 @@ public class NwfbServiceImpl implements NwfbService {
         return stop;
     }
 
+    //TODO
     @Override
     public RouteStop getRouteStopForSpecificBus(String route, String dir) {
         RouteStop routeStop = nwfbExtService.routeStop(route,dir);
@@ -42,6 +44,7 @@ public class NwfbServiceImpl implements NwfbService {
         return routeStop;
     }
 
+    //TODO
     @Override
     public Route getBusOriNDest() {
         Route route = nwfbExtService.route();

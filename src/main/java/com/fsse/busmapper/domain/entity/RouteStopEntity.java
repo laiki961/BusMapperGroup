@@ -18,20 +18,14 @@ public class RouteStopEntity {
 
     @Column(name = "sequence",columnDefinition = "INTEGER",nullable = false)
     private int seq;
-    @JoinColumn
+
+    @Column
+    private String routeId;
+
+    @JoinColumn(name = "stopId")
     @ManyToOne(fetch = FetchType.LAZY)
     private StopEntity stop;
 
-
-
-
-    public String getCo() {
-        return co;
-    }
-
-    public void setCo(String co) {
-        this.co = co;
-    }
 
     public Integer getRouteStopId() {
         return routeStopId;
@@ -41,11 +35,19 @@ public class RouteStopEntity {
         this.routeStopId = routeStopId;
     }
 
-    public String getDirection() {
+    public String getCo() {
+        return co;
+    }
+
+    public void setCo(String co) {
+        this.co = co;
+    }
+
+    public String getDir() {
         return dir;
     }
 
-    public void setDirection(String direction) {
+    public void setDir(String dir) {
         this.dir = dir;
     }
 
@@ -57,20 +59,20 @@ public class RouteStopEntity {
         this.seq = seq;
     }
 
-    public String getDir() {
-        return dir;
-    }
-
-    public void setDir(String dir) {
-        this.dir = dir;
-    }
-
     public StopEntity getStop() {
         return stop;
     }
 
     public void setStop(StopEntity stop) {
         this.stop = stop;
+    }
+
+    public String getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(String routeId) {
+        this.routeId = routeId;
     }
 
     @Override
@@ -80,6 +82,7 @@ public class RouteStopEntity {
                 ", co='" + co + '\'' +
                 ", dir='" + dir + '\'' +
                 ", seq=" + seq +
+                ", routeId='" + routeId + '\'' +
                 ", stop=" + stop +
                 '}';
     }

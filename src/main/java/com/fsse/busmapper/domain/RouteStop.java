@@ -9,12 +9,12 @@ public class RouteStop {
     private String dir;
     private int seq;
     private String stopId;
-    private String routeStopId;
+    private Integer routeStopId;
 
     public RouteStopEntity toRouteStopEntity() {
         RouteStopEntity entity = new RouteStopEntity();
         entity.setCo(getCo());
-        entity.setRouteId(getRouteId());
+        entity.setRouteStopId(getRouteStopId());
         entity.setDir(getDir());
         entity.setSeq(getSeq());
         return entity;
@@ -60,11 +60,11 @@ public class RouteStop {
         this.stopId = stopId;
     }
 
-    public String getRouteStopId() {
+    public Integer getRouteStopId() {
         return routeStopId;
     }
 
-    public void setRouteStopId(String routeStopId) {
+    public void setRouteStopId(Integer routeStopId) {
         this.routeStopId = routeStopId;
     }
 
@@ -76,7 +76,7 @@ public class RouteStop {
                 ", dir='" + dir + '\'' +
                 ", seq=" + seq +
                 ", stopId='" + stopId + '\'' +
-                ", routeStopId='" + routeStopId + '\'' +
+                ", routeStopId=" + routeStopId +
                 '}';
     }
 }
