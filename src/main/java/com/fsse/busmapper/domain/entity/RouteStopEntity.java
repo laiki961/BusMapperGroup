@@ -3,14 +3,20 @@ package com.fsse.busmapper.domain.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "routeStop")
 public class RouteStopEntity {
-    @Column
-    private String co;
     @Id
-    private String routeId;
-    @Column
+    @Column(name = "routeStopId", nullable = true, unique = true, updatable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer routeStopId;
+
+    @Column(name = "bus_company_name",columnDefinition = "VARCHAR(255)",nullable = false)
+    private String co;
+
+    @Column(name = "direction",columnDefinition =  "VARCHAR(255)",nullable = false)
     private String dir;
-    @Column
+
+    @Column(name = "sequence",columnDefinition = "INTEGER",nullable = false)
     private int seq;
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
@@ -27,12 +33,12 @@ public class RouteStopEntity {
         this.co = co;
     }
 
-    public String getRouteId() {
-        return routeId;
+    public Integer getRouteStopId() {
+        return routeStopId;
     }
 
-    public void setRouteId(String routeId) {
-        this.routeId = routeId;
+    public void setRouteStopId(Integer routeStopId) {
+        this.routeStopId = routeStopId;
     }
 
     public String getDirection() {
@@ -67,14 +73,14 @@ public class RouteStopEntity {
         this.stop = stop;
     }
 
-
     @Override
     public String toString() {
-        return "RouteStop{" +
-                "routeId='" + routeId + '\'' +
-                ", direction='" + dir + '\'' +
+        return "RouteStopEntity{" +
+                "routeStopId=" + routeStopId +
+                ", co='" + co + '\'' +
+                ", dir='" + dir + '\'' +
                 ", seq=" + seq +
-                ", stopId='" + stop + '\'' +
+                ", stop=" + stop +
                 '}';
     }
 }

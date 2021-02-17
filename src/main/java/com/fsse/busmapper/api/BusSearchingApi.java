@@ -21,7 +21,7 @@ public class BusSearchingApi {
     @GetMapping("/getBusStopInfo/{stop_id}")
     public CtbStopDataResponseExtDto getBusStopInfo(@PathVariable("stop_id") String stopId){
         CtbStopResponseExtDto dto = nwfbService.getBusStopInfo(stopId);
-//        Stop stop = nwfbExtService.saveStopElements(stopId);
+        Stop stop = nwfbExtService.saveStopElements(stopId);
         CtbStopDataResponseExtDto responseExtDto = new CtbStopDataResponseExtDto(stop);
 
         return dto;
