@@ -4,19 +4,21 @@ import javax.persistence.*;
 
 @Entity
 public class RouteStopEntity {
-    @Column
-    private String co;
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private String routeStopId;
+    @Column
     private String routeId;
     @Column
     private String dir;
     @Column
     private int seq;
-    @JoinColumn
+
+    @JoinColumn(name = "stopId")
     @ManyToOne(fetch = FetchType.LAZY)
     private StopEntity stop;
-
-
+    @Column
+    private String co;
 
 
     public String getCo() {

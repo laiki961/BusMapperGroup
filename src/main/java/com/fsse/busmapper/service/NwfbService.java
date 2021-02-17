@@ -7,5 +7,5 @@ import com.fsse.busmapper.domain.Stop;
 public interface NwfbService {
     Stop getBusStopInfo(String stopId);
     RouteStop getRouteStopForSpecificBus(String route, String dir);
-    Route getBusOriNDest (String route);
+    Route getBusOriNDest ();
 }

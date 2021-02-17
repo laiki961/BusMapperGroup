@@ -1,11 +1,22 @@
 package com.fsse.busmapper.domain.dto.external.response.routeStop;
 
+import com.fsse.busmapper.domain.RouteStop;
+import com.fsse.busmapper.domain.Stop;
+
 public class CtbRouteStopDataResponseExtDto {
     private String co;
     private String route;
     private String dir;
     private int seq;
     public String stop;
+
+    public CtbRouteStopDataResponseExtDto(RouteStop routeStop) {
+        this.co = routeStop.getCo();
+        this.route = routeStop.getRouteId();
+        this.dir = routeStop.getDir();
+        this.seq = routeStop.getSeq();
+        this.stop = routeStop.getStopId();
+    }
 
     public String getCo() {
         return co;
