@@ -19,18 +19,20 @@ public class NwfbExtServiceImpl implements NwfbExtService {
     @Qualifier("nwfbRestTemplate")
     private RestTemplate restTemplate;
 
-
+    @Override
     public Stop stop(String stopId){
         CtbStopResponseExtDto responseExtDto = getBusStopInfo(stopId);
         return responseExtDto.toStop();
     }
 
+    @Override
     public RouteStop routeStop(String route, String dir){
         CtbRouteStopResponseExtDto responseExtDto = getRouteStopForSpecificBus(route, dir);
         return responseExtDto.toRouteStop();
     }
 
-    public Route route(String route){
+    @Override
+    public Route route(){
         CtbRouteResponseExtDto responseExtDto = getBusOriNDest();
         return responseExtDto.toRoute();
     }

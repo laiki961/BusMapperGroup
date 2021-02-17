@@ -11,6 +11,6 @@ import com.fsse.busmapper.domain.entity.StopEntity;
 public interface NwfbExtService {
     Stop stop(String stopId);
     RouteStop routeStop(String route, String dir);
-    Route route(String route);
+    Route route();
 
 }
