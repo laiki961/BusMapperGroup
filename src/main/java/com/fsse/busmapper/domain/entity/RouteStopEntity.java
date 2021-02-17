@@ -3,7 +3,9 @@ package com.fsse.busmapper.domain.entity;
 import javax.persistence.*;
 
 @Entity
-public class RouteStop {
+public class RouteStopEntity {
+    @Column
+    private String co;
     @Id
     private String routeId;
     @Column
@@ -12,8 +14,18 @@ public class RouteStop {
     private int seq;
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
-    private Stop stop;
+    private StopEntity stop;
 
+
+
+
+    public String getCo() {
+        return co;
+    }
+
+    public void setCo(String co) {
+        this.co = co;
+    }
 
     public String getRouteId() {
         return routeId;
@@ -47,11 +59,11 @@ public class RouteStop {
         this.dir = dir;
     }
 
-    public Stop getStop() {
+    public StopEntity getStop() {
         return stop;
     }
 
-    public void setStop(Stop stop) {
+    public void setStop(StopEntity stop) {
         this.stop = stop;
     }
 

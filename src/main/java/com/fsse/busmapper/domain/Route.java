@@ -1,15 +1,29 @@
-package com.fsse.busmapper.domain.entity;
+package com.fsse.busmapper.domain;
 
-import javax.persistence.*;
+import com.fsse.busmapper.domain.entity.RouteEntity;
+import com.fsse.busmapper.domain.entity.RouteStopEntity;
 
-@Entity
 public class Route {
-    @Id
+    private String co;
     private String routeId;
-    @Column
     private String orig;
-    @Column
     private String dest;
+
+    public RouteEntity toRouteEntity() {
+        RouteEntity entity = new RouteEntity();
+        entity.setRouteId(getRouteId());
+        entity.setOrig(getOrig());
+        entity.setDest(getDest());
+        return entity;
+    }
+
+    public String getCo() {
+        return co;
+    }
+
+    public void setCo(String co) {
+        this.co = co;
+    }
 
     public String getRouteId() {
         return routeId;
@@ -43,4 +57,5 @@ public class Route {
                 ", dest='" + dest + '\'' +
                 '}';
     }
+
 }

@@ -1,8 +1,12 @@
 package com.fsse.busmapper.domain.dto.external.response.route;
 
+import com.fsse.busmapper.domain.Route;
+
+import java.util.List;
+
 public class CtbRouteResponseExtDto {
     private String type;
-    private CtbRouteDataResponseExtDto data;
+    private List<CtbRouteDataResponseExtDto> data;
 
     public String getType() {
         return type;
@@ -12,11 +16,11 @@ public class CtbRouteResponseExtDto {
         this.type = type;
     }
 
-    public CtbRouteDataResponseExtDto getData() {
+    public List<CtbRouteDataResponseExtDto> getData() {
         return data;
     }
 
-    public void setData(CtbRouteDataResponseExtDto data) {
+    public void setData(List<CtbRouteDataResponseExtDto> data) {
         this.data = data;
     }
 
@@ -27,4 +31,14 @@ public class CtbRouteResponseExtDto {
                 ", data=" + data +
                 '}';
     }
+
+    public Route toRoute(){
+        Route route = new Route();
+        route.setCo(route.getCo());
+        route.setRouteId(route.getRouteId());
+        route.setOrig(route.getOrig());
+        route.setDest(route.getDest());
+        return route;
+    }
+
 }
