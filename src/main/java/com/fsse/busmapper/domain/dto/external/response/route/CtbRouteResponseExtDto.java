@@ -1,7 +1,9 @@
 package com.fsse.busmapper.domain.dto.external.response.route;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fsse.busmapper.domain.Route;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CtbRouteResponseExtDto {
@@ -40,5 +42,4 @@ public class CtbRouteResponseExtDto {
         route.setDest(route.getDest());
         return route;
     }
-
 }
