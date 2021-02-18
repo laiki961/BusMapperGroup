@@ -13,6 +13,8 @@ import com.fsse.busmapper.service.NwfbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping
 public class BusSearchingApi {
@@ -22,9 +24,10 @@ public class BusSearchingApi {
     @Autowired
     private StopRepository stopRepository;
 
+
     @GetMapping("/getBusStopInfo/{stop_id}")
     public CtbStopDataResponseExtDto getBusStopInfo(@PathVariable("stop_id") String stopId){
-        Stop stop = nwfbService.getBusStopInfo(stopId);
+        List<Stop> stop = nwfbService.getBusStopInfo(stopId);
 //        Stop stop = nwfbExtService.saveStopElements(stopId);
         CtbStopDataResponseExtDto responseExtDto = new CtbStopDataResponseExtDto(stop);
         return responseExtDto;
@@ -34,14 +37,14 @@ public class BusSearchingApi {
     public CtbRouteStopDataResponseExtDto getRouteStopForSpecificBus(
             @PathVariable("route") String route,
             @PathVariable("direction") String dir){
-        RouteStop routeStop = nwfbService.getRouteStopForSpecificBus(route, dir);
+        List<RouteStop> routeStop = nwfbService.getRouteStopForSpecificBus(route, dir);
         CtbRouteStopDataResponseExtDto responseExtDto = new CtbRouteStopDataResponseExtDto(routeStop);
         return responseExtDto;
     }
 
-    @GetMapping("/getRoute/{route}")
+    @GetMapping("/getRoute")
     public CtbRouteResponseExtDto getRoute(){
-        Route route = nwfbService.getBusOriNDest();
+        List<Route> route = nwfbService.getBusOriNDest();
         CtbRouteResponseExtDto responseExtDto = new CtbRouteResponseExtDto();
         return responseExtDto;
     }

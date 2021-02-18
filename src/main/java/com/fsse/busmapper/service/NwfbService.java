@@ -4,8 +4,10 @@ import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.Stop;
 
+import java.util.List;
+
 public interface NwfbService {
-    Stop getBusStopInfo(String stopId);
-    RouteStop getRouteStopForSpecificBus(String route, String dir);
-    Route getBusOriNDest ();
+    List<Stop> getBusStopInfo(String stopId);
+    List<RouteStop> getRouteStopForSpecificBus(String route, String dir);
+    List<Route> getBusOrigAndDest ();
 }

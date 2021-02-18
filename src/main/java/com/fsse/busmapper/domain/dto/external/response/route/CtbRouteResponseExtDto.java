@@ -34,12 +34,19 @@ public class CtbRouteResponseExtDto {
                 '}';
     }
 
-    public Route toRoute(){
-        Route route = new Route();
-        route.setCo(route.getCo());
-        route.setRouteId(route.getRouteId());
-        route.setOrig(route.getOrig());
-        route.setDest(route.getDest());
-        return route;
+    public List<Route> toRouteDo(){
+        List<Route> routeDo = new ArrayList<>();
+
+        for(int i=0; i<data.size(); i++) {
+            CtbRouteDataResponseExtDto item = data.get(i);
+            Route route = new Route();
+            route.setRouteId(item.getRoute());
+            route.setCo(item.getCo());
+            route.setOrig(item.getOrig_en());
+            route.setDest(item.getDest_en());
+            routeDo.add(route);
+        }
+
+        return routeDo;
     }
 }
