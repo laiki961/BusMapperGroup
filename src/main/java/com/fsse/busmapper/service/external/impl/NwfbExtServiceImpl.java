@@ -23,14 +23,14 @@ public class NwfbExtServiceImpl implements NwfbExtService {
 
     @Override
     public List<Stop> stop(String stopId){
-        CtbStopResponseExtDto responseExtDto = getBusStopInfo(stopId);
-        return responseExtDto.toStop();
+        CtbStopResponseExtDto responseExtDto = getBusStopInfo(stopId); //call Ext API
+        return responseExtDto.toStopDo(); //Dto to Do
     }
 
     @Override
     public List<RouteStop> routeStop(String route, String dir){
         CtbRouteStopResponseExtDto responseExtDto = getRouteStopForSpecificBus(route, dir);
-        return responseExtDto.toRouteStop();
+        return responseExtDto.toRouteStopDo();
     }
 
     @Override

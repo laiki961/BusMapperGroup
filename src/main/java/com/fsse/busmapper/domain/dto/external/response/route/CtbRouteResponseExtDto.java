@@ -1,6 +1,7 @@
 package com.fsse.busmapper.domain.dto.external.response.route;
 
 import com.fsse.busmapper.domain.Route;
+import com.fsse.busmapper.domain.Stop;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,6 @@ public class CtbRouteResponseExtDto {
 
     public List<Route> toRouteDo(){
         List<Route> routeDo = new ArrayList<>();
-
         for(int i=0; i<data.size(); i++) {
             CtbRouteDataResponseExtDto item = data.get(i);
             Route route = new Route();
@@ -45,8 +45,8 @@ public class CtbRouteResponseExtDto {
             route.setDest(item.getDest_en());
             routeDo.add(route);
         }
-
         return routeDo;
     }
+
 
 }

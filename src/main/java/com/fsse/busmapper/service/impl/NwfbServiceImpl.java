@@ -15,6 +15,7 @@ import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,23 +31,23 @@ public class NwfbServiceImpl implements NwfbService {
 
     @Override
     public List<Stop> getBusStopInfo(String stopId) {
-        List<Stop> stop = nwfbExtService.stop(stopId);
-        StopEntity stopEntity = stop.toStopEntity();
-        stopEntity = stopRepository.save(stopEntity);
+        List<Stop> stop = nwfbExtService.stop(stopId); //call ext API and return List<Stop> stopDo
+        List<StopEntity> stopEntity = Stop.toStopEntity(); //V2 Do to Entity
+        stopRepository.saveAll(stopEntity);
         return stop;
     }
 
     @Override
     public List<RouteStop> getRouteStopForSpecificBus(String route, String dir) {
-        RouteStop routeStop = nwfbExtService.routeStop(route,dir);
-        RouteStopEntity routeStopEntity = routeStop.toRouteStopEntity();
-        routeStopEntity = routeStopRepository.save(routeStopEntity);
+        List<RouteStop> routeStop = nwfbExtService.routeStop(route,dir); //call ext API and return List<RouteStop> routeStopDo
+        List<RouteStopEntity> routeStopEntity = RouteStop.toRouteStopEntity(routeStop);
+        routeStopRepository.saveAll(routeStopEntity);
         return routeStop;
     }
 
     @Override
-    public List<Route> getBusOriNDest() {
-        Route route = nwfbExtService.route();
+    public List<Route> getBusOrigAndDest() {
+        List<Route> route = nwfbExtService.route();
         RouteEntity routeEntity = route.toRouteEntity();
         routeEntity = routeRepository.save(routeEntity);
         return route;

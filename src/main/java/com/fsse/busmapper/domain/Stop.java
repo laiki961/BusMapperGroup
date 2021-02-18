@@ -1,8 +1,10 @@
 package com.fsse.busmapper.domain;
 
+import com.fsse.busmapper.domain.dto.external.response.routeStop.CtbRouteStopDataResponseExtDto;
 import com.fsse.busmapper.domain.entity.RouteStopEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,25 +16,30 @@ public class Stop {
     private Double latitude;
     private Double longitude;
 
-    public StopEntity toStopEntity() {
-        StopEntity entity = new StopEntity();
-        entity.setStopId(getStopId());
-        entity.setStopname(getStopname());
-        entity.setLatitude(getLatitude());
-        entity.setLongitude(getLongitude());
-        return entity;
+//    //V1 DO to Entity (for loop留係Service)
+//    public StopEntity toStopEntity() {
+//        StopEntity stopEntity = new StopEntity();
+//        stopEntity.setStopId(getStopId());
+//        stopEntity.setStopname(getStopname());
+//        stopEntity.setLatitude(getLatitude());
+//        stopEntity.setLongitude(getLongitude());
+//        return stopEntity;
+//    }
+
+    //V2 DO to Entity (要轉static 同埋掉 List<Stop> )
+    public static List<StopEntity> toStopEntity(List<Stop> stop){
+        List<StopEntity> stopEntities = new ArrayList<>();
+        for(int i=0; i<stop.size(); i++) {
+            StopEntity stopEntity = new StopEntity();
+            stopEntity.setStopId(stop.get(i).getStopId());
+            stopEntity.setStopname(stop.get(i).getStopname());
+            stopEntity.setLatitude(stop.get(i).getLatitude());
+            stopEntity.setLongitude(stop.get(i).getLongitude());
+            stopEntities.add(stopEntity);
+        }
+        return stopEntities;
     }
 
-
-    private Set<StopEntity> storedStop = new HashSet<>();
-
-    public Set<StopEntity> getStoredStop() {
-        return storedStop;
-    }
-
-    public void setStoredStop(Set<StopEntity> storedStop) {
-        this.storedStop = storedStop;
-    }
 
     public String getStopId() {
         return stopId;

@@ -26,7 +26,6 @@ public class RouteStopEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private StopEntity stop;
 
-
     public Integer getRouteStopId() {
         return routeStopId;
     }
@@ -59,20 +58,20 @@ public class RouteStopEntity {
         this.seq = seq;
     }
 
-    public StopEntity getStop() {
-        return stop;
-    }
-
-    public void setStop(StopEntity stop) {
-        this.stop = stop;
-    }
-
     public String getRouteId() {
         return routeId;
     }
 
     public void setRouteId(String routeId) {
         this.routeId = routeId;
+    }
+
+    public StopEntity getStop() {
+        return stop;
+    }
+
+    public void setStop(StopEntity stop) {
+        this.stop = stop;
     }
 
     @Override
