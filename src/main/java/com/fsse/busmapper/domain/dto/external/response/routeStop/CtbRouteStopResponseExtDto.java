@@ -36,17 +36,18 @@ public class CtbRouteStopResponseExtDto {
                 '}';
     }
 
-    public List<RouteStop> toRouteStop(){
-        List<RouteStop> routeStops = new ArrayList<>();
-
-        for (int i=0;i<data.size();i++)
-            CtbRouteDataResponseExtDto item = data.get(i);
+    public List<RouteStop> toRouteStopDo(){
+        List<RouteStop> routeStopDo = new ArrayList<>();
+        for(int i=0; i<data.size(); i++) {
+            CtbRouteStopDataResponseExtDto item = data.get(i);
             RouteStop routeStop = new RouteStop();
-            routeStops.setCo(item.getCo());
-            routeStops.setRouteId(routeStop.getRouteId());
-            routeStops.setDir(routeStop.getDir());
-            routeStops.setSeq(routeStop.getSeq());
-            routeStops.setStopId(routeStop.getStopId());
-        return routeStops;
+            routeStop.setCo(item.getCo());
+            routeStop.setRouteId(item.getRoute());
+            routeStop.setDir(item.getDir());
+            routeStop.setSeq(item.getSeq());
+            routeStop.setStopId(item.getStop());
+            routeStopDo.add(routeStop);
+        }
+        return routeStopDo;
     }
 }

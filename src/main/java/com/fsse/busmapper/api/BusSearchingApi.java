@@ -46,7 +46,7 @@ public class BusSearchingApi {
 
     @GetMapping("/getRoute")
     public CtbRouteResponseExtDto getRoute(){
-        List<Route> route = nwfbService.getBusOriNDest();
+        List<Route> route = nwfbService.getBusOrigAndDest();
         CtbRouteResponseExtDto responseExtDto = new CtbRouteResponseExtDto();
         return responseExtDto;
     }

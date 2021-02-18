@@ -3,19 +3,12 @@ package com.fsse.busmapper.domain.dto.external.response.stop;
 import com.fsse.busmapper.domain.Stop;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CtbStopResponseExtDto {
     private String type;
-    private CtbStopDataResponseExtDto data;
-    @Autowired
-    private CtbStopDataResponseExtDto ctbStopDataResponseExtDto;
-
-    public Stop toStop(){
-        Stop stop = new Stop();
-        stop.setLatitude(ctbStopDataResponseExtDto.getLat());
-        stop.setLongitude(ctbStopDataResponseExtDto.getLongitude());
-        return stop;
-    }
-
+    private List<CtbStopDataResponseExtDto> data;
 
     public String getType() {
         return type;
@@ -25,11 +18,11 @@ public class CtbStopResponseExtDto {
         this.type = type;
     }
 
-    public CtbStopDataResponseExtDto getData() {
+    public List<CtbStopDataResponseExtDto> getData() {
         return data;
     }
 
-    public void setData(CtbStopDataResponseExtDto data) {
+    public void setData(List<CtbStopDataResponseExtDto> data) {
         this.data = data;
     }
 
@@ -41,12 +34,19 @@ public class CtbStopResponseExtDto {
                 '}';
     }
 
-    public Stop toStop(){
-        Stop stop = new Stop();
-        stop.setStopId(stop.getStopId());
-        stop.setStopname(stop.getStopname());
-        stop.setLatitude(stop.getLatitude());
-        stop.setLongitude(stop.getLongitude());
-        return stop;
+    public List<Stop> toStopDo(){
+        List<Stop> stopDo = new ArrayList<>();
+        for(int i=0; i<data.size(); i++){
+            CtbStopDataResponseExtDto item = data.get(i);
+            Stop stop = new Stop();
+            stop.setStopId(item.getStop());
+            stop.setStopname(item.getName_en());
+            stop.setLatitude(item.getLat());
+            stop.setLongitude(item.getLongitude());
+            stopDo.add(stop);
+        }
+        return stopDo;
     }
+
+
 }

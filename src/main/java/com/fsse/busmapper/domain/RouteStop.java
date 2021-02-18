@@ -3,6 +3,9 @@ package com.fsse.busmapper.domain;
 import com.fsse.busmapper.domain.entity.RouteStopEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RouteStop {
     private String co;
     private String routeId;
@@ -11,13 +14,24 @@ public class RouteStop {
     private String stopId;
     private Integer routeStopId;
 
-    public RouteStopEntity toRouteStopEntity() {
-        RouteStopEntity entity = new RouteStopEntity();
-        entity.setCo(getCo());
-        entity.setRouteStopId(getRouteStopId());
-        entity.setDir(getDir());
-        entity.setSeq(getSeq());
-        return entity;
+    public static List<RouteStopEntity> toRouteStopEntity(List<RouteStop> routeStop){
+        List<RouteStopEntity> routeStopEntities = new ArrayList<>();
+        for(int i=0; i<routeStop.size(); i++) {
+            RouteStopEntity routeStopEntity = new RouteStopEntity();
+            routeStopEntity.setRouteStopId(routeStop.get(i).getRouteStopId());
+            routeStopEntity.setCo(routeStop.get(i).getCo());
+            routeStopEntity.setDir(routeStop.get(i).getDir());
+            routeStopEntity.setSeq(routeStop.get(i).getSeq());
+            routeStopEntity.setRouteId(routeStop.get(i).getRouteId());
+            StopEntity stopEntity = new StopEntity();
+            stopEntity.setStopId(routeStop.get(i).getStopId());
+            stopEntity.setStopname(null);
+            stopEntity.setLatitude(null);
+            stopEntity.setLongitude(null);
+            routeStopEntity.setStop(stopEntity);
+            routeStopEntities.add(routeStopEntity);
+        }
+        return routeStopEntities;
     }
 
     public String getCo() {
