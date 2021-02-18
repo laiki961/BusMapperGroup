@@ -8,9 +8,11 @@ import com.fsse.busmapper.domain.dto.external.response.routeStop.CtbRouteStopRes
 import com.fsse.busmapper.domain.dto.external.response.stop.CtbStopResponseExtDto;
 import com.fsse.busmapper.domain.entity.StopEntity;
 
+import java.util.List;
+
 public interface NwfbExtService {
-    Stop stop(String stopId);
-    RouteStop routeStop(String route, String dir);
-    Route route();
+    List<Stop> stop(String stopId);
+    List<RouteStop> routeStop(String route, String dir);
+    List<Route> route();
 
 }

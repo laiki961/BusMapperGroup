@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class NwfbExtServiceImpl implements NwfbExtService {
     // Use this in this class only!!!!!
@@ -20,21 +22,21 @@ public class NwfbExtServiceImpl implements NwfbExtService {
     private RestTemplate restTemplate;
 
     @Override
-    public Stop stop(String stopId){
+    public List<Stop> stop(String stopId){
         CtbStopResponseExtDto responseExtDto = getBusStopInfo(stopId);
         return responseExtDto.toStop();
     }
 
     @Override
-    public RouteStop routeStop(String route, String dir){
+    public List<RouteStop> routeStop(String route, String dir){
         CtbRouteStopResponseExtDto responseExtDto = getRouteStopForSpecificBus(route, dir);
         return responseExtDto.toRouteStop();
     }
 
     @Override
-    public Route route(){
-        CtbRouteResponseExtDto responseExtDto = getBusOriNDest();
-        return responseExtDto.toRoute();
+    public List<Route> route(){
+        CtbRouteResponseExtDto responseExtDto = getBusOrigAndDest();
+        return responseExtDto.toRouteDo();
     }
 
 
@@ -56,7 +58,7 @@ public class NwfbExtServiceImpl implements NwfbExtService {
         return responseExtDto;
     }
 
-    private CtbRouteResponseExtDto getBusOriNDest() {
+    private CtbRouteResponseExtDto getBusOrigAndDest() {
         CtbRouteResponseExtDto responseExtDto = restTemplate.getForObject(
                 "https://rt.data.gov.hk/v1/transport/citybus-nwfb/route/ctb",
                 CtbRouteResponseExtDto.class
