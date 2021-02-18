@@ -3,7 +3,9 @@ package com.fsse.busmapper.domain.dto.external.response.routeStop;
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.Stop;
+import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteDataResponseExtDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CtbRouteStopResponseExtDto {
@@ -34,13 +36,17 @@ public class CtbRouteStopResponseExtDto {
                 '}';
     }
 
-    public RouteStop toRouteStop(){
-        RouteStop routeStop = new RouteStop();
-        routeStop.setCo(routeStop.getCo());
-        routeStop.setRouteId(routeStop.getRouteId());
-        routeStop.setDir(routeStop.getDir());
-        routeStop.setSeq(routeStop.getSeq());
-        routeStop.setStopId(routeStop.getStopId());
-        return routeStop;
+    public List<RouteStop> toRouteStop(){
+        List<RouteStop> routeStops = new ArrayList<>();
+
+        for (int i=0;i<data.size();i++)
+            CtbRouteDataResponseExtDto item = data.get(i);
+            RouteStop routeStop = new RouteStop();
+            routeStops.setCo(item.getCo());
+            routeStops.setRouteId(routeStop.getRouteId());
+            routeStops.setDir(routeStop.getDir());
+            routeStops.setSeq(routeStop.getSeq());
+            routeStops.setStopId(routeStop.getStopId());
+        return routeStops;
     }
 }

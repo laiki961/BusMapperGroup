@@ -27,6 +27,7 @@ public class RouteStopEntity {
     private StopEntity stop;
 
 
+
     public Integer getRouteStopId() {
         return routeStopId;
     }

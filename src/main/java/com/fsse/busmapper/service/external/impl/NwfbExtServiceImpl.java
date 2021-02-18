@@ -39,7 +39,6 @@ public class NwfbExtServiceImpl implements NwfbExtService {
         return responseExtDto.toRouteDo();
     }
 
-
     private CtbStopResponseExtDto getBusStopInfo(String stopId) {
         CtbStopResponseExtDto responseExtDto = restTemplate.getForObject(
                 "https://rt.data.gov.hk/" +

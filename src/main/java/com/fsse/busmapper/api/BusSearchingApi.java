@@ -10,6 +10,7 @@ import com.fsse.busmapper.domain.dto.external.response.stop.CtbStopDataResponseE
 import com.fsse.busmapper.domain.dto.external.response.stop.CtbStopResponseExtDto;
 import com.fsse.busmapper.repository.StopRepository;
 import com.fsse.busmapper.service.NwfbService;
+import com.fsse.busmapper.service.external.NwfbExtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,8 @@ import java.util.List;
 @RestController
 @RequestMapping
 public class BusSearchingApi {
-
+    @Autowired
+    private NwfbExtService nwfbExtService;
     @Autowired
     private NwfbService nwfbService;
     @Autowired
@@ -28,7 +30,7 @@ public class BusSearchingApi {
     @GetMapping("/getBusStopInfo/{stop_id}")
     public CtbStopDataResponseExtDto getBusStopInfo(@PathVariable("stop_id") String stopId){
         List<Stop> stop = nwfbService.getBusStopInfo(stopId);
-//        Stop stop = nwfbExtService.saveStopElements(stopId);
+        Stop stop = nwfbExtService.saveStopElements(stopId);
         CtbStopDataResponseExtDto responseExtDto = new CtbStopDataResponseExtDto(stop);
         return responseExtDto;
     }
