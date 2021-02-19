@@ -30,7 +30,82 @@ public class NwfbServiceImpl implements NwfbService {
     Logger logger = LoggerFactory.getLogger(NwfbServiceImpl.class);
 
     @Override
-    public void loadAllBusData(String route, String dir) {
+    public void loadAllRoutes() {
+        // Step 1.0: Load all routes
+        List<Route> routeDOs = nwfbExtService.loadAllRoutes();
+        logger.debug(routeDOs.toString());
+        // Step 1.1: Convert the routeDO into RouteEntity
+        List<RouteEntity> routeEntities = new ArrayList<>();
+        for(int i=0; i<routeDOs.size(); i++) {
+            Route routeDO = routeDOs.get(i);
+            RouteEntity entity = new RouteEntity();
+            entity.setRouteId(routeDO.getRoute());
+            entity.setOrig(routeDO.getOrig());
+            entity.setDest(routeDO.getDest());
+            routeEntities.add(entity);
+        }
+        // Step 1.2: Save all RouteEntity to database
+        routeRepository.saveAll(routeEntities);
+
+        // Step 2:0: use the existing route data to search routeStop
+        //loadRouteDirectionStop( RouteEntity route, inbound / outbound);
+
+    }
+
+
+    @Override
+    public void loadRouteDirectionStop(RouteEntity route, String dir){
+    // Step 2.0: Load RouteStop
+    logger.debug("Fetching route {} in {}", route.getRouteId(), dir);
+    List<RouteStop> routeStopDOs = nwfbExtService.loadSpecificRouteStop(route.getRouteId(), dir);
+    logger.debug("Done fetch route {} in {}", route.getRouteId(), dir);
+    // Step 2.1: Convert routeStopDO into Entity
+    List<RouteStopEntity> routeStopEntities = new ArrayList<>();
+    for (int i=0; i<routeStopDOs.size(); i++){
+        logger.debug("A DEBUG Message102");
+        RouteStopEntity entity = new RouteStopEntity();
+        entity.setCo(routeStopDOs.get(i).getCo());
+        entity.setDir(dir);
+
+        entity.setRouteEntity(route);
+
+        entity.setSeq(routeStopDOs.get(i).getSeq());
+        StopEntity stop = new StopEntity();
+        stop.setStopId(routeStopDOs.get(i).getStop());
+        stop.setStopname(null);
+        stop.setLatitude(null);
+        stop.setLongitude(null);
+        entity.setStopEntity(stop);
+        routeStopEntities.add(entity);
+    }
+
+    // Step 2.2: Save to database
+        logger.debug("routeStopEntities: {}", routeStopEntities);
+        routeStopRepository.saveAll(routeStopEntities);
+    }
+
+    @Override
+    public void loadRouteInAndOutboundStop (List<RouteEntity> routeEntities){
+        String[] direction = new String[2];
+        direction[0] = "inbound";
+        direction[1] = "outbound";
+        for(int i=0; i<routeEntities.size(); i++){
+            for(int j=0; j<direction.length; j++){
+                loadRouteDirectionStop(routeEntities.get(i), direction[j]);
+                //loadRouteDirectionStop( RouteEntity route, inbound / outbound);
+            }
+        }
+    }
+
+
+
+
+
+
+
+///Final
+    @Override
+    public void loadAllBusData() {
         // Step 1.0: Load all routes
         List<Route> routeDOs = nwfbExtService.loadAllRoutes();
         // Step 1.1: Convert the routeDO into RouteEntity
@@ -51,41 +126,6 @@ public class NwfbServiceImpl implements NwfbService {
 
 
     }
-
-    @Override
-    public void testingRouteStopAPI(String route, String dir){
-    // Step 2.0: Load RouteStop
-    List<RouteStop> routeStopDOs = nwfbExtService.loadSpecificRouteStop(route, dir);
-        logger.debug("A DEBUG Message101");
-    // Step 2.1: Convert routeStopDO into Entity
-    List<RouteStopEntity> routeStopEntities = new ArrayList<>();
-        for (int i=0; i<routeStopDOs.size(); i++){
-        logger.debug("A DEBUG Message102");
-        RouteStopEntity entity = new RouteStopEntity();
-        entity.setCo(routeStopDOs.get(i).getCo());
-        entity.setDir(dir);
-
-        RouteEntity routeE = new RouteEntity();
-        routeE.setRouteId(routeRepository.findById());
-        routeE.setOrig();
-        routeE.setDest();
-
-        entity.setSeq(routeStopDOs.get(i).getSeq());
-        StopEntity stop = new StopEntity();
-        stop.setStopId(routeStopDOs.get(i).getStop());
-        stop.setStopname(null);
-        stop.setLatitude(null);
-        stop.setLongitude(null);
-        entity.setStop(stop);
-        routeStopEntities.add(entity);
-        logger.debug(routeStopEntities.toString());
-    }
-
-    // Step 2.2: Save to database
-        logger.debug("A DEBUG Message103");
-        routeStopRepository.saveAll(routeStopEntities);
-    }
-
 
 
 

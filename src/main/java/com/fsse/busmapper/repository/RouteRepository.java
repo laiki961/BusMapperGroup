@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface RouteRepository extends CrudRepository<RouteEntity, String> {
-    List<Route> findById(List<String> routeId);
+    List<RouteEntity> findAll();
 }
