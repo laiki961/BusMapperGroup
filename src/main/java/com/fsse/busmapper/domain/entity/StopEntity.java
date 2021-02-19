@@ -12,8 +12,8 @@ public class StopEntity {
     private Double lat;
     private Double lng;
 
-    /*@OneToMany(mappedBy = "stopId")
-    private List<RouteStop> routeStops;*/
+    @OneToMany(mappedBy = "stopId")
+    private List<RouteStop> routeStops;
 
     public String getStopId() {
         return stopId;
@@ -47,7 +47,7 @@ public class StopEntity {
         this.lng = lng;
     }
 
-    /*public List<RouteStop> getRouteStops() {
+    public List<RouteStop> getRouteStops() {
         return routeStops;
     }
 
@@ -64,5 +64,5 @@ public class StopEntity {
                 ", lng=" + lng +
                 ", routeStops=" + routeStops +
                 '}';
-    }*/
+    }
 }
