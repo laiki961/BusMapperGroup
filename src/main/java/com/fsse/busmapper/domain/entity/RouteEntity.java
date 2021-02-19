@@ -7,7 +7,8 @@ import java.util.List;
 @Table(name = "route")
 public class RouteEntity {
     @Id
-//    @OneToMany(mappedBy = "routeId")
+//    @OneToMany(mappedBy="routeId")
+    @Column(name = "route_id", columnDefinition =  "VARCHAR(255)", nullable = false)
     private String routeId;
     @Column(name = "origin", columnDefinition =  "VARCHAR(255)", nullable = false)
     private String orig;

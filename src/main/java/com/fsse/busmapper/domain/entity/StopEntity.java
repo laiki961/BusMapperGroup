@@ -8,8 +8,10 @@ import java.util.List;
 public class StopEntity {
 
     @Id
+//    @Column(name = "stop_id", columnDefinition = "VARCHAR(255)", nullable = false)
+//    @OneToMany(fetch = FetchType.LAZY)
     private String stopId;
-    @Column
+    @Column//(name = "stop name", columnDefinition = "VARCHAR(255)")
     private String stopname;
     @Column(name = "latitude", columnDefinition = "DECIMAL(15,13)")
     private Double latitude;

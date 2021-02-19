@@ -8,6 +8,7 @@ import com.fsse.busmapper.domain.entity.RouteStopEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
 import com.fsse.busmapper.repository.RouteRepository;
 import com.fsse.busmapper.repository.RouteStopRepository;
+import com.fsse.busmapper.repository.StopRepository;
 import com.fsse.busmapper.service.NwfbService;
 import com.fsse.busmapper.service.external.NwfbExtService;
 import org.slf4j.Logger;
@@ -26,6 +27,8 @@ public class NwfbServiceImpl implements NwfbService {
     private RouteRepository routeRepository;
     @Autowired
     private RouteStopRepository routeStopRepository;
+    @Autowired
+    private StopRepository stopRepository;
 
     Logger logger = LoggerFactory.getLogger(NwfbServiceImpl.class);
 
@@ -62,20 +65,21 @@ public class NwfbServiceImpl implements NwfbService {
     // Step 2.1: Convert routeStopDO into Entity
     List<RouteStopEntity> routeStopEntities = new ArrayList<>();
     for (int i=0; i<routeStopDOs.size(); i++){
-        logger.debug("A DEBUG Message102");
+        logger.debug(i+"/"+routeStopDOs.size());
         RouteStopEntity entity = new RouteStopEntity();
         entity.setCo(routeStopDOs.get(i).getCo());
         entity.setDir(dir);
-
         entity.setRouteEntity(route);
-
         entity.setSeq(routeStopDOs.get(i).getSeq());
+
         StopEntity stop = new StopEntity();
         stop.setStopId(routeStopDOs.get(i).getStop());
         stop.setStopname(null);
         stop.setLatitude(null);
         stop.setLongitude(null);
+        stopRepository.save(stop);
         entity.setStopEntity(stop);
+
         routeStopEntities.add(entity);
     }
 
@@ -93,6 +97,7 @@ public class NwfbServiceImpl implements NwfbService {
             for(int j=0; j<direction.length; j++){
                 loadRouteDirectionStop(routeEntities.get(i), direction[j]);
                 //loadRouteDirectionStop( RouteEntity route, inbound / outbound);
+                logger.debug("saved: " + routeEntities.get(i).getRouteId() + direction[j]);
             }
         }
     }

@@ -9,12 +9,12 @@ import java.util.List;
 @Table(name = "routeStop")
 public class RouteStopEntity {
     @Id
-    @Column(name = "routeStopId", nullable = true, unique = true, updatable = false)
+    @Column(name = "route_stop_id", nullable = true, unique = true, updatable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer routeStopId;
 
-    @JoinColumn(name = "routeId", columnDefinition =  "VARCHAR(255)", nullable = false)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "route_id", columnDefinition =  "VARCHAR(255)", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL) //, fetch = FetchType.LAZY
     private RouteEntity routeEntity;
 
     @Column(name = "direction", columnDefinition =  "VARCHAR(255)", nullable = false)
@@ -26,8 +26,8 @@ public class RouteStopEntity {
     @Column(name = "sequence", columnDefinition = "INTEGER", nullable = false)
     private Integer seq;
 
-    @JoinColumn(name = "stopId", columnDefinition = "VARCHAR(255)", nullable = false, referencedColumnName = "stopId")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "stop_id", columnDefinition = "VARCHAR(255)", nullable = false, referencedColumnName = "stopId")
+    @ManyToOne//(cascade = CascadeType.ALL) //, fetch = FetchType.LAZY
     private StopEntity stopEntity;
 
     public Integer getRouteStopId() {
