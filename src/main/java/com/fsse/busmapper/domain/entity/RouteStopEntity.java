@@ -14,7 +14,7 @@ public class RouteStopEntity {
     private Integer routeStopId;
 
     @JoinColumn(name = "route_id", columnDefinition =  "VARCHAR(255)", nullable = false)
-    @ManyToOne(cascade = CascadeType.ALL) //, fetch = FetchType.LAZY
+    @ManyToOne(cascade = CascadeType.ALL)
     private RouteEntity routeEntity;
 
     @Column(name = "direction", columnDefinition =  "VARCHAR(255)", nullable = false)
@@ -27,7 +27,7 @@ public class RouteStopEntity {
     private Integer seq;
 
     @JoinColumn(name = "stop_id", columnDefinition = "VARCHAR(255)", nullable = false, referencedColumnName = "stopId")
-    @ManyToOne//(cascade = CascadeType.ALL) //, fetch = FetchType.LAZY
+    @ManyToOne//(cascade = CascadeType.ALL)
     private StopEntity stopEntity;
 
     public Integer getRouteStopId() {

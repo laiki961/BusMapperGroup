@@ -10,5 +10,5 @@ public interface NwfbService {
     void loadAllRoutes(); //Don't touch ***
 
     void loadRouteDirectionStop(RouteEntity route, String dir); //Don't touch
-    void loadRouteInAndOutboundStop (List<RouteEntity> routeEntities); //Doing this
+    void loadRouteInAndOutboundStop (List<RouteEntity> routeEntities); //Don't touch
 }

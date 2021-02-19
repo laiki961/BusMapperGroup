@@ -51,10 +51,23 @@ public class NwfbServiceImpl implements NwfbService {
         routeRepository.saveAll(routeEntities);
 
         // Step 2:0: use the existing route data to search routeStop
-        //loadRouteDirectionStop( RouteEntity route, inbound / outbound);
+
 
     }
 
+    @Override
+    public void loadRouteInAndOutboundStop (List<RouteEntity> routeEntities){
+        String[] direction = new String[2];
+        direction[0] = "inbound";
+        direction[1] = "outbound";
+        for(int i=0; i<routeEntities.size(); i++){
+            for(int j=0; j<direction.length; j++){
+                loadRouteDirectionStop(routeEntities.get(i), direction[j]);
+                //loadRouteDirectionStop( RouteEntity route, inbound / outbound);
+                logger.debug("saved routeID {} ,{} to database: ", routeEntities.get(i).getRouteId(), direction[j]);
+            }
+        }
+    }
 
     @Override
     public void loadRouteDirectionStop(RouteEntity route, String dir){
@@ -62,10 +75,11 @@ public class NwfbServiceImpl implements NwfbService {
     logger.debug("Fetching route {} in {}", route.getRouteId(), dir);
     List<RouteStop> routeStopDOs = nwfbExtService.loadSpecificRouteStop(route.getRouteId(), dir);
     logger.debug("Done fetch route {} in {}", route.getRouteId(), dir);
+
     // Step 2.1: Convert routeStopDO into Entity
     List<RouteStopEntity> routeStopEntities = new ArrayList<>();
     for (int i=0; i<routeStopDOs.size(); i++){
-        logger.debug(i+"/"+routeStopDOs.size());
+        logger.debug("Setting routeID. {}, stopNo.{} of {}, {} ", route.getRouteId(), i+1, routeStopDOs.size(), dir);
         RouteStopEntity entity = new RouteStopEntity();
         entity.setCo(routeStopDOs.get(i).getCo());
         entity.setDir(dir);
@@ -82,30 +96,11 @@ public class NwfbServiceImpl implements NwfbService {
 
         routeStopEntities.add(entity);
     }
+    logger.debug("routeStopEntities: {}", routeStopEntities);
 
     // Step 2.2: Save to database
-        logger.debug("routeStopEntities: {}", routeStopEntities);
         routeStopRepository.saveAll(routeStopEntities);
     }
-
-    @Override
-    public void loadRouteInAndOutboundStop (List<RouteEntity> routeEntities){
-        String[] direction = new String[2];
-        direction[0] = "inbound";
-        direction[1] = "outbound";
-        for(int i=0; i<routeEntities.size(); i++){
-            for(int j=0; j<direction.length; j++){
-                loadRouteDirectionStop(routeEntities.get(i), direction[j]);
-                //loadRouteDirectionStop( RouteEntity route, inbound / outbound);
-                logger.debug("saved: " + routeEntities.get(i).getRouteId() + direction[j]);
-            }
-        }
-    }
-
-
-
-
-
 
 
 ///Final
