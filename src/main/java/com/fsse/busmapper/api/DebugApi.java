@@ -2,9 +2,7 @@ package com.fsse.busmapper.api;
 
 import com.fsse.busmapper.service.NwfbService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/debug")
@@ -16,4 +14,12 @@ public class DebugApi {
     public void loadAllBusData() {
         nwfbService.loadAllBusData();
     }
+
+    @GetMapping("/loadStop/{stopId}")
+    public void loadStop(@PathVariable("stopId") String stopId) {
+
+        //hard code stopID
+        nwfbService.loadStop(stopId);
+    }
+
 }

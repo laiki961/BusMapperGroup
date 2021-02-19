@@ -1,8 +1,10 @@
 package com.fsse.busmapper.service.external.impl;
 
 import com.fsse.busmapper.domain.Route;
+import com.fsse.busmapper.domain.Stop;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteDataResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteResponseExtDto;
+import com.fsse.busmapper.domain.dto.external.response.route.CtbStopResponseExtDto;
 import com.fsse.busmapper.service.external.NwfbExtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,4 +37,21 @@ public class NwfbExtServiceImpl implements NwfbExtService {
         }
         return routeDOs;
     }
+
+    @Override
+    public Stop stop(String stopId) {
+        CtbStopResponseExtDto responseDto = loadStop(stopId);
+        return responseDto.toStop();
+    }
+
+
+    public CtbStopResponseExtDto loadStop(String stopId) {
+        CtbStopResponseExtDto response = restTemplate.getForObject(
+                "https://rt.data.gov.hk/" +
+                        "v1/transport/citybus-nwfb/stop/" + stopId,
+                CtbStopResponseExtDto.class
+        );
+        return response;
+    }
+
 }
