@@ -31,7 +31,7 @@ public class RouteStop {
         this.dir = dir;
     }
 
-    public int getSeq() {
+    public Integer getSeq() {
         return seq;
     }
 
@@ -53,9 +53,8 @@ public class RouteStop {
                 "co='" + co + '\'' +
                 ", route='" + route + '\'' +
                 ", dir='" + dir + '\'' +
-                ", seq='" + seq + '\'' +
+                ", seq=" + seq +
                 ", stop='" + stop + '\'' +
                 '}';
     }
-
 }

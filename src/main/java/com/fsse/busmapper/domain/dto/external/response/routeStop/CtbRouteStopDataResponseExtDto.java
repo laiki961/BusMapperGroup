@@ -6,6 +6,7 @@ public class CtbRouteStopDataResponseExtDto {
     private String co;
     private String route;
     private String dir;
+    private Integer seq;
     private String stop;
 
     public RouteStop toRouteStopDO(){
@@ -13,6 +14,7 @@ public class CtbRouteStopDataResponseExtDto {
         routeStopDO.setCo(co);
         routeStopDO.setRoute(route);
         routeStopDO.setDir(dir);
+        routeStopDO.setSeq(seq);
         routeStopDO.setStop(stop);
         return routeStopDO;
     }
@@ -41,6 +43,14 @@ public class CtbRouteStopDataResponseExtDto {
         this.dir = dir;
     }
 
+    public Integer getSeq() {
+        return seq;
+    }
+
+    public void setSeq(Integer seq) {
+        this.seq = seq;
+    }
+
     public String getStop() {
         return stop;
     }
@@ -55,7 +65,8 @@ public class CtbRouteStopDataResponseExtDto {
                 "co='" + co + '\'' +
                 ", route='" + route + '\'' +
                 ", dir='" + dir + '\'' +
-                ", stop=" + stop +
+                ", seq=" + seq +
+                ", stop='" + stop + '\'' +
                 '}';
     }
 }

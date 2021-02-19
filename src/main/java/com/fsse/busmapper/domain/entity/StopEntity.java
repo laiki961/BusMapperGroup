@@ -15,9 +15,8 @@ public class StopEntity {
     private Double latitude;
     @Column(name = "longitude", columnDefinition = "DECIMAL(16,13)")
     private Double longitude;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "stop")
-    List<RouteStopEntity> routeStopEntities;
-
+//    @OneToMany(mappedBy = "stop")
+//    List<RouteStopEntity> routeStopEntities;
 
     public String getStopId() {
         return stopId;

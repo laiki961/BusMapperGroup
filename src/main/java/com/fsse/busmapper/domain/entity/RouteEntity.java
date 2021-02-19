@@ -1,15 +1,17 @@
 package com.fsse.busmapper.domain.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "route")
 public class RouteEntity {
     @Id
+//    @OneToMany(mappedBy = "routeId")
     private String routeId;
+    @Column(name = "origin", columnDefinition =  "VARCHAR(255)", nullable = false)
     private String orig;
+    @Column(name = "destination", columnDefinition =  "VARCHAR(255)", nullable = false)
     private String dest;
 
     public String getRouteId() {

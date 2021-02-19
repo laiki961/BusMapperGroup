@@ -1,6 +1,9 @@
 package com.fsse.busmapper.domain.entity;
 
+import com.fsse.busmapper.domain.Route;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "routeStop")
@@ -10,19 +13,20 @@ public class RouteStopEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer routeStopId;
 
-    @Column(name = "bus_company_name",columnDefinition = "VARCHAR(255)",nullable = false)
-    private String co;
+    @JoinColumn(name = "routeId", columnDefinition =  "VARCHAR(255)", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    private RouteEntity routeId;
 
-    @Column(name = "direction",columnDefinition =  "VARCHAR(255)",nullable = false)
+    @Column(name = "direction", columnDefinition =  "VARCHAR(255)", nullable = false)
     private String dir;
 
-    @Column(name = "sequence",columnDefinition = "INTEGER",nullable = false)
-    private int seq;
+    @Column(name = "bus_company_name", columnDefinition = "VARCHAR(255)", nullable = false)
+    private String co;
 
-    @Column
-    private String routeId;
+    @Column(name = "sequence", columnDefinition = "INTEGER", nullable = false)
+    private Integer seq;
 
-    @JoinColumn(name = "stopId")
+    @JoinColumn(name = "stopId", columnDefinition = "VARCHAR(255)", nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)
     private StopEntity stop;
 
@@ -50,20 +54,12 @@ public class RouteStopEntity {
         this.dir = dir;
     }
 
-    public int getSeq() {
+    public Integer getSeq() {
         return seq;
     }
 
-    public void setSeq(int seq) {
+    public void setSeq(Integer seq) {
         this.seq = seq;
-    }
-
-    public String getRouteId() {
-        return routeId;
-    }
-
-    public void setRouteId(String routeId) {
-        this.routeId = routeId;
     }
 
     public StopEntity getStop() {
@@ -74,6 +70,14 @@ public class RouteStopEntity {
         this.stop = stop;
     }
 
+    public RouteEntity getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(RouteEntity routeId) {
+        this.routeId = routeId;
+    }
+
     @Override
     public String toString() {
         return "RouteStopEntity{" +
@@ -81,7 +85,6 @@ public class RouteStopEntity {
                 ", co='" + co + '\'' +
                 ", dir='" + dir + '\'' +
                 ", seq=" + seq +
-                ", routeId='" + routeId + '\'' +
                 ", stop=" + stop +
                 '}';
     }

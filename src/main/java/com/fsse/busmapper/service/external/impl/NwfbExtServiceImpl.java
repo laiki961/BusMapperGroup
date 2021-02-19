@@ -1,11 +1,14 @@
 package com.fsse.busmapper.service.external.impl;
 
+import com.fsse.busmapper.api.LoggingApi;
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteDataResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.routeStop.CtbRouteStopResponseExtDto;
 import com.fsse.busmapper.service.external.NwfbExtService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,8 @@ public class NwfbExtServiceImpl implements NwfbExtService {
     @Autowired
     @Qualifier("nwfbRestTemplate")
     private RestTemplate restTemplate;
+
+
 
     @Override
     public List<Route> loadAllRoutes() {
