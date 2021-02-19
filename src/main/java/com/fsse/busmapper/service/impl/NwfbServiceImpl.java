@@ -2,6 +2,7 @@ package com.fsse.busmapper.service.impl;
 
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
+import com.fsse.busmapper.domain.Stop;
 import com.fsse.busmapper.domain.entity.RouteEntity;
 import com.fsse.busmapper.domain.entity.RouteStopEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
@@ -14,6 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +34,9 @@ public class NwfbServiceImpl implements NwfbService {
     private StopRepository stopRepository;
 
     Logger logger = LoggerFactory.getLogger(NwfbServiceImpl.class);
+
+    @Autowired
+    private StopRepository stopRepository;
 
     @Override
     public void loadAllRoutes() {
@@ -101,7 +108,23 @@ public class NwfbServiceImpl implements NwfbService {
         routeStopRepository.saveAll(routeStopEntities);
     }
 
+    @Override
+    public void loadStop(String stopId) {
+        Stop stops = nwfbExtService.stop(stopId);
+        StopEntity stopEntity = new StopEntity();
 
+        stopEntity.setStopId((stops.getStopId()));
+        stopEntity.setStopName(stops.getStopName());
+        stopEntity.setLat(stops.getLat());
+        stopEntity.setLng(stops.getLng());
+        stops.setStopId(stopEntity.getStopId());
+
+        stopEntity = stopRepository.save(stopEntity);
+    }
+
+
+
+    
 ///Final
     @Override
     public void loadAllBusData() {
@@ -125,7 +148,5 @@ public class NwfbServiceImpl implements NwfbService {
 
 
     }
-
-
 
 }

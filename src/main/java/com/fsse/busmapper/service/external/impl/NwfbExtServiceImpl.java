@@ -3,6 +3,7 @@ package com.fsse.busmapper.service.external.impl;
 import com.fsse.busmapper.api.LoggingApi;
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
+import com.fsse.busmapper.domain.Stop;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteDataResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.routeStop.CtbRouteStopResponseExtDto;
@@ -24,8 +25,6 @@ public class NwfbExtServiceImpl implements NwfbExtService {
     @Qualifier("nwfbRestTemplate")
     private RestTemplate restTemplate;
 
-
-
     @Override
     public List<Route> loadAllRoutes() {
         CtbRouteResponseExtDto response = restTemplate.getForObject(
@@ -41,7 +40,8 @@ public class NwfbExtServiceImpl implements NwfbExtService {
         }
         return routeDOs;
     }
-
+    
+	@Override
     public List<RouteStop> loadSpecificRouteStop(String route, String dir){
         CtbRouteStopResponseExtDto response = restTemplate.getForObject(
                 "https://rt.data.gov.hk/" +
@@ -55,4 +55,21 @@ public class NwfbExtServiceImpl implements NwfbExtService {
          }
          return routeStopDOs;
     }
+
+    @Override
+    public Stop stop(String stopId) {
+        CtbStopResponseExtDto responseDto = loadStop(stopId);
+        return responseDto.toStop();
+    }
+
+
+    public CtbStopResponseExtDto loadStop(String stopId) {
+        CtbStopResponseExtDto response = restTemplate.getForObject(
+                "https://rt.data.gov.hk/" +
+                        "v1/transport/citybus-nwfb/stop/" + stopId,
+                CtbStopResponseExtDto.class
+        );
+        return response;
+    }
+
 }

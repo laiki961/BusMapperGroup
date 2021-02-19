@@ -43,5 +43,14 @@ public class DebugApi {
         nwfbService.loadRouteInAndOutboundStop(routeEntities);
     }
 
+        nwfbService.loadAllBusData();
+    }
+
+    @GetMapping("/loadStop/{stopId}")
+    public void loadStop(@PathVariable("stopId") String stopId) {
+
+        //hard code stopID
+        nwfbService.loadStop(stopId);
+    }
 
 }

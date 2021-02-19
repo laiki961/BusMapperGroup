@@ -1,0 +1,8 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://training.cysw5i6zvhnb.ap-southeast-1.rds.amazonaws.com:3306/busmapper
+    username: admin
+    password: Meiling83!
