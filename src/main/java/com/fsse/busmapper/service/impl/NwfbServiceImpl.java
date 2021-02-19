@@ -1,6 +1,5 @@
 package com.fsse.busmapper.service.impl;
 
-import com.fsse.busmapper.api.LoggingApi;
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.entity.RouteEntity;

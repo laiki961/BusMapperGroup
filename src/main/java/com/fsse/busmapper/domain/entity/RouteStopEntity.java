@@ -1,9 +1,6 @@
 package com.fsse.busmapper.domain.entity;
 
-import com.fsse.busmapper.domain.Route;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "routeStop")
