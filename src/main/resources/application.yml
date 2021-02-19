@@ -6,3 +6,9 @@ spring:
     url: jdbc:mysql://{DATABASE_URL}:3306/{SCHEMA_NAME}
     username: {USERNAME}
     password: {PASSWORD}
+
+logging:
+  level:
+    root: WARN
+    com:
+      fsse: DEBUG
