@@ -1,7 +1,11 @@
 package com.fsse.busmapper.api;
 
+import com.fsse.busmapper.domain.RouteStop;
+import com.fsse.busmapper.domain.Stop;
 import com.fsse.busmapper.domain.entity.RouteEntity;
+import com.fsse.busmapper.domain.entity.RouteStopEntity;
 import com.fsse.busmapper.repository.RouteRepository;
+import com.fsse.busmapper.repository.RouteStopRepository;
 import com.fsse.busmapper.service.NwfbService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +24,8 @@ public class DebugApi {
 
     @Autowired
     private RouteRepository routeRepository;
+    @Autowired
+    private RouteStopRepository routeStopRepository;
 
     private Logger logger = LoggerFactory.getLogger(DebugApi.class);
 
@@ -43,14 +49,14 @@ public class DebugApi {
         nwfbService.loadRouteInAndOutboundStop(routeEntities);
     }
 
-        nwfbService.loadAllBusData();
-    }
-
-    @GetMapping("/loadStop/{stopId}")
-    public void loadStop(@PathVariable("stopId") String stopId) {
-
-        //hard code stopID
-        nwfbService.loadStop(stopId);
+    @GetMapping("/load/all-stops")
+    public void loadAllStops() {
+        logger.debug("Start loading [List<RouteStopEntity>] from the database");
+        List<RouteStopEntity> routeStops = routeStopRepository.findAll();
+        logger.debug("Done loading from database");
+        for(int i=0; i<routeStops.size(); i++) {
+            nwfbService.loadAllStops(routeStops);
+        }
     }
 
 }

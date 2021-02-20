@@ -1,8 +1,7 @@
-package com.fsse.busmapper.domain.dto.external.response.route;
+package com.fsse.busmapper.domain.dto.external.response.stop;
 
 import com.fsse.busmapper.domain.Stop;
-
-import java.util.List;
+import com.fsse.busmapper.domain.dto.external.response.stop.CtbStopDataResponseExtDto;
 
 public class CtbStopResponseExtDto {
     private CtbStopDataResponseExtDto data;

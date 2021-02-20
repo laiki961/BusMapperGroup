@@ -8,5 +8,5 @@ import java.util.List;
 public interface NwfbExtService {
     List<Route> loadAllRoutes();
     List<RouteStop> loadSpecificRouteStop(String route, String dir);
-    Stop stop(String stopId);
+    List<Stop> loadAllStops(String stopId);
 }

@@ -1,4 +1,4 @@
-package com.fsse.busmapper.domain.dto.external.response.route;
+package com.fsse.busmapper.domain.dto.external.response.stop;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fsse.busmapper.domain.Route;
