@@ -16,9 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +33,24 @@ public class NwfbServiceImpl implements NwfbService {
 
     Logger logger = LoggerFactory.getLogger(NwfbServiceImpl.class);
 
+    private void speedLimit() {
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException ie) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     @Override
-    public void loadAllRoutes() {
+    public List<RouteEntity> loadAllRoutes() {
         // Step 1.0: Load all routes
         List<Route> routeDOs = nwfbExtService.loadAllRoutes();
-        logger.debug(routeDOs.toString());
+        logger.debug("Done fetching [Routes from Ext API]");
+
         // Step 1.1: Convert the routeDO into RouteEntity
         List<RouteEntity> routeEntities = new ArrayList<>();
         for(int i=0; i<routeDOs.size(); i++) {
+            logger.debug("Adding {}/{} ", i+1, routeDOs.size());
             Route routeDO = routeDOs.get(i);
             RouteEntity entity = new RouteEntity();
             entity.setRouteId(routeDO.getRoute());
@@ -53,95 +60,107 @@ public class NwfbServiceImpl implements NwfbService {
         }
         // Step 1.2: Save all RouteEntity to database
         routeRepository.saveAll(routeEntities);
+        logger.debug("Saved [List<RouteEntity> into database]");
+        return routeEntities;
     }
 
     @Override
     // Step 2.3: let the program run 2 direction itself
-    public void loadRouteInAndOutboundStop (List<RouteEntity> routeEntities){
+    public List<StopEntity> loadRouteInAndOutboundStop (List<RouteEntity> routeEntities){
+        List<StopEntity> stopEntities = new ArrayList<>();
+        List<RouteStopEntity> routeStopEntities = null;
         String[] direction = new String[2];
         direction[0] = "inbound";
         direction[1] = "outbound";
         for(int i=0; i<routeEntities.size(); i++){
             for(int j=0; j<direction.length; j++){
-                loadRouteDirectionStop(routeEntities.get(i), direction[j]);
+                logger.debug("Total amount of routes: {}, 2 Directions: {}", routeEntities.size(), routeEntities.size()*2);
+                logger.debug("{} routes left: ", routeEntities.size()*2 - j);
+                routeStopEntities = loadRouteDirectionStop(routeEntities.get(i), direction[j]);
                 //loadRouteDirectionStop( RouteEntity route, inbound / outbound);
-                logger.debug("saved routeID {} ,{} to database: ", routeEntities.get(i).getRouteId(), direction[j]);
+                logger.debug("saved routeID {}, {} to database", routeEntities.get(i).getRouteId(), direction[j]);
+                speedLimit();
             }
         }
+        return stopEntities;
     }
 
     @Override
-    public void loadRouteDirectionStop(RouteEntity route, String dir){
-    // Step 2.0: Load RouteStop with a single direction
-    logger.debug("Fetching route {} in {}", route.getRouteId(), dir);
-    List<RouteStop> routeStopDOs = nwfbExtService.loadSpecificRouteStop(route.getRouteId(), dir);
-    logger.debug("Done fetch route {} in {}", route.getRouteId(), dir);
+    public List<RouteStopEntity> loadRouteDirectionStop(RouteEntity route, String dir){
+        List<RouteStopEntity> routeStopEntities = new ArrayList<>();
+        // Step 2.0: Load RouteStop with a single direction
 
-    // Step 2.1: Convert routeStopDO into RouteStopEntity
-    List<RouteStopEntity> routeStopEntities = new ArrayList<>();
-    for (int i=0; i<routeStopDOs.size(); i++){
-        logger.debug("Setting routeID. {}, stopNo.{} of {}, {} ", route.getRouteId(), i+1, routeStopDOs.size(), dir);
-        RouteStopEntity entity = new RouteStopEntity();
-        entity.setCo(routeStopDOs.get(i).getCo());
-        entity.setDir(dir);
-        entity.setRouteEntity(route);
-        entity.setSeq(routeStopDOs.get(i).getSeq());
+        logger.debug("Fetching route {} in {}", route.getRouteId(), dir);
+        List<RouteStop> routeStopDOs = nwfbExtService.loadSpecificRouteStop(route.getRouteId(), dir);
+        logger.debug("Done fetch route {} in {}", route.getRouteId(), dir);
 
-        StopEntity stop = new StopEntity();
-        stop.setStopId(routeStopDOs.get(i).getStop());
-        stop.setStopname(null);
-        stop.setLatitude(null);
-        stop.setLongitude(null);
-        stopRepository.save(stop);
-        entity.setStopEntity(stop);
+        // Step 2.1: Convert routeStopDO into RouteStopEntity
+        for (int i=0; i<routeStopDOs.size(); i++){
+            logger.debug("Setting routeID. {}, stopNo.{} of {}, {} ", route.getRouteId(), i+1, routeStopDOs.size(), dir);
 
-        routeStopEntities.add(entity);
-    }
-    logger.debug("routeStopEntities: {}", routeStopEntities);
+            RouteStopEntity routeStopEntity = new RouteStopEntity();
+            routeStopEntity.setCo(routeStopDOs.get(i).getCo());
+            routeStopEntity.setDir(dir);
+            routeStopEntity.setRouteEntity(route);
+            routeStopEntity.setSeq(routeStopDOs.get(i).getSeq());
 
-    // Step 2.2: Save to database
+            StopEntity stopEntity = new StopEntity();
+            stopEntity.setStopId(routeStopDOs.get(i).getStop());
+            stopEntity.setStopname(null);
+            stopEntity.setLatitude(null);
+            stopEntity.setLongitude(null);
+            stopRepository.save(stopEntity);
+
+            routeStopEntity.setStopEntity(stopEntity);
+
+            routeStopEntities.add(routeStopEntity);
+            logger.debug("StopID {}: Added routeId to [Stop database] ONLY", routeStopDOs.get(i).getStop());
+        }
+        // Step 2.2: Save to database
         routeStopRepository.saveAll(routeStopEntities);
+        return routeStopEntities;
     }
 
     @Override
-    public void loadAllStops(List<RouteStopEntity> routeStops) {
-        for (int j=0; j<routeStops.size(); j++){
-            logger.debug("stopID {}: Fetching {}/{} ", routeStops.get(j).getStopEntity().getStopId(), j+1, routeStops.size());
-            List<Stop> stopDOs = nwfbExtService.loadAllStops(routeStops.get(j).getStopEntity().getStopId());
-            logger.debug("StopID {}: Done fetch details, received Stop", routeStops.get(j).getStopEntity().getStopId());
+    public void loadAllStops() {
+        List<StopEntity> stopEntities = stopRepository.findAll();
+        List<Stop> stopDOs = new ArrayList<>();
 
-            //if stop details already exist then skip (if latitude doesn't exist in the database[false] [loop] below)
-//            if(!stopRepository.existsById(routeStops.get(j).getStopEntity().getLatitude())){
-                List<StopEntity> stopEntities = new ArrayList<>();
-                for(int i=0; i<stopDOs.size(); i++){
-                    logger.debug("Converting [StopDOs] into [StopEntity] {}/{}", i+1, stopDOs.size());
-                    StopEntity entity = new StopEntity();
-                    entity.setStopId(routeStops.get(j).getStopEntity().getStopId());
-                    entity.setStopname(stopDOs.get(i).getStopName());
-                    entity.setLatitude(stopDOs.get(i).getLat());
-                    entity.setLongitude(stopDOs.get(i).getLng());
-                    stopEntities.add(entity);
-                    logger.debug("Added [StopEntity] into [List<StopEntity>]");
-                }
-                stopRepository.saveAll(stopEntities);
-                logger.debug("stopID {}: Saved [List<StopEntity>] into database", routeStops.get(j).getStopEntity().getStopId());
-//            }else{
-//                logger.debug("StopID {}: Already exist in database", routeStops.get(j).getStopEntity().getStopId());
-//            }
+        for (int j=0; j<stopEntities.size(); j++){
+            logger.debug("Total stopID amount {}/{}, left: {}, stopID{} ", j+1, stopEntities.size(), stopEntities.size()-(j+1), stopEntities.get(j).getStopId());
+
+            Stop stopDO = nwfbExtService.loadSpecificStop(stopEntities.get(j).getStopId());
+            stopDOs.add(stopDO);
+
+            logger.debug("stopID {}: Setting StopName, Latitude & Longitude", stopEntities.get(j).getStopId() );
+            StopEntity entity = new StopEntity();
+            entity.setStopId(stopDOs.get(j).getStopId());
+            entity.setStopname(stopDOs.get(j).getStopName());
+            entity.setLatitude(stopDOs.get(j).getLat());
+            entity.setLongitude(stopDOs.get(j).getLng());
+            stopRepository.save(entity);
+            logger.debug("StopID {}: Added StopId, StopName, Latitude & Longitude to [Stop database]", stopEntities.get(j).getStopId());
+
+            speedLimit();
         }
     }
-
-
-
     
-///Final
-//    @Override
-//    public FetchDataFromCTBResponseDto loadAllBusData() {
-//        FetchDataFromCTBResponseDto fetchDataFromCTBResponseDto = new FetchDataFromCTBResponseDto();
-//        List<RouteEntity> routeEntities = loadAllRoutes(); // 要改上面return value
-//        List<RouteStopEntity> routeStopEntities = loadRouteInAndOutboundStop(routeEntities);
-//        loadAllStops(routeStopEntities);
-//        return fetchDataFromCTBResponseDto;
-//    }
+//Final
+    @Override
+    public FetchDataFromCTBResponseDto loadAllBusData() {
+        FetchDataFromCTBResponseDto fetchDataFromCTBResponseDto = new FetchDataFromCTBResponseDto();
+        logger.debug("Start calling [Routes from External API]");
+        List<RouteEntity> routeEntities = loadAllRoutes();
+
+        logger.debug("Start calling [RouteStops from External API] from [List<RouteEntity>] ");
+        List<StopEntity> stopEntities = loadRouteInAndOutboundStop(routeEntities);
+
+        logger.debug("Start calling [Stops from External API] from [List<StopEntity>]");
+        loadAllStops();
+
+        logger.debug("Finished fetching data from CTB");
+        return fetchDataFromCTBResponseDto;
+    }
+
 
 }

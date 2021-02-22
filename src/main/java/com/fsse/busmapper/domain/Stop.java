@@ -1,23 +1,10 @@
 package com.fsse.busmapper.domain;
 
-import com.fsse.busmapper.domain.entity.StopEntity;
-
-import javax.persistence.criteria.CriteriaBuilder;
-
 public class Stop {
     private String stopId;
     private String stopName;
     private Double lat;
     private Double lng;
-
-    /*
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }*/
 
     public String getStopId() {
         return stopId;

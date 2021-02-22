@@ -11,7 +11,7 @@ public class RouteStopEntity {
     private Integer routeStopId;
 
     @JoinColumn(name = "route_id", columnDefinition =  "VARCHAR(255)", nullable = false)
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne//(cascade = CascadeType.ALL)
     private RouteEntity routeEntity;
 
     @Column(name = "direction", columnDefinition =  "VARCHAR(255)", nullable = false)

@@ -1,7 +1,6 @@
 package com.fsse.busmapper.domain.dto.external.response.stop;
 
 import com.fsse.busmapper.domain.Stop;
-import com.fsse.busmapper.domain.dto.external.response.stop.CtbStopDataResponseExtDto;
 
 public class CtbStopResponseExtDto {
     private CtbStopDataResponseExtDto data;
@@ -12,7 +11,6 @@ public class CtbStopResponseExtDto {
         stopDO.setStopName(data.getStopName());
         stopDO.setLat(data.getLat());
         stopDO.setLng(data.getLng());
-
         return stopDO;
     }
 

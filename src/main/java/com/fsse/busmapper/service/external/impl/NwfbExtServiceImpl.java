@@ -1,14 +1,12 @@
 package com.fsse.busmapper.service.external.impl;
 
-import com.fsse.busmapper.api.DebugApi;
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.Stop;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteDataResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteResponseExtDto;
-import com.fsse.busmapper.domain.dto.external.response.stop.CtbStopResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.routeStop.CtbRouteStopResponseExtDto;
-import com.fsse.busmapper.domain.entity.StopEntity;
+import com.fsse.busmapper.domain.dto.external.response.stop.CtbStopResponseExtDto;
 import com.fsse.busmapper.service.external.NwfbExtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,22 +59,17 @@ public class NwfbExtServiceImpl implements NwfbExtService {
     }
 
     @Override
-    public List<Stop> loadAllStops(String stopId) {
+    public Stop loadSpecificStop(String stopId) {
         CtbStopResponseExtDto response = restTemplate.getForObject(
                 "https://rt.data.gov.hk/" +
                         "v1/transport/citybus-nwfb/stop/" + stopId,
                 CtbStopResponseExtDto.class
         );
 
-        List<Stop> stopDOs = new ArrayList<>();
-        Stop stop = new Stop();
-        logger.debug("stopID {}: Adding Stop's elements to [StopDO] ", stopId);
-        stop.setStopName(response.getData().getStopName());
-        stop.setLat(response.getData().getLat());
-        stop.setLng(response.getData().getLng());
-        stopDOs.add(stop);
-        logger.debug("stopID {}: Added [StopDO] details into [List<Stop>]", stopId);
-        return stopDOs;
+            logger.debug("stopID {}: Adding Stop's elements to [StopDO]", stopId);
+            Stop stopDO = response.toStop();
+            logger.debug("stopID {}: Added [StopDO] into [List<Stop>]", stopId);
+        return stopDO;
     }
 
 
