@@ -18,6 +18,6 @@ public class LoggingApi {
         logger.warn("A WARN Message");
         logger.error("An ERROR Message");
 
-        return "Howdy! Check out the Logs to see the output...";
+        return "message";
     }
 }
