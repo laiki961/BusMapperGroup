@@ -1,10 +1,14 @@
 package com.fsse.busmapper.domain;
 
+import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto.GoogleSearchPlaceNameResponseExtDtoResultGeometry;
 import com.fsse.busmapper.domain.entity.SearchPlaceHistoryEntity;
 
 public class LocationNameDO {
-    private Integer placeSearchId;
+//    private Integer placeSearchId; //it should be inside entity instead of DO
     private String formatAdd;
+    private GoogleSearchPlaceNameResponseExtDtoResultGeometry geometry;
+    private 
+
     private Double locationLat;
     private Double locationLng;
     private Double viewportNeLat;
@@ -24,20 +28,20 @@ public class LocationNameDO {
         return entity;
     }
 
-    public Integer getPlaceSearchId() {
-        return placeSearchId;
-    }
-
-    public void setPlaceSearchId(Integer placeSearchId) {
-        this.placeSearchId = placeSearchId;
-    }
-
     public String getFormatAdd() {
         return formatAdd;
     }
 
     public void setFormatAdd(String formatAdd) {
         this.formatAdd = formatAdd;
+    }
+
+    public GoogleSearchPlaceNameResponseExtDtoResultGeometry getGeometry() {
+        return geometry;
+    }
+
+    public void setGeometry(GoogleSearchPlaceNameResponseExtDtoResultGeometry geometry) {
+        this.geometry = geometry;
     }
 
     public Double getLocationLat() {
@@ -86,19 +90,5 @@ public class LocationNameDO {
 
     public void setViewportSwLng(Double viewportSwLng) {
         this.viewportSwLng = viewportSwLng;
-    }
-
-    @Override
-    public String toString() {
-        return "LocationNameDO{" +
-                "placeSearchId=" + placeSearchId +
-                ", formatAdd='" + formatAdd + '\'' +
-                ", locationLat=" + locationLat +
-                ", locationLng=" + locationLng +
-                ", viewportNeLat=" + viewportNeLat +
-                ", viewportNeLng=" + viewportNeLng +
-                ", viewportSwLat=" + viewportSwLat +
-                ", viewportSwLng=" + viewportSwLng +
-                '}';
     }
 }
