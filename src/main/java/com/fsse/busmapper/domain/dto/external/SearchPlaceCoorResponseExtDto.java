@@ -1,14 +1,14 @@
 package com.fsse.busmapper.domain.dto.external;
 
-import com.fsse.busmapper.domain.LocationNameDO;
+import com.fsse.busmapper.domain.GoogleSearchPlaceNameResponseExtDO;
 import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto.GoogleSearchPlaceNameResponseExtDtoResult;
 
 public class SearchPlaceCoorResponseExtDto {
     private GoogleSearchPlaceNameResponseExtDtoResult result;
     private String status;
 
-    public LocationNameDO toSearchPlaceCoorDo() {
-        LocationNameDO searchPlaceCoorDo = new LocationNameDO();
+    public GoogleSearchPlaceNameResponseExtDO toSearchPlaceCoorDo() {
+        GoogleSearchPlaceNameResponseExtDO searchPlaceCoorDo = new GoogleSearchPlaceNameResponseExtDO();
 
         searchPlaceCoorDo.setFormatAdd(result.getFormatAdd());
         searchPlaceCoorDo.setLocationLat(result.getGeometry().getLocation().getLat());

@@ -1,10 +1,5 @@
 package com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto;
 
-import com.fsse.busmapper.domain.LocationNameDO;
-import com.fsse.busmapper.domain.dto.GoogleSearchPlaceNameResponseDto.GoogleSearchPlaceNameResponseViewport;
-import com.fsse.busmapper.domain.entity.SearchPlaceHistoryEntity;
-
-import javax.xml.stream.Location;
 import java.util.List;
 
 public class GoogleSearchPlaceNameResponseExtDto {

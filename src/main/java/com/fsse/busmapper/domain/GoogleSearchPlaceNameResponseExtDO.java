@@ -3,12 +3,10 @@ package com.fsse.busmapper.domain;
 import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto.GoogleSearchPlaceNameResponseExtDtoResultGeometry;
 import com.fsse.busmapper.domain.entity.SearchPlaceHistoryEntity;
 
-public class LocationNameDO {
-//    private Integer placeSearchId; //it should be inside entity instead of DO
-    private String formatAdd;
-    private GoogleSearchPlaceNameResponseExtDtoResultGeometry geometry;
-    private 
+public class GoogleSearchPlaceNameResponseExtDO {
 
+    private String formatAdd;
+    private String placeId;
     private Double locationLat;
     private Double locationLng;
     private Double viewportNeLat;
@@ -28,20 +26,20 @@ public class LocationNameDO {
         return entity;
     }
 
+    public String getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
+    }
+
     public String getFormatAdd() {
         return formatAdd;
     }
 
     public void setFormatAdd(String formatAdd) {
         this.formatAdd = formatAdd;
-    }
-
-    public GoogleSearchPlaceNameResponseExtDtoResultGeometry getGeometry() {
-        return geometry;
-    }
-
-    public void setGeometry(GoogleSearchPlaceNameResponseExtDtoResultGeometry geometry) {
-        this.geometry = geometry;
     }
 
     public Double getLocationLat() {
