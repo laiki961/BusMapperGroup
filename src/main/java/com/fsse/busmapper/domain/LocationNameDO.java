@@ -1,40 +1,104 @@
 package com.fsse.busmapper.domain;
 
+import com.fsse.busmapper.domain.entity.SearchPlaceHistoryEntity;
+
 public class LocationNameDO {
-    private String formatName;
-    private LocationNameDOGeometry geometry;
-    public String placeId;
+    private Integer placeSearchId;
+    private String formatAdd;
+    private Double locationLat;
+    private Double locationLng;
+    private Double viewportNeLat;
+    private Double viewportNeLng;
+    private Double viewportSwLat;
+    private Double viewportSwLng;
 
-    public String getFormatName() {
-        return formatName;
+    public SearchPlaceHistoryEntity toPlaceEntity(){
+        SearchPlaceHistoryEntity entity = new SearchPlaceHistoryEntity();
+        entity.setFormatAdd(getFormatAdd());
+        entity.setLocationLat(getLocationLat());
+        entity.setLocationLng(getLocationLng());
+        entity.setViewportNelat(getViewportNeLat());
+        entity.setViewportNeLng(getViewportNeLng());
+        entity.setViewportSwLat(getViewportSwLat());
+        entity.setViewportSwLng(getViewportSwLng());
+        return entity;
     }
 
-    public void setFormatName(String formatName) {
-        this.formatName = formatName;
+    public Integer getPlaceSearchId() {
+        return placeSearchId;
     }
 
-    public LocationNameDOGeometry getGeometry() {
-        return geometry;
+    public void setPlaceSearchId(Integer placeSearchId) {
+        this.placeSearchId = placeSearchId;
     }
 
-    public void setGeometry(LocationNameDOGeometry geometry) {
-        this.geometry = geometry;
+    public String getFormatAdd() {
+        return formatAdd;
     }
 
-    public String getPlaceId() {
-        return placeId;
+    public void setFormatAdd(String formatAdd) {
+        this.formatAdd = formatAdd;
     }
 
-    public void setPlaceId(String placeId) {
-        this.placeId = placeId;
+    public Double getLocationLat() {
+        return locationLat;
+    }
+
+    public void setLocationLat(Double locationLat) {
+        this.locationLat = locationLat;
+    }
+
+    public Double getLocationLng() {
+        return locationLng;
+    }
+
+    public void setLocationLng(Double locationLng) {
+        this.locationLng = locationLng;
+    }
+
+    public Double getViewportNeLat() {
+        return viewportNeLat;
+    }
+
+    public void setViewportNeLat(Double viewportNeLat) {
+        this.viewportNeLat = viewportNeLat;
+    }
+
+    public Double getViewportNeLng() {
+        return viewportNeLng;
+    }
+
+    public void setViewportNeLng(Double viewportNeLng) {
+        this.viewportNeLng = viewportNeLng;
+    }
+
+    public Double getViewportSwLat() {
+        return viewportSwLat;
+    }
+
+    public void setViewportSwLat(Double viewportSwLat) {
+        this.viewportSwLat = viewportSwLat;
+    }
+
+    public Double getViewportSwLng() {
+        return viewportSwLng;
+    }
+
+    public void setViewportSwLng(Double viewportSwLng) {
+        this.viewportSwLng = viewportSwLng;
     }
 
     @Override
     public String toString() {
         return "LocationNameDO{" +
-                "locationName='" + formatName + '\'' +
-                ", geometry=" + geometry +
-                ", placeId='" + placeId + '\'' +
+                "placeSearchId=" + placeSearchId +
+                ", formatAdd='" + formatAdd + '\'' +
+                ", locationLat=" + locationLat +
+                ", locationLng=" + locationLng +
+                ", viewportNeLat=" + viewportNeLat +
+                ", viewportNeLng=" + viewportNeLng +
+                ", viewportSwLat=" + viewportSwLat +
+                ", viewportSwLng=" + viewportSwLng +
                 '}';
     }
 }

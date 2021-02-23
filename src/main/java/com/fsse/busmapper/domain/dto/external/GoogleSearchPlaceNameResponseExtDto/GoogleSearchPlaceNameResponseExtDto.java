@@ -2,7 +2,9 @@ package com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtD
 
 import com.fsse.busmapper.domain.LocationNameDO;
 import com.fsse.busmapper.domain.dto.GoogleSearchPlaceNameResponseDto.GoogleSearchPlaceNameResponseViewport;
+import com.fsse.busmapper.domain.entity.SearchPlaceHistoryEntity;
 
+import javax.xml.stream.Location;
 import java.util.List;
 
 public class GoogleSearchPlaceNameResponseExtDto {
@@ -17,12 +19,13 @@ public class GoogleSearchPlaceNameResponseExtDto {
         this.results = results;
     }
 
-    //pass name,location,viewport,placeID to DO
-//    public LocationNameDO toLocationNameDO(){
-//        GoogleSearchPlaceNameResponseExtDtoResult response = new GoogleSearchPlaceNameResponseExtDtoResult();
-//        response.setPlaceId(response.getPlaceId());
-//        response.setGeometry(response.getGeometry());
-//        return response;
-//    }
-}
+//    public LocationNameDO toLocationNameDO (){
+//        LocationNameDO locationNameDO = new LocationNameDO();
+//        for (int i=0;i<results.size();i++) {
+//            locationNameDO.setFormatAdd();
+//            //todo
+//        }
+    }
+
+
 

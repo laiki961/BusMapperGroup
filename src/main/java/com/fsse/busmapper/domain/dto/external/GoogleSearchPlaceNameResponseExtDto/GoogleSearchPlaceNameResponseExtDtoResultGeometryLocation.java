@@ -1,8 +1,5 @@
 package com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto;
 
-import com.fsse.busmapper.domain.LocationNameDO;
-import com.fsse.busmapper.domain.LocationNameDOGeometryLocation;
-
 public class GoogleSearchPlaceNameResponseExtDtoResultGeometryLocation {
     private Double lat;
     private Double lng;
@@ -30,10 +27,10 @@ public class GoogleSearchPlaceNameResponseExtDtoResultGeometryLocation {
                 ", lng=" + lng +
                 '}';
     }
-    public LocationNameDOGeometryLocation toLocationNameDOGeometryLocation(){
-        LocationNameDOGeometryLocation locationNameDOGeometryLocation = new LocationNameDOGeometryLocation();
-        locationNameDOGeometryLocation.setLat(lat);
-        locationNameDOGeometryLocation.setLng(lng);
-        return locationNameDOGeometryLocation;
-    }
+//    public LocationNameDOGeometryLocation toLocationNameDOGeometryLocation(){
+//        LocationNameDOGeometryLocation locationNameDOGeometryLocation = new LocationNameDOGeometryLocation();
+//        locationNameDOGeometryLocation.setLat(lat);
+//        locationNameDOGeometryLocation.setLng(lng);
+//        return locationNameDOGeometryLocation;
+//    }
 }

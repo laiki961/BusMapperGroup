@@ -1,7 +1,5 @@
 package com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto;
 
-import com.fsse.busmapper.domain.LocationNameDOGeometryViewport;
-
 public class GoogleSearchPlaceNameResponseExtDtoResultGeometryViewportNE {
     private Double lat;
     private Double lng;
