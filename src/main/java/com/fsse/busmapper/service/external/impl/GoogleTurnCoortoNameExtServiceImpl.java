@@ -1,7 +1,9 @@
 package com.fsse.busmapper.service.external.impl;
 
 
-import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceCoorResponseExtDto.GoogleSearchPlaceCoorResponseExtDto;
+import com.fsse.busmapper.domain.LocationNameDO;
+import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto.GoogleSearchPlaceNameResponseExtDto;
+import com.fsse.busmapper.domain.dto.external.SearchPlaceCoorResponseExtDto;
 import com.fsse.busmapper.service.external.GoogleTurnCoortoNameExtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +17,29 @@ public class GoogleTurnCoortoNameExtServiceImpl implements GoogleTurnCoortoNameE
     Logger logger = LoggerFactory.getLogger(GoogleTurnCoortoNameExtServiceImpl.class);
 
     @Override
-    public GoogleSearchPlaceCoorResponseExtDto loadLocationName(Double lat, Double lng) {
-        GoogleSearchPlaceCoorResponseExtDto response = restTemplate.getForObject(
+    public GoogleSearchPlaceNameResponseExtDto loadLocationName(Double lat, Double lng) {
+        GoogleSearchPlaceNameResponseExtDto response = restTemplate.getForObject(
                 "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
                         lat + "," + lng +
                         "&key=" + "AIzaSyCjCVCEaRCewdaqDQE6ocCPC1x_W-EsS-g",
-                GoogleSearchPlaceCoorResponseExtDto.class
+                GoogleSearchPlaceNameResponseExtDto.class
+        );
+        logger.debug(response.toString());
+        return response;
+    }
+
+    @Override
+    public LocationNameDO locationNameDO(String placedId) {
+        SearchPlaceCoorResponseExtDto searchPlaceCoorResponseExtDto = searchPlaceCoorResponseExtDto(placedId);
+        return  searchPlaceCoorResponseExtDto.toSearchPlaceCoorDo();
+    }
+
+
+    public SearchPlaceCoorResponseExtDto searchPlaceCoorResponseExtDto(String placeId) {
+        SearchPlaceCoorResponseExtDto response = restTemplate.getForObject(
+                "https://maps.googleapis.com/maps/api/place/details/json?place_id=" +
+                        placeId + "&key=AIzaSyBUhJeB80YLr4o1fC-q0r7_lzIJkQHldpg",
+                SearchPlaceCoorResponseExtDto.class
         );
         logger.debug(response.toString());
         return response;

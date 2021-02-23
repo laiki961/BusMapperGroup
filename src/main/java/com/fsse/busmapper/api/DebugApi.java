@@ -1,7 +1,10 @@
 package com.fsse.busmapper.api;
 
+import com.fsse.busmapper.domain.LocationNameDO;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.Stop;
+import com.fsse.busmapper.domain.dto.SearchPlaceCoorResponseDto;
+import com.fsse.busmapper.domain.dto.external.SearchPlaceCoorResponseExtDto;
 import com.fsse.busmapper.domain.dto.response.FetchDataFromCTBResponseDto;
 import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.domain.entity.RouteEntity;
@@ -11,7 +14,7 @@ import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.repository.RouteRepository;
 import com.fsse.busmapper.repository.RouteStopRepository;
 import com.fsse.busmapper.repository.StopRepository;
-import com.fsse.busmapper.service.GooglePlaceSearchService;
+import com.fsse.busmapper.service.GoogleTurnCoortoNameService;
 import com.fsse.busmapper.service.NwfbService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -39,8 +43,9 @@ public class DebugApi {
     @Autowired
     private StopRepository stopRepository;
     @Autowired
+    private GoogleTurnCoortoNameService googleTurnCoortoNameService;
+    @Autowired
     private PlaceRepository placeRepository;
-
     private Logger logger = LoggerFactory.getLogger(DebugApi.class);
 
     @GetMapping("/load/all-route")
@@ -67,6 +72,11 @@ public class DebugApi {
 //    public FetchDataFromCTBResponseDto loadAllBusData(){
 //        return nwfbService.loadAllBusData();
 //    }
+
+    @GetMapping("/load/searchByPlaceId")
+    public LocationNameDO searchByPlaceId(@RequestParam("placeId") String placeId) {
+        return googleTurnCoortoNameService.locationNameDO(placeId);
+    }
 
     @GetMapping("/search-bus-route/{origPlaceSearchId}/{destPlaceSearchId}")
     public void searchBusRoute(@PathVariable int origPlaceSearchId, @PathVariable int destPlaceSearchId){
