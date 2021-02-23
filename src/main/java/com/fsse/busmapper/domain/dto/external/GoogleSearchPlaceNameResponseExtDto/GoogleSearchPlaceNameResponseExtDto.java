@@ -1,5 +1,8 @@
 package com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto;
 
+import com.fsse.busmapper.domain.GoogleSearchPlaceNameResponseExtDO;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleSearchPlaceNameResponseExtDto {
@@ -14,12 +17,12 @@ public class GoogleSearchPlaceNameResponseExtDto {
         this.results = results;
     }
 
-//    public LocationNameDO toLocationNameDO (){
-//        LocationNameDO locationNameDO = new LocationNameDO();
-//        for (int i=0;i<results.size();i++) {
-//            locationNameDO.setFormatAdd();
-//            //todo
-//        }
+    public GoogleSearchPlaceNameResponseExtDO toGoogleSearchPlaceNameResponseExtDO (){
+        GoogleSearchPlaceNameResponseExtDO GoogleSearchPlaceNameResponseExtDO = new GoogleSearchPlaceNameResponseExtDO();
+        List<GoogleSearchPlaceNameResponseExtDO> googleSearchPlaceNameResponseExtDOS = new ArrayList<>();
+        for (int i=0;i<results.size();i++) {
+            googleSearchPlaceNameResponseExtDOS.add();
+        }
     }
 
 

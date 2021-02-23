@@ -13,14 +13,15 @@ public class GoogleSearchPlaceNameResponseExtDtoResult {
 
     public GoogleSearchPlaceNameResponseExtDO toLocationNameDO(){
         GoogleSearchPlaceNameResponseExtDO googleSearchPlaceNameResponseExtDO = new GoogleSearchPlaceNameResponseExtDO();
-        googleSearchPlaceNameResponseExtDO.setFormatAdd();
-        googleSearchPlaceNameResponseExtDO.setPlaceId();
-        googleSearchPlaceNameResponseExtDO.setLocationLat();
+        googleSearchPlaceNameResponseExtDO.setFormatAdd(formatAdd);
+        googleSearchPlaceNameResponseExtDO.setPlaceId(placeId);
+        googleSearchPlaceNameResponseExtDO.setGeometry
         googleSearchPlaceNameResponseExtDO.setLocationLng();
         googleSearchPlaceNameResponseExtDO.setViewportNeLat();
         googleSearchPlaceNameResponseExtDO.setViewportSwLat();
         googleSearchPlaceNameResponseExtDO.setViewportNeLng();
         googleSearchPlaceNameResponseExtDO.setViewportSwLng();
+        return googleSearchPlaceNameResponseExtDO;
 
     }
 
