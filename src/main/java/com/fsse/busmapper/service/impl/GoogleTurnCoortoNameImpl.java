@@ -21,6 +21,8 @@ public class GoogleTurnCoortoNameImpl implements GoogleTurnCoortoNameService {
         //save entity to repository
 
         return googleTurnCoortoNameExtService.loadLocationName(lat, lng);
-
+    }
+    public void searchPlaceCoor(){
+        //todo
     }
 }

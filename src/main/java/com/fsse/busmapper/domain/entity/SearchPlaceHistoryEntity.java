@@ -9,7 +9,7 @@ public class SearchPlaceHistoryEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer placeSearchId;
     @Column
-    private String locationName;
+    private String formatName;
     @Column
     private Double lat;
     @Column
@@ -31,12 +31,12 @@ public class SearchPlaceHistoryEntity {
         this.placeSearchId = placeSearchId;
     }
 
-    public String getLocationName() {
-        return locationName;
+    public String getFormatName() {
+        return formatName;
     }
 
-    public void setLocationName(String locationName) {
-        this.locationName = locationName;
+    public void setFormatName(String formatName) {
+        this.formatName = formatName;
     }
 
     public Double getLat() {
@@ -59,7 +59,7 @@ public class SearchPlaceHistoryEntity {
     public String toString() {
         return "locationNameEntity{" +
                 "placeholderId=" + placeSearchId +
-                ", locationName='" + locationName + '\'' +
+                ", locationName='" + formatName + '\'' +
                 ", lat=" + lat +
                 ", lng=" + lng +
                 '}';

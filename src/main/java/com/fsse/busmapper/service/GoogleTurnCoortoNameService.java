@@ -7,4 +7,5 @@ import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDt
 public interface GoogleTurnCoortoNameService {
     //load name from location
     GoogleSearchPlaceNameResponseExtDto loadLocationName(Double lat, Double lng);
+    void searchPlaceCoor();
 }
