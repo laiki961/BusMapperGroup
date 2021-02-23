@@ -1,10 +1,10 @@
 package com.fsse.busmapper.domain.dto.external;
 
 import com.fsse.busmapper.domain.GoogleSearchPlaceNameResponseExtDO;
-import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto.GoogleSearchPlaceNameResponseExtDtoResult;
+import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceCoorResponseExtDto.GoogleSearchPlaceCoorResultResponseExtDto;
 
 public class SearchPlaceCoorResponseExtDto {
-    private GoogleSearchPlaceNameResponseExtDtoResult result;
+    private GoogleSearchPlaceCoorResultResponseExtDto result;
     private String status;
 
     public GoogleSearchPlaceNameResponseExtDO toSearchPlaceCoorDo() {
@@ -20,11 +20,11 @@ public class SearchPlaceCoorResponseExtDto {
         return searchPlaceCoorDo;
     }
 
-    public GoogleSearchPlaceNameResponseExtDtoResult getResult() {
+    public GoogleSearchPlaceCoorResultResponseExtDto getResult() {
         return result;
     }
 
-    public void setResult(GoogleSearchPlaceNameResponseExtDtoResult result) {
+    public void setResult(GoogleSearchPlaceCoorResultResponseExtDto result) {
         this.result = result;
     }
 
@@ -43,4 +43,10 @@ public class SearchPlaceCoorResponseExtDto {
                 ", status='" + status + '\'' +
                 '}';
     }
+
+
+
+
+
+
 }

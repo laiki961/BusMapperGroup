@@ -1,11 +1,10 @@
 package com.fsse.busmapper.service;
 
 
-import com.fsse.busmapper.domain.dto.GoogleSearchPlaceNameResponseDto.GoogleSearchPlaceNameResponseDto;
-import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto.GoogleSearchPlaceNameResponseExtDto;
+import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceCoorResponseExtDto.GoogleSearchPlaceCoorResponseExtDto;
 
 public interface GoogleTurnCoortoNameService {
     //load name from location
-    GoogleSearchPlaceNameResponseExtDto loadLocationName(Double lat, Double lng);
+    GoogleSearchPlaceCoorResponseExtDto loadLocationName(Double lat, Double lng);
     void searchPlaceCoor();
 }

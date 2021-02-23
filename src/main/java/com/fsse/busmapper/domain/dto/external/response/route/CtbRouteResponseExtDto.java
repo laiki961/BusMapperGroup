@@ -10,14 +10,14 @@ import java.util.List;
 public class CtbRouteResponseExtDto {
     private List<CtbRouteDataResponseExtDto> data;
 
-//    public List<Route> toRoutesDO() {
-//        List<Route> routeDOs = new ArrayList<>();
-//        for(int i=0; i<data.size(); i++) {
-//            CtbRouteDataResponseExtDto routeDto = data.get(i);
-//            routeDOs.add(routeDto.toRouteDO());
-//        }
-//        return routeDOs;
-//    }
+    public List<Route> toRoutesDO() {
+        List<Route> routeDOs = new ArrayList<>();
+        for(int i=0; i<data.size(); i++) {
+            CtbRouteDataResponseExtDto routeDto = data.get(i);
+            routeDOs.add(routeDto.toRouteDO());
+        }
+        return routeDOs;
+    }
 
     public List<CtbRouteDataResponseExtDto> getData() {
         return data;

@@ -1,6 +1,5 @@
 package com.fsse.busmapper.domain;
 
-import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto.GoogleSearchPlaceNameResponseExtDtoResultGeometry;
 import com.fsse.busmapper.domain.entity.SearchPlaceHistoryEntity;
 
 public class GoogleSearchPlaceNameResponseExtDO {

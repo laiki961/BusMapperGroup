@@ -1,7 +1,6 @@
 package com.fsse.busmapper.service.impl;
 
-import com.fsse.busmapper.domain.dto.GoogleSearchPlaceNameResponseDto.GoogleSearchPlaceNameResponseDto;
-import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto.GoogleSearchPlaceNameResponseExtDto;
+import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceCoorResponseExtDto.GoogleSearchPlaceCoorResponseExtDto;
 import com.fsse.busmapper.repository.GooglePlaceLocationNameRepository;
 import com.fsse.busmapper.service.GoogleTurnCoortoNameService;
 import com.fsse.busmapper.service.external.GoogleTurnCoortoNameExtService;
@@ -15,7 +14,7 @@ public class GoogleTurnCoortoNameImpl implements GoogleTurnCoortoNameService {
     @Autowired
     private GooglePlaceLocationNameRepository googlePlaceLocationNameRepository;
 
-    public GoogleSearchPlaceNameResponseExtDto loadLocationName(Double lat, Double lng){
+    public GoogleSearchPlaceCoorResponseExtDto loadLocationName(Double lat, Double lng){
         //link with external service(turn dto to do)
         //convert to DO to entity
         //save entity to repository

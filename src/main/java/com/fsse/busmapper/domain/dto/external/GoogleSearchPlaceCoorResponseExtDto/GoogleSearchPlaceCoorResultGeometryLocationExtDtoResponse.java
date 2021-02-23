@@ -1,6 +1,6 @@
-package com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto;
+package com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceCoorResponseExtDto;
 
-public class GoogleSearchPlaceNameResponseExtDtoResultGeometryLocation {
+public class GoogleSearchPlaceCoorResultGeometryLocationExtDtoResponse {
     private Double lat;
     private Double lng;
 

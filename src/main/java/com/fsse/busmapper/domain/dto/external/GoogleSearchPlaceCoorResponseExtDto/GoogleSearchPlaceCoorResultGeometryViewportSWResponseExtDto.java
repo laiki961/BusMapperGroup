@@ -1,6 +1,6 @@
-package com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto;
+package com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceCoorResponseExtDto;
 
-public class GoogleSearchPlaceNameResponseExtDtoResultGeometryViewportNE {
+public class GoogleSearchPlaceCoorResultGeometryViewportSWResponseExtDto {
     private Double lat;
     private Double lng;
 
@@ -22,10 +22,9 @@ public class GoogleSearchPlaceNameResponseExtDtoResultGeometryViewportNE {
 
     @Override
     public String toString() {
-        return "GoogleSearchPlaceNameResponseExtDtoResultGeometryViewportNE{" +
+        return "GoogleSearchPlaceNameResponseExtDtoResultGeometryViewportSW{" +
                 "lat=" + lat +
                 ", lng=" + lng +
                 '}';
     }
-    
 }

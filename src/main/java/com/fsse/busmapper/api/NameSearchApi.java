@@ -1,7 +1,7 @@
 package com.fsse.busmapper.api;
 
 
-import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceNameResponseExtDto.GoogleSearchPlaceNameResponseExtDto;
+import com.fsse.busmapper.domain.dto.external.GoogleSearchPlaceCoorResponseExtDto.GoogleSearchPlaceCoorResponseExtDto;
 import com.fsse.busmapper.service.GoogleTurnCoortoNameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class NameSearchApi {
     private GoogleTurnCoortoNameService googleTurnCoortoNameService;
 
     @GetMapping("/{lat}/{lng}")
-    public GoogleSearchPlaceNameResponseExtDto loadLocationName(@PathVariable("lat") Double lat, @PathVariable("lng") Double lng){
+    public GoogleSearchPlaceCoorResponseExtDto loadLocationName(@PathVariable("lat") Double lat, @PathVariable("lng") Double lng){
         return googleTurnCoortoNameService.loadLocationName(lat, lng);
 
     }
