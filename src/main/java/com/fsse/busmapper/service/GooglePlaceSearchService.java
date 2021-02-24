@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface GooglePlaceSearchService {
     //API 2
-
+    Place googleSearchLatLng(Double lat, Double lng);
 
     //API 3
     Place googleSearchPlaceId(String placeId);

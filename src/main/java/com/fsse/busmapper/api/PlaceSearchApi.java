@@ -2,11 +2,10 @@ package com.fsse.busmapper.api;
 
 
 import com.fsse.busmapper.domain.Place;
-import com.fsse.busmapper.domain.dto.internal.response.place.SearchBusRouteDto;
-import com.fsse.busmapper.domain.dto.internal.response.place.googleSearchPlace.GoogleSearchPlaceResponseDto;
-import com.fsse.busmapper.domain.entity.PlaceEntity;
-import com.fsse.busmapper.repository.PlaceRepository;
+import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
+import com.fsse.busmapper.domain.dto.internal.response.place.GoogleSearchPlaceResponseDto;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
+import com.fsse.busmapper.service.impl.GooglePlaceSearchServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +25,13 @@ public class PlaceSearchApi {
     private PlaceRepository placeRepository;
 
 //API 2
-//    @GetMapping("/byPlaceLatLng/{lat}/{lng}")
-//    public GoogleSearchPlaceResponseDto loadLocationName(@PathVariable("lat") Double lat, @PathVariable("lng") Double lng){
-//        return googleTurnCoortoNameService.loadLocationName(lat, lng);
-//
-//    }
+    @GetMapping("/byPlaceLatLng/{lat}/{lng}")
+    public GoogleSearchPlaceResponseDto loadLocationName(@PathVariable("lat") Double lat, @PathVariable("lng") Double lng){
+        Place placeDO = googlePlaceSearchService.googleSearchLatLng(lat,lng);
+        logger.debug("received 6: {}", placeDO );
+        GoogleSearchPlaceResponseDto dto = new GoogleSearchPlaceResponseDto(placeDO);
+        return dto;
+    }
 
     //API 3 DONE (DON'T TOUCH)
     @GetMapping("/byPlaceId/{placeId}")

@@ -1,9 +1,10 @@
 package com.fsse.busmapper.service.external;
 
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceIdResponseExtDto;
-import com.fsse.busmapper.domain.dto.internal.response.place.googleSearchPlace.GoogleSearchPlaceResponseDto;
+import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
+import com.fsse.busmapper.domain.dto.internal.response.place.GoogleSearchPlaceResponseDto;
 
 public interface GooglePlaceSearchExtService {
-    GoogleSearchPlaceResponseDto loadLocationName(Double lat, Double lng);
+    GoogleSearchPlaceLatLngResponseExtDto googlePlaceSearchByLatLng(Double lat, Double lng);
     GoogleSearchPlaceIdResponseExtDto googlePlaceSearchByPlaceId(String placedId);
 }
