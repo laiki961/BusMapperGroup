@@ -1,8 +1,13 @@
 package com.fsse.busmapper.domain.dto.internal.response.place;
 
+import com.fsse.busmapper.api.PlaceSearchApi;
 import com.fsse.busmapper.domain.Place;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GoogleSearchPlaceResponseDto {
+    Logger logger = LoggerFactory.getLogger(GoogleSearchPlaceResponseDto.class);
+
     private Integer placeSearchId; // from entity
     private String name;
     private GoogleSearchPlaceResponseDtoLocation location;
@@ -12,20 +17,25 @@ public class GoogleSearchPlaceResponseDto {
 
     public GoogleSearchPlaceResponseDto (Place placeDO){
         this.placeSearchId = placeDO.getSearchPlaceId();
+        logger.debug("received 7: {}", placeDO.getSearchPlaceId());
+
+        this.name = placeDO.getFormatAdd();
+
         GoogleSearchPlaceResponseDtoLocation location = new GoogleSearchPlaceResponseDtoLocation();
-        location.setLat(getLocation().getLat());
-        location.setLng(getLocation().getLng());
+        location.setLat(placeDO.getLocationLat());
+        location.setLng(placeDO.getLocationLng());
         this.location = location;
+        logger.debug("received 8: {}", this.location);
 
         GoogleSearchPlaceResponseDtoViewport viewport = new GoogleSearchPlaceResponseDtoViewport();
         //
         GoogleSearchPlaceResponseDtoViewportNe ne = new GoogleSearchPlaceResponseDtoViewportNe();
-        ne.setLat(getViewport().getNe().getLat());
-        ne.setLng(getViewport().getNe().getLng());
+        ne.setLat(placeDO.getViewportNeLat());
+        ne.setLng(placeDO.getViewportNeLng());
         viewport.setNe(ne);
         GoogleSearchPlaceResponseDtoViewportSw sw = new GoogleSearchPlaceResponseDtoViewportSw();
-        sw.setLat(getViewport().getSw().getLat());
-        sw.setLng(getViewport().getSw().getLng());
+        sw.setLat(placeDO.getViewportSwLat());
+        sw.setLng(placeDO.getViewportSwLng());
         viewport.setSw(sw);
         //
         this.viewport = viewport;

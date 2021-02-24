@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface GooglePlaceSearchService {
     //API 2
+
+
+    //API 3
     Place googleSearchPlaceId(String placeId);
 
 //    //API 4
