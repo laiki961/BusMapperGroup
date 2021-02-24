@@ -3,7 +3,10 @@ package com.fsse.busmapper.api;
 
 import com.fsse.busmapper.domain.Place;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
-import com.fsse.busmapper.domain.dto.internal.response.place.GoogleSearchPlaceResponseDto;
+import com.fsse.busmapper.domain.dto.internal.response.place.SearchBusRouteDto;
+import com.fsse.busmapper.domain.dto.internal.response.place.googleSearchPlace.GoogleSearchPlaceResponseDto;
+import com.fsse.busmapper.domain.entity.PlaceEntity;
+import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
 import com.fsse.busmapper.service.impl.GooglePlaceSearchServiceImpl;
 import org.slf4j.Logger;
@@ -44,7 +47,7 @@ public class PlaceSearchApi {
 
     //API 4
     @GetMapping("/search-bus-route/{origPlaceSearchId}/{destPlaceSearchId}")
-    public SearchBusRouteDto searchBusRoute(@PathVariable int origPlaceSearchId, @PathVariable int destPlaceSearchId){
+    public void searchBusRoute(@PathVariable int origPlaceSearchId, @PathVariable int destPlaceSearchId){
         List<PlaceEntity> placeEntities = new ArrayList<>();
         PlaceEntity placeEntity0 = new PlaceEntity();
         placeEntity0.setPlaceSearchId(0);
@@ -69,10 +72,9 @@ public class PlaceSearchApi {
 
         placeRepository.saveAll(placeEntities);
 
-        SearchBusRouteDto dto = new SearchBusRouteDto();
-        googlePlaceSearchService.
-        return ;
-//        googlePlaceSearchService.searchBusRoute(origPlaceSearchId, destPlaceSearchId);
+//        googlePlaceSearchService.
+//        return earchBusRouteDto;
+
 
     }
 }

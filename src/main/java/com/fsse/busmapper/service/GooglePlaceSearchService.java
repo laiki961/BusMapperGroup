@@ -14,5 +14,5 @@ public interface GooglePlaceSearchService {
     Place googleSearchPlaceId(String placeId);
 
     //API 4
-//    void searchBusRoute(int origPlaceSearchId, int destPlaceSearchId);
+    void searchBusStopIdWithinRange(int origPlaceSearchId, int destPlaceSearchId);
 }

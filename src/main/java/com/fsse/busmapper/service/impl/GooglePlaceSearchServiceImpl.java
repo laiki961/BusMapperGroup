@@ -3,11 +3,11 @@ package com.fsse.busmapper.service.impl;
 import com.fsse.busmapper.domain.Place;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceIdResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
-import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceResponseExtDtoResult;
 import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
 import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.repository.SearchBusRepository;
+import com.fsse.busmapper.repository.StopRepository;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
 import com.fsse.busmapper.service.external.GooglePlaceSearchExtService;
 import org.slf4j.Logger;
@@ -26,12 +26,14 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
     private PlaceRepository placeRepository;
     @Autowired
     private SearchBusRepository searchBusRepository;
+    @Autowired
+    private StopRepository stopRepository;
 
     Logger logger = LoggerFactory.getLogger(GooglePlaceSearchServiceImpl.class);
 
-    public Place googleSearchLatLng(Double lat, Double lng){
+    public Place googleSearchLatLng(Double lat, Double lng) {
 
-        GoogleSearchPlaceLatLngResponseExtDto responseDto = googlePlaceSearchExtService.googlePlaceSearchByLatLng(lat,lng);
+        GoogleSearchPlaceLatLngResponseExtDto responseDto = googlePlaceSearchExtService.googlePlaceSearchByLatLng(lat, lng);
 
         Place placeDo = responseDto.toPlaceExtDo();
 
@@ -42,10 +44,11 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
         placeDo.setSearchPlaceId(placeEntity.getPlaceSearchId());
 
         return placeDo;
+    }
 
     //API 3 (DONE Don't touch)
     @Override
-    public Place googleSearchPlaceId(String placeId) {
+    public Place googleSearchPlaceId(String placeId){
         // Fetch place detail by searchInput from Google Search Place API
         GoogleSearchPlaceIdResponseExtDto placeDto = googlePlaceSearchExtService.googlePlaceSearchByPlaceId(placeId);
         logger.debug("received 1: {}", placeDto.toString()); //OK
@@ -65,6 +68,10 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
 
     //API 4
     public void searchBusStopIdWithinRange(int origPlaceSearchId, int destPlaceSearchId){
-        List<StopEntity> stopIdLat = searchBusRepository.findStopIdLatBetween();
+        List<StopEntity> stops = stopRepository.findAll();
+        for (int i=0; i<stops.size(); i++){
+        List<StopEntity> stopIdLat = searchBusRepository.findOrigStopIdLatBetween(stops.get(i).getLatitude() - 0.001 , stops.get(i).getLatitude()+ 0.001);
+        List<StopEntity> stopIdLng = searchBusRepository.findOrigStopIdLngBetween(stops.get(i).getLongitude() - 0.001, stops.get(i).getLongitude() + 0.001);
+        }
     }
 }
