@@ -2,6 +2,7 @@ package com.fsse.busmapper.service.impl;
 
 import com.fsse.busmapper.domain.Place;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceIdResponseExtDto;
+import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
 import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
@@ -22,15 +23,20 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
 
     Logger logger = LoggerFactory.getLogger(GooglePlaceSearchServiceImpl.class);
 
-//    public Place loadLocationName(Double lat, Double lng){
-//        //link with external service(turn dto to do)
-//        //convert to DO to entity
-//        //save entity to repository
-//
-//        return googleTurnCoortoNameExtService.loadLocationName(lat, lng);
-//    }
-    public void searchPlaceCoor(){
-        //todo
+    public Place googleSearchLatLng(Double lat, Double lng){
+        GoogleSearchPlaceLatLngResponseExtDto placeDto = googlePlaceSearchExtService.googlePlaceSearchByLatLng(lat, lng);
+        logger.debug(placeDto.toString());
+
+        Place placeDO = placeDto.toPlaceExtDo();
+        PlaceEntity placeEntity = placeDO.toPlaceEntity();
+
+        // Save the Entity into database
+        placeEntity = placeRepository.save(placeEntity);
+
+        // Load the auto generated place ID into the ??? instance
+        placeEntity.setPlaceSearchId(placeEntity.getPlaceSearchId());
+
+        return Place;
     }
 
     @Override

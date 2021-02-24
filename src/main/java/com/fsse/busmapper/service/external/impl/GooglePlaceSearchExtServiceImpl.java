@@ -16,7 +16,7 @@ public class GooglePlaceSearchExtServiceImpl implements GooglePlaceSearchExtServ
     Logger logger = LoggerFactory.getLogger(GooglePlaceSearchExtServiceImpl.class);
 
     @Override
-    public GoogleSearchPlaceResponseDto loadLocationName(Double lat, Double lng) {
+    public GoogleSearchPlaceResponseDto googlePlaceSearchByLatLng(Double lat, Double lng) {
         GoogleSearchPlaceResponseDto response = restTemplate.getForObject(
                 "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
                         lat + "," + lng +
