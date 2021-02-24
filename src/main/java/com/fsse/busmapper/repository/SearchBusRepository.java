@@ -9,9 +9,6 @@ import java.util.List;
 
 @Repository
 public interface SearchBusRepository extends JpaRepository<StopEntity, String> {
-    List<StopEntity> findOrigStopIdLatBetween (Double latLowerBound, Double latUpperBound);
-    List<StopEntity> findOrigStopIdLngBetween (Double lngLowerBound, Double lngUpperBound);
+    List<StopEntity> findByLatitudeBetweenAndLongitudeBetween (Double latLowerBound, Double latUpperBound, Double lngLowerBound, Double lngUpperBound);
 
-    List<StopEntity> findDestStopIdLatBetween (Double latLowerBound, Double latUpperBound);
-    List<StopEntity> findDestStopIdLngBetween (Double lngLowerBound, Double lngUpperBound);
 }

@@ -27,7 +27,7 @@ public class PlaceSearchApi {
     @Autowired
     private PlaceRepository placeRepository;
 
-//API 2
+    //API 2
     @GetMapping("/byPlaceLatLng/{lat}/{lng}")
     public GoogleSearchPlaceResponseDto loadLocationName(@PathVariable("lat") Double lat, @PathVariable("lng") Double lng){
         Place placeDO = googlePlaceSearchService.googleSearchLatLng(lat,lng);

@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface StopRepository extends CrudRepository<StopEntity, String> {
     List<StopEntity> findAll();
+    boolean existByStopId(String stopId);
 }
