@@ -2,6 +2,7 @@ package com.fsse.busmapper.service.external.impl;
 
 
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceIdResponseExtDto;
+import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.GoogleSearchPlaceResponseDto;
 import com.fsse.busmapper.service.external.GooglePlaceSearchExtService;
 import org.slf4j.Logger;
@@ -16,12 +17,12 @@ public class GooglePlaceSearchExtServiceImpl implements GooglePlaceSearchExtServ
     Logger logger = LoggerFactory.getLogger(GooglePlaceSearchExtServiceImpl.class);
 
     @Override
-    public GoogleSearchPlaceResponseDto googlePlaceSearchByLatLng(Double lat, Double lng) {
-        GoogleSearchPlaceResponseDto response = restTemplate.getForObject(
+    public GoogleSearchPlaceLatLngResponseExtDto googlePlaceSearchByLatLng(Double lat, Double lng) {
+        GoogleSearchPlaceLatLngResponseExtDto response = restTemplate.getForObject(
                 "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
                         lat + "," + lng +
                         "&key=" + "AIzaSyCjCVCEaRCewdaqDQE6ocCPC1x_W-EsS-g",
-                GoogleSearchPlaceResponseDto.class
+                GoogleSearchPlaceLatLngResponseExtDto.class
         );
         logger.debug(response.toString());
         return response;

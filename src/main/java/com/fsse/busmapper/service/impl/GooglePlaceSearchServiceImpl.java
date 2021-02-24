@@ -3,6 +3,7 @@ package com.fsse.busmapper.service.impl;
 import com.fsse.busmapper.domain.Place;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceIdResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
+import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceResponseExtDtoResult;
 import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
@@ -12,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 @Service
@@ -24,19 +26,18 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
     Logger logger = LoggerFactory.getLogger(GooglePlaceSearchServiceImpl.class);
 
     public Place googleSearchLatLng(Double lat, Double lng){
-        GoogleSearchPlaceLatLngResponseExtDto placeDto = googlePlaceSearchExtService.googlePlaceSearchByLatLng(lat, lng);
-        logger.debug(placeDto.toString());
 
-        Place placeDO = placeDto.toPlaceExtDo();
-        PlaceEntity placeEntity = placeDO.toPlaceEntity();
+        GoogleSearchPlaceLatLngResponseExtDto responseDto = googlePlaceSearchExtService.googlePlaceSearchByLatLng(lat,lng);
 
-        // Save the Entity into database
+        Place placeDo = responseDto.toPlaceExtDo();
+
+        PlaceEntity placeEntity = placeDo.toPlaceEntity();
+
         placeEntity = placeRepository.save(placeEntity);
 
-        // Load the auto generated place ID into the ??? instance
-        placeEntity.setPlaceSearchId(placeEntity.getPlaceSearchId());
+        placeDo.setSearchPlaceId(placeEntity.getPlaceSearchId());
 
-        return Place;
+        return placeDo;
     }
 
     @Override
