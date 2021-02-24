@@ -13,6 +13,6 @@ public interface GooglePlaceSearchService {
     //API 3
     Place googleSearchPlaceId(String placeId);
 
-//    //API 4
+    //API 4
 //    void searchBusRoute(int origPlaceSearchId, int destPlaceSearchId);
 }

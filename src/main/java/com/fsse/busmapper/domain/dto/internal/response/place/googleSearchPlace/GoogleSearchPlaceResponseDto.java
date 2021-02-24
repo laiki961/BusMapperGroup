@@ -1,6 +1,5 @@
-package com.fsse.busmapper.domain.dto.internal.response.place;
+package com.fsse.busmapper.domain.dto.internal.response.place.googleSearchPlace;
 
-import com.fsse.busmapper.api.PlaceSearchApi;
 import com.fsse.busmapper.domain.Place;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
