@@ -1,6 +1,6 @@
 package com.fsse.busmapper.api;
 
-import com.fsse.busmapper.domain.dto.response.FetchDataFromCTBResponseDto;
+import com.fsse.busmapper.domain.dto.internal.response.bus.FetchDataFromCTBResponseDto;
 import com.fsse.busmapper.service.NwfbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

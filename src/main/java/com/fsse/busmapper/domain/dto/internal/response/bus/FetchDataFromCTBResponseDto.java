@@ -1,4 +1,4 @@
-package com.fsse.busmapper.domain.dto.response;
+package com.fsse.busmapper.domain.dto.internal.response.bus;
 
 public class FetchDataFromCTBResponseDto {
     private final String result = "OK";

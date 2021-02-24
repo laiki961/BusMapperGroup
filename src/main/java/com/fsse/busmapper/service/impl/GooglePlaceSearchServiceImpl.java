@@ -1,52 +1,53 @@
 package com.fsse.busmapper.service.impl;
 
+import com.fsse.busmapper.domain.Place;
+import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceIdResponseExtDto;
 import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
+import com.fsse.busmapper.service.external.GooglePlaceSearchExtService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
+
 
 @Service
 public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
     @Autowired
-    PlaceRepository placeRepository;
+    private GooglePlaceSearchExtService googlePlaceSearchExtService;
+    @Autowired
+    private PlaceRepository placeRepository;
 
-    @Override
-    public void searchBusRoute(int origPlaceSearchId, int destPlaceSearchId) {
-        List<PlaceEntity> placeEntities = placeRepository.findAll();
+    Logger logger = LoggerFactory.getLogger(GooglePlaceSearchServiceImpl.class);
 
-        for(int i=0; i<placeEntities.size(); i++){
-            if(placeEntities.get(i).getPlaceSearchId().equals(origPlaceSearchId)){
-                ///
-                double searchRangeLatPos = placeEntities.get(i).getLocationLat() + 0.001;
-                double searchRangeLatNeg = placeEntities.get(i).getLocationLat() - 0.001;
-
-                double searchRangeLngPos = placeEntities.get(i).getLocationLng() + 0.001;
-                double searchRangeLngNeg = placeEntities.get(i).getLocationLng() - 0.001;
-
-               if(searchRangeLatPos <= placeEntities.get(i).getLocationLat() && searchRangeLatNeg >= placeEntities.get(i).getLocationLat()
-               && searchRangeLngPos <= placeEntities.get(i).getLocationLng() && searchRangeLngNeg >= placeEntities.get(i).getLocationLng()){
-
-               }
-
-            }
-        }
-
-        for(int i=0; i<placeEntities.size(); i++){
-            if(placeEntities.get(i).getPlaceSearchId().equals(destPlaceSearchId)){
-
-            }
-        }
-        //offset location lat+0.001
-        //offset location lat-0.001
-
-        //offset location lng+0.001
-        //offset location lng-0.001
+//    public Place loadLocationName(Double lat, Double lng){
+//        //link with external service(turn dto to do)
+//        //convert to DO to entity
+//        //save entity to repository
+//
+//        return googleTurnCoortoNameExtService.loadLocationName(lat, lng);
+//    }
+    public void searchPlaceCoor(){
+        //todo
     }
 
+    @Override
+    public Place googleSearchPlaceId(String placeId) {
+        // Fetch place detail by searchInput from Google Search Place API
+        GoogleSearchPlaceIdResponseExtDto placeDto = googlePlaceSearchExtService.googlePlaceSearchByPlaceId(placeId);
+        logger.debug(placeDto.toString());
 
+        Place placeDO = placeDto.toPlaceExtDo();
+        PlaceEntity placeEntity = placeDO.toPlaceEntity();
 
+        // Save the Entity into database
+        placeEntity = placeRepository.save(placeEntity);
+
+        // Load the auto generated place ID into the ??? instance
+        placeEntity.setPlaceSearchId(placeEntity.getPlaceSearchId());
+
+        return placeDO;
+    }
 }

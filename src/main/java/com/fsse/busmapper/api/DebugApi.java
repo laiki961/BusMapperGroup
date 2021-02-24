@@ -1,14 +1,8 @@
 package com.fsse.busmapper.api;
 
 import com.fsse.busmapper.domain.LocationNameDO;
-import com.fsse.busmapper.domain.RouteStop;
-import com.fsse.busmapper.domain.Stop;
-import com.fsse.busmapper.domain.dto.SearchPlaceCoorResponseDto;
-import com.fsse.busmapper.domain.dto.external.SearchPlaceCoorResponseExtDto;
-import com.fsse.busmapper.domain.dto.response.FetchDataFromCTBResponseDto;
 import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.domain.entity.RouteEntity;
-import com.fsse.busmapper.domain.entity.RouteStopEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
 import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.repository.RouteRepository;

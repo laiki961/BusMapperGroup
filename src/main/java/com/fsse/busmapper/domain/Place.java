@@ -1,42 +1,35 @@
-package com.fsse.busmapper.domain.entity;
+package com.fsse.busmapper.domain;
 
-import javax.persistence.*;
+import com.fsse.busmapper.domain.entity.PlaceEntity;
 
-@Entity
-@Table(name = "search_place_history")
-public class PlaceEntity {
-    @Id
-    @Column(name = "SearchHistoryId", nullable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer placeSearchId;
-
-    @Column(name = "name",columnDefinition = "VARCHAR(255)", nullable = false)
+public class Place {
+    private Integer searchPlaceId;
     private String formatAdd;
-
-    @Column(name = "Location_latitude", columnDefinition = "DECIMAL(15,13)",nullable = false)
     private Double locationLat;
-
-    @Column(name = "Location_longitude", columnDefinition = "DECIMAL(16,13)", nullable = false)
     private Double locationLng;
-
-    @Column(name = "NE_latitiude", columnDefinition = "DECIMAL(15,13)",nullable = false)
-    private Double viewportNelat;
-
-    @Column(name = "NE_longitude", columnDefinition = "DECIMAL(16,13)", nullable = false)
+    private Double viewportNeLat;
     private Double viewportNeLng;
-
-    @Column(name = "SW_latitiude", columnDefinition = "DECIMAL(15,13)",nullable = false)
     private Double viewportSwLat;
-
-    @Column(name = "SW_longitude", columnDefinition = "DECIMAL(16,13)", nullable = false)
     private Double viewportSwLng;
 
-    public Integer getPlaceSearchId() {
-        return placeSearchId;
+    public PlaceEntity toPlaceEntity(){
+        PlaceEntity entity = new PlaceEntity();
+        entity.setFormatAdd(getFormatAdd());
+        entity.setLocationLat(getLocationLat());
+        entity.setLocationLng(getLocationLng());
+        entity.setViewportNelat(getViewportNeLat());
+        entity.setViewportNeLng(getViewportNeLng());
+        entity.setViewportSwLat(getViewportSwLat());
+        entity.setViewportSwLng(getViewportSwLng());
+        return entity;
     }
 
-    public void setPlaceSearchId(Integer placeSearchId) {
-        this.placeSearchId = placeSearchId;
+    public Integer getSearchPlaceId() {
+        return searchPlaceId;
+    }
+
+    public void setSearchPlaceId(Integer searchPlaceId) {
+        this.searchPlaceId = searchPlaceId;
     }
 
     public String getFormatAdd() {
@@ -63,12 +56,12 @@ public class PlaceEntity {
         this.locationLng = locationLng;
     }
 
-    public Double getViewportNelat() {
-        return viewportNelat;
+    public Double getViewportNeLat() {
+        return viewportNeLat;
     }
 
-    public void setViewportNelat(Double viewportNelat) {
-        this.viewportNelat = viewportNelat;
+    public void setViewportNeLat(Double viewportNeLat) {
+        this.viewportNeLat = viewportNeLat;
     }
 
     public Double getViewportNeLng() {
@@ -97,12 +90,12 @@ public class PlaceEntity {
 
     @Override
     public String toString() {
-        return "SearchPlaceHistoryEntity{" +
-                "placeSearchId=" + placeSearchId +
+        return "Place{" +
+                "searchPlaceId='" + searchPlaceId + '\'' +
                 ", formatAdd='" + formatAdd + '\'' +
                 ", locationLat=" + locationLat +
                 ", locationLng=" + locationLng +
-                ", viewportNelat=" + viewportNelat +
+                ", viewportNeLat=" + viewportNeLat +
                 ", viewportNeLng=" + viewportNeLng +
                 ", viewportSwLat=" + viewportSwLat +
                 ", viewportSwLng=" + viewportSwLng +

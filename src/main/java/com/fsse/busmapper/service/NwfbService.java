@@ -1,6 +1,6 @@
 package com.fsse.busmapper.service;
 
-import com.fsse.busmapper.domain.dto.response.FetchDataFromCTBResponseDto;
+import com.fsse.busmapper.domain.dto.internal.response.bus.FetchDataFromCTBResponseDto;
 import com.fsse.busmapper.domain.entity.RouteEntity;
 import com.fsse.busmapper.domain.entity.RouteStopEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
