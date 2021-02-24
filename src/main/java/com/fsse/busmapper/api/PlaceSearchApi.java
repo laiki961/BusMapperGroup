@@ -2,7 +2,9 @@ package com.fsse.busmapper.api;
 
 
 import com.fsse.busmapper.domain.Place;
-import com.fsse.busmapper.domain.dto.internal.response.place.GoogleSearchPlaceResponseDto;
+import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
+import com.fsse.busmapper.domain.dto.internal.response.place.SearchBusRouteDto;
+import com.fsse.busmapper.domain.dto.internal.response.place.googleSearchPlace.GoogleSearchPlaceResponseDto;
 import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
@@ -17,8 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/googleSearchPlace")
-public class
-PlaceSearchApi {
+public class PlaceSearchApi {
     Logger logger = LoggerFactory.getLogger(PlaceSearchApi.class);
 
     @Autowired
@@ -27,11 +28,13 @@ PlaceSearchApi {
     private PlaceRepository placeRepository;
 
 //API 2
-//    @GetMapping("/byPlaceLatLng/{lat}/{lng}")
-//    public GoogleSearchPlaceResponseDto loadLocationName(@PathVariable("lat") Double lat, @PathVariable("lng") Double lng){
-//        return googleTurnCoortoNameService.loadLocationName(lat, lng);
-//
-//    }
+    @GetMapping("/byPlaceLatLng/{lat}/{lng}")
+    public GoogleSearchPlaceResponseDto loadLocationName(@PathVariable("lat") Double lat, @PathVariable("lng") Double lng){
+        Place placeDO = googlePlaceSearchService.googleSearchLatLng(lat,lng);
+        logger.debug("received 6: {}", placeDO );
+        GoogleSearchPlaceResponseDto dto = new GoogleSearchPlaceResponseDto(placeDO);
+        return dto;
+    }
 
     //API 3 DONE (DON'T TOUCH)
     @GetMapping("/byPlaceId/{placeId}")
@@ -42,11 +45,10 @@ PlaceSearchApi {
         return dto;
     }
 
-    //Api 4
+    //API 4
     @GetMapping("/search-bus-route/{origPlaceSearchId}/{destPlaceSearchId}")
     public void searchBusRoute(@PathVariable int origPlaceSearchId, @PathVariable int destPlaceSearchId){
         List<PlaceEntity> placeEntities = new ArrayList<>();
-
         PlaceEntity placeEntity0 = new PlaceEntity();
         placeEntity0.setPlaceSearchId(0);
         placeEntity0.setFormatAdd("Tai Po Centre");
@@ -57,7 +59,6 @@ PlaceSearchApi {
         placeEntity0.setViewportSwLat(40.7128830197085);
         placeEntity0.setViewportSwLng(-73.96263788029151);
         placeEntities.add(placeEntity0);
-
         PlaceEntity placeEntity1 = new PlaceEntity();
         placeEntity1.setPlaceSearchId(1);
         placeEntity1.setFormatAdd("Sai Ying Pun Station, Sai Ying Pun, Hong Kong");
@@ -71,7 +72,9 @@ PlaceSearchApi {
 
         placeRepository.saveAll(placeEntities);
 
-        googlePlaceSearchService.searchBusRoute(origPlaceSearchId, destPlaceSearchId);
+//        googlePlaceSearchService.
+//        return earchBusRouteDto;
+
 
     }
 }

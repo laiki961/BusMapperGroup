@@ -1,4 +1,4 @@
-package com.fsse.busmapper.domain.dto.internal.response.place;
+package com.fsse.busmapper.domain.dto.internal.response.place.googleSearchPlace;
 
 public class GoogleSearchPlaceResponseDtoLocation {
     private Double lat;
