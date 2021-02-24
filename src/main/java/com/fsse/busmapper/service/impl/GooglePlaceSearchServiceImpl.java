@@ -4,6 +4,7 @@ import com.fsse.busmapper.domain.Place;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceIdResponseExtDto;
 import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.repository.PlaceRepository;
+import com.fsse.busmapper.repository.SearchBusRepository;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
 import com.fsse.busmapper.service.external.GooglePlaceSearchExtService;
 import org.slf4j.Logger;
@@ -19,6 +20,8 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
     private GooglePlaceSearchExtService googlePlaceSearchExtService;
     @Autowired
     private PlaceRepository placeRepository;
+    @Autowired
+    private SearchBusRepository searchBusRepository;
 
     Logger logger = LoggerFactory.getLogger(GooglePlaceSearchServiceImpl.class);
 
@@ -29,9 +32,13 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
 //
 //        return googleTurnCoortoNameExtService.loadLocationName(lat, lng);
 //    }
-    public void searchPlaceCoor(){
-        //todo
-    }
+
+
+//    public void searchBusRoute(List <origPlaceSearchId>, int destPlaceSearchId){
+//        List<>
+//
+//
+//    }
 
     @Override
     public Place googleSearchPlaceId(String placeId) {
