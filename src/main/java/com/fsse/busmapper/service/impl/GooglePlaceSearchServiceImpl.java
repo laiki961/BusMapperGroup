@@ -15,6 +15,15 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
     PlaceRepository placeRepository;
 
     @Override
+    public List<OriStop>(){
+
+    }
+
+    public List<DestStop>(){
+        
+    }
+
+    @Override
     public void searchBusRoute(int origPlaceSearchId, int destPlaceSearchId) {
         List<PlaceEntity> placeEntities = placeRepository.findAll();
 
