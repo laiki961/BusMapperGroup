@@ -37,17 +37,20 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
     public Place googleSearchPlaceId(String placeId) {
         // Fetch place detail by searchInput from Google Search Place API
         GoogleSearchPlaceIdResponseExtDto placeDto = googlePlaceSearchExtService.googlePlaceSearchByPlaceId(placeId);
-        logger.debug(placeDto.toString());
+        logger.debug("received 1: {}", placeDto.toString()); //OK
 
-        Place placeDO = placeDto.toPlaceExtDo();
-        PlaceEntity placeEntity = placeDO.toPlaceEntity();
+        Place placeDO = placeDto.toPlaceExtDo(); //OK
+        PlaceEntity placeEntity = placeDO.toPlaceEntity(); //OK
 
         // Save the Entity into database
         placeEntity = placeRepository.save(placeEntity);
 
         // Load the auto generated place ID into the ??? instance
-        placeEntity.setPlaceSearchId(placeEntity.getPlaceSearchId());
+        placeDO.setSearchPlaceId(placeEntity.getPlaceSearchId());
+        logger.debug("received 4: {}", placeEntity );
 
+
+        logger.debug("received 5: {}", placeDO );
         return placeDO;
     }
 }

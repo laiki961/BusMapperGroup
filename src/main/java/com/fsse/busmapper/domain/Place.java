@@ -1,8 +1,13 @@
 package com.fsse.busmapper.domain;
 
 import com.fsse.busmapper.domain.entity.PlaceEntity;
+import com.fsse.busmapper.service.impl.GooglePlaceSearchServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Place {
+    Logger logger = LoggerFactory.getLogger(GooglePlaceSearchServiceImpl.class);
+
     private Integer searchPlaceId;
     private String formatAdd;
     private Double locationLat;
@@ -21,6 +26,7 @@ public class Place {
         entity.setViewportNeLng(getViewportNeLng());
         entity.setViewportSwLat(getViewportSwLat());
         entity.setViewportSwLng(getViewportSwLng());
+        logger.debug("received 3: {}", entity );
         return entity;
     }
 
@@ -87,6 +93,7 @@ public class Place {
     public void setViewportSwLng(Double viewportSwLng) {
         this.viewportSwLng = viewportSwLng;
     }
+
 
     @Override
     public String toString() {
