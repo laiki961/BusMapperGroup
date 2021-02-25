@@ -3,7 +3,6 @@ package com.fsse.busmapper.service.external.impl;
 
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceIdResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
-import com.fsse.busmapper.domain.dto.internal.response.place.GoogleSearchPlaceResponseDto;
 import com.fsse.busmapper.service.external.GooglePlaceSearchExtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

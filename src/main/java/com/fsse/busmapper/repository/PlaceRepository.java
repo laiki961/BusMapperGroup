@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface PlaceRepository extends CrudRepository<PlaceEntity, Integer> {
     List<PlaceEntity> findAll();
+
+    PlaceEntity findByPlaceSearchId(Integer placeSearchId);
 }

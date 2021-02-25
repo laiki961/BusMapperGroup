@@ -11,5 +11,6 @@ import java.util.List;
 @Repository
 public interface StopRepository extends CrudRepository<StopEntity, String> {
     List<StopEntity> findAll();
-    boolean existByStopId(String stopId);
+    List<StopEntity> findByLatitudeBetweenAndLongitudeBetween (Double latLowerBound, Double latUpperBound, Double lngLowerBound, Double lngUpperBound);
+
 }

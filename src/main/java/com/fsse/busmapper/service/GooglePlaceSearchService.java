@@ -1,6 +1,7 @@
 package com.fsse.busmapper.service;
 
 import com.fsse.busmapper.domain.Place;
+import com.fsse.busmapper.domain.SearchBusRoute;
 import com.fsse.busmapper.domain.entity.PlaceEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -14,5 +15,6 @@ public interface GooglePlaceSearchService {
     Place googleSearchPlaceId(String placeId);
 
     //API 4
-    void searchBusStopIdWithinRange(int origPlaceSearchId, int destPlaceSearchId);
+    // return what datatype?
+    List<SearchBusRoute> searchBusStopIdWithinRange(int origPlaceSearchId, int destPlaceSearchId);
 }

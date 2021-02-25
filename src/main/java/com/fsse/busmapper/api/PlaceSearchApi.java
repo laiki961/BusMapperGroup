@@ -2,6 +2,7 @@ package com.fsse.busmapper.api;
 
 
 import com.fsse.busmapper.domain.Place;
+import com.fsse.busmapper.domain.SearchBusRoute;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.SearchBusRouteDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.googleSearchPlace.GoogleSearchPlaceResponseDto;
@@ -41,40 +42,58 @@ public class PlaceSearchApi {
     public GoogleSearchPlaceResponseDto searchPlaceCoorResponseDto(@PathVariable("placeId") String placeId) {
         Place placeDO = googlePlaceSearchService.googleSearchPlaceId(placeId);
         logger.debug("received 6: {}", placeDO );
-        GoogleSearchPlaceResponseDto dto = new GoogleSearchPlaceResponseDto(placeDO);
-        return dto;
+        return new GoogleSearchPlaceResponseDto(placeDO);
     }
 
     //API 4
     @GetMapping("/search-bus-route/{origPlaceSearchId}/{destPlaceSearchId}")
-    public void searchBusRoute(@PathVariable int origPlaceSearchId, @PathVariable int destPlaceSearchId){
+    public SearchBusRouteDto searchBusRoute(@PathVariable int origPlaceSearchId, @PathVariable int destPlaceSearchId){
         List<PlaceEntity> placeEntities = new ArrayList<>();
         PlaceEntity placeEntity0 = new PlaceEntity();
-        placeEntity0.setPlaceSearchId(0);
-        placeEntity0.setFormatAdd("Tai Po Centre");
-        placeEntity0.setLocationLat(40.714232);
-        placeEntity0.setLocationLng(-73.9612889);
-        placeEntity0.setViewportNelat(40.7155809802915);
-        placeEntity0.setViewportNeLng(-73.9599399197085);
-        placeEntity0.setViewportSwLat(40.7128830197085);
-        placeEntity0.setViewportSwLng(-73.96263788029151);
-        placeEntities.add(placeEntity0);
-        PlaceEntity placeEntity1 = new PlaceEntity();
-        placeEntity1.setPlaceSearchId(1);
-        placeEntity1.setFormatAdd("Sai Ying Pun Station, Sai Ying Pun, Hong Kong");
-        placeEntity1.setLocationLat(22.285533);
-        placeEntity1.setLocationLng(114.142733);
-        placeEntity1.setViewportNelat(22.2868819802915);
-        placeEntity1.setViewportNeLng(114.1440819802915);
-        placeEntity1.setViewportSwLat(22.2841840197085);
-        placeEntity1.setViewportSwLng(114.1413840197085);
-        placeEntities.add(placeEntity1);
+//        placeEntity0.setPlaceSearchId(0);
+//        placeEntity0.setFormatAdd("Tai Po Centre");
+//        placeEntity0.setLocationLat(40.714232);
+//        placeEntity0.setLocationLng(-73.9612889);
+//        placeEntity0.setViewportNelat(40.7155809802915);
+//        placeEntity0.setViewportNeLng(-73.9599399197085);
+//        placeEntity0.setViewportSwLat(40.7128830197085);
+//        placeEntity0.setViewportSwLng(-73.96263788029151);
+//        placeEntities.add(placeEntity0);
+//        PlaceEntity placeEntity1 = new PlaceEntity();
+//        placeEntity1.setPlaceSearchId(1);
+//        placeEntity1.setFormatAdd("Sai Ying Pun Station, Sai Ying Pun, Hong Kong");
+//        placeEntity1.setLocationLat(22.285533);
+//        placeEntity1.setLocationLng(114.142733);
+//        placeEntity1.setViewportNelat(22.2868819802915);
+//        placeEntity1.setViewportNeLng(114.1440819802915);
+//        placeEntity1.setViewportSwLat(22.2841840197085);
+//        placeEntity1.setViewportSwLng(114.1413840197085);
+//        placeEntities.add(placeEntity1);
+        PlaceEntity placeEntity2 = new PlaceEntity();
+        placeEntity2.setPlaceSearchId(2);
+        placeEntity2.setFormatAdd("Kennedy Town");
+        placeEntity2.setLocationLat();
+        placeEntity2.setLocationLng();
+        placeEntity2.setViewportNelat();
+        placeEntity2.setViewportNeLng();
+        placeEntity2.setViewportSwLat();
+        placeEntity2.setViewportSwLng();
+        placeEntities.add(placeEntity2);
+        PlaceEntity placeEntity3 = new PlaceEntity();
+        placeEntity3.setPlaceSearchId(3);
+        placeEntity3.setFormatAdd("Kennedy Town");
+        placeEntity3.setLocationLat();
+        placeEntity3.setLocationLng();
+        placeEntity3.setViewportNelat();
+        placeEntity3.setViewportNeLng();
+        placeEntity3.setViewportSwLat();
+        placeEntity3.setViewportSwLng();
+        placeEntities.add(placeEntity3);
+//
+//        placeRepository.saveAll(placeEntities);
+//        logger.debug(placeEntities.toString()); //OK
 
-        placeRepository.saveAll(placeEntities);
-
-//        googlePlaceSearchService.
-//        return earchBusRouteDto;
-
-
+        List<SearchBusRoute> busRouteDetails = googlePlaceSearchService.searchBusStopIdWithinRange(origPlaceSearchId, destPlaceSearchId);
+        return new SearchBusRouteDto(busRouteDetails);
     }
 }

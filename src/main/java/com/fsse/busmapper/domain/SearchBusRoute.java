@@ -1,6 +1,6 @@
-package com.fsse.busmapper.domain.dto.internal.response.place;
+package com.fsse.busmapper.domain;
 
-public class SearchBusRouteResponseDto {
+public class SearchBusRoute {
     private String co;
     private String route;
     private String direction;
@@ -63,5 +63,18 @@ public class SearchBusRouteResponseDto {
 
     public void setDestStop(String destStop) {
         this.destStop = destStop;
+    }
+
+    @Override
+    public String toString() {
+        return "SearchBusRoute{" +
+                "co='" + co + '\'' +
+                ", route='" + route + '\'' +
+                ", direction='" + direction + '\'' +
+                ", origName='" + origName + '\'' +
+                ", origStop='" + origStop + '\'' +
+                ", destName='" + destName + '\'' +
+                ", destStop='" + destStop + '\'' +
+                '}';
     }
 }
