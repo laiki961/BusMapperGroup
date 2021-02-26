@@ -28,7 +28,7 @@ public class PlaceSearchApi {
     @Autowired
     private PlaceRepository placeRepository;
 
-    //API 2
+    //API 2 DONE (DON'T TOUCH)
     @GetMapping("/byPlaceLatLng/{lat}/{lng}")
     public GoogleSearchPlaceResponseDto loadLocationName(@PathVariable("lat") Double lat, @PathVariable("lng") Double lng){
         Place placeDO = googlePlaceSearchService.googleSearchLatLng(lat,lng);
@@ -69,31 +69,35 @@ public class PlaceSearchApi {
 //        placeEntity1.setViewportSwLat(22.2841840197085);
 //        placeEntity1.setViewportSwLng(114.1413840197085);
 //        placeEntities.add(placeEntity1);
-        PlaceEntity placeEntity2 = new PlaceEntity();
-        placeEntity2.setPlaceSearchId(2);
-        placeEntity2.setFormatAdd("Kennedy Town");
-        placeEntity2.setLocationLat();
-        placeEntity2.setLocationLng();
-        placeEntity2.setViewportNelat();
-        placeEntity2.setViewportNeLng();
-        placeEntity2.setViewportSwLat();
-        placeEntity2.setViewportSwLng();
-        placeEntities.add(placeEntity2);
-        PlaceEntity placeEntity3 = new PlaceEntity();
-        placeEntity3.setPlaceSearchId(3);
-        placeEntity3.setFormatAdd("Kennedy Town");
-        placeEntity3.setLocationLat();
-        placeEntity3.setLocationLng();
-        placeEntity3.setViewportNelat();
-        placeEntity3.setViewportNeLng();
-        placeEntity3.setViewportSwLat();
-        placeEntity3.setViewportSwLng();
-        placeEntities.add(placeEntity3);
+
+        //Route No.1 //2403
+//        PlaceEntity placeEntity2 = new PlaceEntity();
+//        placeEntity2.setPlaceSearchId(2);
+//        placeEntity2.setFormatAdd("Happy Valley (Upper)");
+//        placeEntity2.setLocationLat(22.2644579);
+//        placeEntity2.setLocationLng(114.1886403);
+//        placeEntity2.setViewportNelat(22.2658068802915);
+//        placeEntity2.setViewportNeLng(114.1899892802915);
+//        placeEntity2.setViewportSwLat(22.2631089197085);
+//        placeEntity2.setViewportSwLng(114.1872913197085);
+//        placeEntities.add(placeEntity2);
+//        //Route No.1 //2537
+//        PlaceEntity placeEntity3 = new PlaceEntity();
+//        placeEntity3.setPlaceSearchId(3);
+//        placeEntity3.setFormatAdd("Bullock Lane, Wan Chai Road");
+//        placeEntity3.setLocationLat(22.2767987920910);
+//        placeEntity3.setLocationLng(114.1759725205300);
+//        placeEntity3.setViewportNelat();
+//        placeEntity3.setViewportNeLng();
+//        placeEntity3.setViewportSwLat();
+//        placeEntity3.setViewportSwLng();
+//        placeEntities.add(placeEntity3);
 //
 //        placeRepository.saveAll(placeEntities);
 //        logger.debug(placeEntities.toString()); //OK
 
         List<SearchBusRoute> busRouteDetails = googlePlaceSearchService.searchBusStopIdWithinRange(origPlaceSearchId, destPlaceSearchId);
+        logger.debug("Finished API 4");
         return new SearchBusRouteDto(busRouteDetails);
     }
 }

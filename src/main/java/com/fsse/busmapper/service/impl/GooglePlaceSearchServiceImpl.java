@@ -72,10 +72,10 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
         //Step 1.1: Find orig range
         logger.debug("calling searchBusStopIdWithinRange method");
         PlaceEntity origEntity = placeRepository.findByPlaceSearchId(origPlaceSearchId);
-        logger.debug("orig Lat: {}, orig Lng: {}", origEntity.getLocationLat(), origEntity.getLocationLng());
+        logger.debug("(Orig) Lat: {}, orig Lng: {}", origEntity.getLocationLat(), origEntity.getLocationLng());
         //Step 1.1: Find dest range
         PlaceEntity destEntity = placeRepository.findByPlaceSearchId(destPlaceSearchId);
-        logger.debug("dest Lat: {}, orig Lng: {}", destEntity.getLocationLat(), destEntity.getLocationLng());
+        logger.debug("(Dest) Lat: {}, orig Lng: {}", destEntity.getLocationLat(), destEntity.getLocationLng());
 
         //Step 1.2: StopId within orig range
         List<StopEntity> origStop = stopRepository.findByLatitudeBetweenAndLongitudeBetween(origEntity.getLocationLat() - 0.001, origEntity.getLocationLat() + 0.001, origEntity.getLocationLng() - 0.001, origEntity.getLocationLng() + 0.001);
@@ -87,13 +87,15 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
 
         //Step 2: check if routeID form origStop exist in destStop
         List<RouteStopEntity> routeStopOrig = new ArrayList<>();
-        List<RouteStopEntity> routeStopDest = new ArrayList<>();
         for(int i=0; i<origStop.size();i++){
             routeStopOrig.addAll(routeStopRepository.findByStopEntity_StopId(origStop.get(i).getStopId()));
+        }
+        logger.debug("Route in range(Orig): {}", routeStopOrig.toString());
+        List<RouteStopEntity> routeStopDest = new ArrayList<>();
+        for(int i=0; i<destStop.size(); i++){
             routeStopDest.addAll(routeStopRepository.findByStopEntity_StopId(destStop.get(i).getStopId()));
         }
-        logger.debug(routeStopOrig.toString());
-        logger.debug(routeStopDest.toString());
+        logger.debug("Route in range(Dest): {}", routeStopDest.toString());
 
         List<RouteStopEntity> sameRouteIdInOrig = new ArrayList<>();
         List<RouteStopEntity> sameRouteIdInDest = new ArrayList<>();
@@ -104,12 +106,14 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
                     && routeStopOrig.get(i).getDir().equals(routeStopDest.get(j).getDir())
                     && routeStopOrig.get(i).getSeq()<routeStopDest.get(j).getSeq()){
                         sameRouteIdInOrig.add(routeStopOrig.get(i));
+                        logger.debug("sameRouteIdInOrig: Added{}", routeStopOrig.get(i).toString());
                         sameRouteIdInDest.add(routeStopOrig.get(i));
+                        logger.debug("sameRouteIdInDest: Added{}", routeStopDest.get(j).toString());
                 }
             }
         }
-        logger.debug(sameRouteIdInOrig.toString());
-        logger.debug(sameRouteIdInDest.toString());
+        logger.debug("sameRouteIdInOrig: {}", sameRouteIdInOrig.toString());
+        logger.debug("sameRouteIdInDest: {}", sameRouteIdInDest.toString());
 
         List<SearchBusRoute> busRouteDetails = new ArrayList<>();
         SearchBusRoute searchBusRoute = new SearchBusRoute();
