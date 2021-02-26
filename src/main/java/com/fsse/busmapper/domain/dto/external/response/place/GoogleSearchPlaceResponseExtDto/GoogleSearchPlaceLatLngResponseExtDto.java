@@ -14,7 +14,8 @@ public class GoogleSearchPlaceLatLngResponseExtDto {
         placeDO.setLocationLng(results.get(0).getGeometry().getLocation().getLng());
         placeDO.setViewportNeLat(results.get(0).getGeometry().getViewport().getNe().getLat());
         placeDO.setViewportNeLng(results.get(0).getGeometry().getViewport().getNe().getLng());
-        placeDO.setViewportSwLat(results.get(0).getGeometry().getViewport().getSw().getLat());
+        placeDO.setViewportSwLat(results.get(0
+        ).getGeometry().getViewport().getSw().getLat());
         placeDO.setViewportSwLng(results.get(0).getGeometry().getViewport().getSw().getLng());
         return placeDO;
     }
@@ -33,6 +34,27 @@ public class GoogleSearchPlaceLatLngResponseExtDto {
 //            locationNameDO.setFormatAdd();
 //            //todo
 //        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 

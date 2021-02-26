@@ -1,5 +1,6 @@
 package com.fsse.busmapper.service;
 
+import com.fsse.busmapper.domain.BusEta;
 import com.fsse.busmapper.domain.dto.internal.response.bus.FetchDataFromCTBResponseDto;
 import com.fsse.busmapper.domain.entity.RouteEntity;
 import com.fsse.busmapper.domain.entity.RouteStopEntity;
@@ -20,5 +21,5 @@ public interface NwfbService {
     List<RouteStopEntity> loadRouteDirectionStop(RouteEntity route, String dir); //Don't touch***
 
    	void loadAllStops();
-
+    BusEta busArrivalEta(String dir, String seq);
 }

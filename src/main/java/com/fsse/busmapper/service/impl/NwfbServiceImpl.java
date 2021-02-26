@@ -1,5 +1,6 @@
 package com.fsse.busmapper.service.impl;
 
+import com.fsse.busmapper.domain.BusEta;
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.Stop;
@@ -39,6 +40,17 @@ public class NwfbServiceImpl implements NwfbService {
         } catch (InterruptedException ie) {
             Thread.currentThread().interrupt();
         }
+    }
+    @Override
+    public BusEta busArrivalEta(String dir,String seq){
+        List<BusEta> busEta =nwfbExtService.loadEta();
+        List<BusEta> BusEtaResponseDOs = new ArrayList<>();
+        for (int i=0;i<busEta.size();i++) {
+            if(busEta.get(i).getDir().equals(dir)&&busEta.get(i).getSeq().equals((seq))){
+                BusEta trueBusEta = busEta.get(i);
+                return trueBusEta;
+            }
+        }return null;
     }
 
     @Override

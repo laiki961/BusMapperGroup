@@ -1,8 +1,10 @@
 package com.fsse.busmapper.service.external.impl;
 
+import com.fsse.busmapper.domain.BusEta;
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.Stop;
+import com.fsse.busmapper.domain.dto.external.response.buseta.BusEtaResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteDataResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.routeStop.CtbRouteStopResponseExtDto;
@@ -67,10 +69,26 @@ public class NwfbExtServiceImpl implements NwfbExtService {
         );
 
             logger.debug("stopID {}: Adding Stop's elements to [StopDO]", stopId);
-            Stop stopDO = response.toStop();
+            Stop stopDO =
+                    response.toStop();
             logger.debug("stopID {}: Added [StopDO] into [List<Stop>]", stopId);
         return stopDO;
     }
+    @Override
+    public BusEta busArrivalEta(String stopId, String route){
 
+    }
+
+    @Override
+    public List<BusEta> loadEta(String stopId, String route){
+        BusEtaResponseExtDto response = restTemplate.getForObject("https://rt.data.gov.hk/"
+                +"v1/transport/citybusnwfb/eta/ctb/"
+                + stopId + "/"+ route, BusEtaResponseExtDto.class);
+        List<BusEta> BusEtaResponseDOs = new ArrayList<>();
+        for (int i=0;i<response.getData().size();i++){
+            BusEtaResponseDOs.add(response.getData().get(i).toBusEtaDO());
+
+        }return BusEtaResponseDOs;
+    }
 
 }
