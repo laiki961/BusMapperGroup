@@ -37,3 +37,5 @@ out/
 .vscode/
 
 src/main/resources/application-personal.yml
+
+src/main/resources/firebase_config.json
