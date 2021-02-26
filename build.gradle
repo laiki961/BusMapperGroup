@@ -18,6 +18,9 @@ dependencies {
 	implementation 'org.apache.httpcomponents:httpclient:4.5.10'
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//firebase
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'com.google.firebase:firebase-admin:7.1.0'
 }
 
 test {
