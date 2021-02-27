@@ -3,19 +3,18 @@ package com.fsse.busmapper.api;
 
 import com.fsse.busmapper.domain.Place;
 import com.fsse.busmapper.domain.SearchBusRoute;
-import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.SearchBusRouteDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.googleSearchPlace.GoogleSearchPlaceResponseDto;
-import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
-import com.fsse.busmapper.service.impl.GooglePlaceSearchServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

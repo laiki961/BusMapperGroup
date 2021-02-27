@@ -1,6 +1,5 @@
 package com.fsse.busmapper.api;
 
-import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.domain.entity.RouteEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
 import com.fsse.busmapper.repository.PlaceRepository;
@@ -12,9 +11,10 @@ import com.fsse.busmapper.service.NwfbService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

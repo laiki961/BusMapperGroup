@@ -1,11 +1,9 @@
 package com.fsse.busmapper.service.impl;
 
 import com.fsse.busmapper.domain.Place;
-import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.SearchBusRoute;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceIdResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
-import com.fsse.busmapper.domain.dto.internal.response.place.SearchBusRouteDto;
 import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.domain.entity.RouteStopEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
@@ -19,7 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
