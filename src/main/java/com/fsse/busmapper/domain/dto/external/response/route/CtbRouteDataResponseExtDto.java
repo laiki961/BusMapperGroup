@@ -6,12 +6,11 @@ import com.fsse.busmapper.domain.Route;
 public class CtbRouteDataResponseExtDto {
     private String co;
     private String route;
-
     @JsonProperty("orig_en")
     private String orig;
-
     @JsonProperty("dest_en")
     private String dest;
+
 
     public Route toRouteDO() {
         Route routeDo = new Route();

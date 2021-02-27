@@ -1,14 +1,12 @@
 package com.fsse.busmapper.api;
 
-import com.fsse.busmapper.domain.RouteStop;
-import com.fsse.busmapper.domain.Stop;
-import com.fsse.busmapper.domain.dto.response.FetchDataFromCTBResponseDto;
 import com.fsse.busmapper.domain.entity.RouteEntity;
-import com.fsse.busmapper.domain.entity.RouteStopEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
+import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.repository.RouteRepository;
 import com.fsse.busmapper.repository.RouteStopRepository;
 import com.fsse.busmapper.repository.StopRepository;
+import com.fsse.busmapper.service.GooglePlaceSearchService;
 import com.fsse.busmapper.service.NwfbService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +22,8 @@ import java.util.List;
 public class DebugApi {
     @Autowired
     private NwfbService nwfbService;
+    @Autowired
+    private GooglePlaceSearchService googlePlaceSearchService;
 
     @Autowired
     private RouteRepository routeRepository;
@@ -31,7 +31,8 @@ public class DebugApi {
     private RouteStopRepository routeStopRepository;
     @Autowired
     private StopRepository stopRepository;
-
+    @Autowired
+    private PlaceRepository placeRepository;
     private Logger logger = LoggerFactory.getLogger(DebugApi.class);
 
     @GetMapping("/load/all-route")
@@ -53,10 +54,11 @@ public class DebugApi {
         nwfbService.loadAllStops();
     }
 
-    //Final
+//    Final
 //    @GetMapping("/load/all-buses-details")
 //    public FetchDataFromCTBResponseDto loadAllBusData(){
 //        return nwfbService.loadAllBusData();
 //    }
+
 
 }

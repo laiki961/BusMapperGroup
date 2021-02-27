@@ -6,6 +6,9 @@ import java.util.List;
 public class CtbRouteStopResponseExtDto {
     private List<CtbRouteStopDataResponseExtDto> data;
 
+
+
+
     public List<CtbRouteStopDataResponseExtDto> getData() {
         return data;
     }
