@@ -3,6 +3,7 @@ package com.fsse.busmapper.service.impl;
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.Stop;
+import com.fsse.busmapper.domain.dto.external.response.BusEta.BusEtaResponseExtDto;
 import com.fsse.busmapper.domain.dto.internal.response.bus.FetchDataFromCTBResponseDto;
 import com.fsse.busmapper.domain.entity.RouteEntity;
 import com.fsse.busmapper.domain.entity.RouteStopEntity;
@@ -40,6 +41,26 @@ public class NwfbServiceImpl implements NwfbService {
             Thread.currentThread().interrupt();
         }
     }
+//
+//    @GetMapping("/{route}/{dir}/{oriStop}/{destStop}")
+//    public BusEtaResponseDto busEta(@PathVariable String route, @PathVariable String dir, @PathVariable String oriStop, @PathVariable String destStop) {
+//        BusEtaResponseDto result = busEtaRequestDto.toBusEtaDto(route ,dir ,oriStop ,destStop);
+//        return result;
+//    }
+
+//    @Override
+//    public BusEtaExtDO busEta(String dir, String seq){
+//        List<BusEtaExtDO> busEta =nwfbExtService.busEta();
+//        List<BusEtaExtDO> BusEtaResponseDOs = new ArrayList<>();
+//        for (int i=0;i<busEta.size();i++) {
+//            if(busEta.get(i).getDir().equals(dir)&&busEta.get(i).getSeq().equals((seq))){
+//                BusEtaExtDO trueBusEta = busEta.get(i);
+//                return trueBusEta;
+//            }
+//        }return null;
+//    }
+
+
 
     @Override
     public List<RouteEntity> loadAllRoutes() {

@@ -1,4 +1,4 @@
-package com.fsse.busmapper.domain.dto.external.response;
+package com.fsse.busmapper.domain.dto.external.response.BusEta;
 
 import com.fsse.busmapper.domain.BusEtaExtDO;
 
@@ -7,9 +7,9 @@ public class BusEtaDataResponseExtDto {
     private String seq;
     private String eta;
 
-    public BusEtaExtDO toBusEtaExtDO(){
-        //todo
-    }
+//    public BusEtaExtDO toBusEtaExtDO(){
+//        //todo
+//    }
 
     public String getDir() {
         return dir;

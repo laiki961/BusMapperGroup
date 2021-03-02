@@ -1,13 +1,8 @@
 package com.fsse.busmapper.domain.dto.external.response.BusEta;
 
-import com.fsse.busmapper.domain.BusEtaIntDO;
-import com.fsse.busmapper.domain.dto.external.response.BusEtaDataResponseExtDto;
-import com.fsse.busmapper.domain.entity.RouteStopEntity;
-import com.fsse.busmapper.domain.entity.StopEntity;
-
 import java.util.List;
 
-public class BusEtaResponseDto {
+public class BusEtaResponseExtDto {
     private List<BusEtaDataResponseExtDto> data;
     private String route;
     
@@ -15,26 +10,26 @@ public class BusEtaResponseDto {
     private String oriStop;
     private String destStop;
 
-    private BusEtaResponseDto stops;
-    private BusEtaResponseDto origin;
+    private BusEtaResponseExtDto stops;
+    private BusEtaResponseExtDto origin;
 
 
-    public BusEtaIntDO toBusEtaDto(){
-        //todo
-        // put stuff from do to dto
-        BusEtaIntDO busEtaIntDO = new BusEtaIntDO();
-        RouteStopEntity routeStopEntity = new RouteStopEntity();
-        StopEntity stopEntity = new StopEntity();
-
-        busEtaIntDO.setRoute(route);
-        busEtaIntDO.setDir(dir);
-        busEtaIntDO.setDestStop(destStop);
-
-        busEtaIntDO.setRouteStopEntity(routeStopEntity.getStopEntity().getStopId());
-        busEtaIntDO.setRouteStopEntity(routeStopEntity.getStopEntity().getLatitude());
-        busEtaIntDO.setRouteStopEntity(routeStopEntity.getStopEntity().getLongitude());
-        return busEtaIntDO;
-    }
+//    public BusEtaIntDO toBusEtaDto(){
+//        //todo
+//        // put stuff from do to dto
+//        BusEtaIntDO busEtaIntDO = new BusEtaIntDO();
+//        RouteStopEntity routeStopEntity = new RouteStopEntity();
+//        StopEntity stopEntity = new StopEntity();
+//
+//        busEtaIntDO.setRoute(route);
+//        busEtaIntDO.setDir(dir);
+//        busEtaIntDO.setDestStop(destStop);
+//
+//        busEtaIntDO.setRouteStopEntity(routeStopEntity.getStopEntity().getStopId());
+//        busEtaIntDO.setRouteStopEntity(routeStopEntity.getStopEntity().getLatitude());
+//        busEtaIntDO.setRouteStopEntity(routeStopEntity.getStopEntity().getLongitude());
+//        return busEtaIntDO;
+//    }
 
 
     public List<BusEtaDataResponseExtDto> getData() {
@@ -61,19 +56,19 @@ public class BusEtaResponseDto {
         this.dir = dir;
     }
 
-    public BusEtaResponseDto getStops() {
+    public BusEtaResponseExtDto getStops() {
         return stops;
     }
 
-    public void setStops(BusEtaResponseDto stops) {
+    public void setStops(BusEtaResponseExtDto stops) {
         this.stops = stops;
     }
 
-    public BusEtaResponseDto getOrigin() {
+    public BusEtaResponseExtDto getOrigin() {
         return origin;
     }
 
-    public void setOrigin(BusEtaResponseDto origin) {
+    public void setOrigin(BusEtaResponseExtDto origin) {
         this.origin = origin;
     }
 

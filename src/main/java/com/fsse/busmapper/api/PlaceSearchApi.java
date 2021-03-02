@@ -3,17 +3,21 @@ package com.fsse.busmapper.api;
 
 import com.fsse.busmapper.domain.Place;
 import com.fsse.busmapper.domain.SearchBusRoute;
-import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
+import com.fsse.busmapper.domain.dto.external.response.BusEta.BusEtaResponseExtDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.SearchBusRouteDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.googleSearchPlace.GoogleSearchPlaceResponseDto;
 import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
-import com.fsse.busmapper.service.impl.GooglePlaceSearchServiceImpl;
+import com.fsse.busmapper.service.NwfbService;
+import com.fsse.busmapper.service.external.NwfbExtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +31,10 @@ public class PlaceSearchApi {
     private GooglePlaceSearchService googlePlaceSearchService;
     @Autowired
     private PlaceRepository placeRepository;
+    @Autowired
+    private NwfbService nwfbService;
+    @Autowired
+    private NwfbExtService nwfbExtService;
 
     //API 2 DONE (DON'T TOUCH)
     @GetMapping("/byPlaceLatLng/{lat}/{lng}")
@@ -99,5 +107,15 @@ public class PlaceSearchApi {
         List<SearchBusRoute> busRouteDetails = googlePlaceSearchService.searchBusStopIdWithinRange(origPlaceSearchId, destPlaceSearchId);
         logger.debug("Finished API 4");
         return new SearchBusRouteDto(busRouteDetails);
+    }
+//      api 5
+//    @GetMapping("/{route}/{dir}/{oriStop}/{destStop}")
+//    public BusEtaResponseDto busEta(@PathVariable String route, @PathVariable String dir, @PathVariable String oriStop, @PathVariable String destStop){
+//        BusEtaResponseDto result = busEtaResponseDto.toBusEtaDto(route,dir,oriStop,destStop);
+//        return result;
+//    }
+    @GetMapping("/buseta/{oristop}/{route}")
+    public BusEtaResponseExtDto test(String oriStop, String route){
+        return nwfbExtService.busEta(oriStop,route);
     }
 }
