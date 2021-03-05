@@ -24,7 +24,6 @@ public class DebugApi {
     private NwfbService nwfbService;
     @Autowired
     private GooglePlaceSearchService googlePlaceSearchService;
-
     @Autowired
     private RouteRepository routeRepository;
     @Autowired

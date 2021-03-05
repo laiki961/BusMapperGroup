@@ -3,10 +3,12 @@ package com.fsse.busmapper.api;
 
 import com.fsse.busmapper.domain.Place;
 import com.fsse.busmapper.domain.SearchBusRoute;
+//import com.fsse.busmapper.domain.dto.external.response.eta.CtbEtaResponseExtDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.SearchBusRouteDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.googleSearchPlace.GoogleSearchPlaceResponseDto;
 import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
+import com.fsse.busmapper.service.external.NwfbExtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,10 @@ public class PlaceSearchApi {
     private GooglePlaceSearchService googlePlaceSearchService;
     @Autowired
     private PlaceRepository placeRepository;
+
+    //testing
+    @Autowired
+    private NwfbExtService nwfbExtService;
 
     //API 2 DONE (DON'T TOUCH)
     @GetMapping("/byPlaceLatLng/{lat}/{lng}")
@@ -50,4 +56,11 @@ public class PlaceSearchApi {
         List<SearchBusRoute> busRouteDetails = googlePlaceSearchService.searchBusStopIdWithinRange(origPlaceSearchId, destPlaceSearchId);
         return new SearchBusRouteDto(busRouteDetails);
     }
+
+    //API 5 (working on)
+//    @GetMapping("/eta/{stopId}/{route}")
+//    public CtbEtaResponseExtDto busRouteDetailsWithOriginEta(@PathVariable Integer stopId, @PathVariable Integer route){
+//        CtbEtaResponseExtDto ctbEtaResponseExtDto = nwfbExtService.busRouteDetailsWithOriginEta(stopId, route);
+//        return ctbEtaResponseExtDto;
+//    }
 }
