@@ -1,5 +1,6 @@
 package com.fsse.busmapper.service;
 
+import com.fsse.busmapper.domain.EstTime;
 import com.fsse.busmapper.domain.dto.internal.response.bus.FetchDataFromCTBResponseDto;
 import com.fsse.busmapper.domain.entity.RouteEntity;
 import com.fsse.busmapper.domain.entity.RouteStopEntity;
@@ -21,4 +22,9 @@ public interface NwfbService {
 
    	void loadAllStops();
 
+    EstTime loadEstTime(String routeId, String origStopId);
+
+    List<StopEntity> stopEntityList(String routeId, String direction);
+
+    List<RouteStopEntity> routeStopEntities(String routeId, String direction);
 }

@@ -13,6 +13,7 @@ import java.util.List;
 public interface RouteStopRepository extends CrudRepository<RouteStopEntity, Integer> {
     List<RouteStopEntity> findAll();
     List<RouteStopEntity> findByStopEntity_StopId(String stopId);
+    List<RouteStopEntity> findByRouteEntity_RouteIdAndDir(String routeId, String dir);
 
 
 }

@@ -3,6 +3,7 @@ package com.fsse.busmapper.service.external.impl;
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.Stop;
+import com.fsse.busmapper.domain.dto.external.response.estTime.CtbEstTimeResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteDataResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.routeStop.CtbRouteStopResponseExtDto;
@@ -72,5 +73,12 @@ public class NwfbExtServiceImpl implements NwfbExtService {
         return stopDO;
     }
 
+    @Override
+    public CtbEstTimeResponseExtDto loadEstTime(String origStopId, String routeId) {
+        CtbEstTimeResponseExtDto response = restTemplate.getForObject(
+                "https://rt.data.gov.hk/v1/transport/citybus-nwfb/eta/CTB/" + origStopId  + "/" + routeId,
+                CtbEstTimeResponseExtDto.class);
+        return response;
+    }
 
 }
