@@ -13,14 +13,22 @@ public class BusEtaIntDO {
     private String destStop;
 
     private Integer stopSeq;
-    private Integer routeStopId;
+    private Integer stopId;
     private String stopName;
     private Double stopLat;
     private Double stopLng;
 
     private String eta;
 
-    toBusEtaResponseDto()
+    public BusEtaResponseDto toBusEtaResponseDto(RouteStopEntity routeStopEntity){
+        BusEtaResponseDto dto = new BusEtaResponseDto();???
+        dto.setDir(busEtaIntDO.getDir());
+        dto.setRoute(busEtaIntDO.getRoute());
+        dto.setOriResponse(busEtaIntDO.getOriStop());
+        dto.setStopsResponse();
+        //todo
+        return dto;
+    }
 
     public BusEtaIntDO(BusEtaExtDO result, RouteStopEntity routeStopEntity, StopEntity stopEntity){
         this.route = result.ge;

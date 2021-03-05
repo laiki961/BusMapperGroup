@@ -43,7 +43,9 @@ public class NwfbServiceImpl implements NwfbService {
     }
 
     public BusEtaIntDO busEta(String route, String dir, String oriStop, String destStop) {
-        BusEtaIntDO busEtaIntDO = nwfbExtService.busEta(oriStop, route);
+        BusEtaExtDO busEtaExtDO = nwfbExtService.busEta(oriStop, route);
+        BusEtaIntDO busEtaIntDO
+        BusEtaIntDO busEtaIntDO = new BusEtaIntDO(busEtaExtDO);
         return busEtaIntDO;
     }
 
