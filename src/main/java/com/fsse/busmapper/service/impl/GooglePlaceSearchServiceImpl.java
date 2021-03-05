@@ -1,11 +1,9 @@
 package com.fsse.busmapper.service.impl;
 
 import com.fsse.busmapper.domain.Place;
-import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.SearchBusRoute;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceIdResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
-import com.fsse.busmapper.domain.dto.internal.response.place.SearchBusRouteDto;
 import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.domain.entity.RouteStopEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
@@ -19,7 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Service
@@ -69,6 +68,7 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
     public List<SearchBusRoute> searchBusStopIdWithinRange(int origPlaceSearchId, int destPlaceSearchId) {
 //        List<StopEntity> stopEntities = stopRepository.findAll();
 //        List<PlaceEntity> placeEntities = placeRepository.findAll();
+
         //Step 1.1: Find orig range
         logger.debug("calling searchBusStopIdWithinRange method");
         PlaceEntity origEntity = placeRepository.findByPlaceSearchId(origPlaceSearchId);
@@ -91,48 +91,36 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
             routeStopOrig.addAll(routeStopRepository.findByStopEntity_StopId(origStop.get(i).getStopId()));
         }
         logger.debug("Route in range(Orig): {}", routeStopOrig.toString());
+
         List<RouteStopEntity> routeStopDest = new ArrayList<>();
         for(int i=0; i<destStop.size(); i++){
             routeStopDest.addAll(routeStopRepository.findByStopEntity_StopId(destStop.get(i).getStopId()));
         }
         logger.debug("Route in range(Dest): {}", routeStopDest.toString());
 
-        List<RouteStopEntity> sameRouteIdInOrig = new ArrayList<>();
-        List<RouteStopEntity> sameRouteIdInDest = new ArrayList<>();
+
+        List<SearchBusRoute> busRouteDetails = new ArrayList<>();
         for (int i = 0; i < routeStopOrig.size(); i++) {
             for (int j = 0; j < routeStopDest.size(); j++) {
                 //check (1)RouteID exist in Ori and Dest (2)both StopId if they are in the same direction
                 if (routeStopOrig.get(i).getRouteEntity().getRouteId().equals(routeStopDest.get(j).getRouteEntity().getRouteId())
-                    && routeStopOrig.get(i).getDir().equals(routeStopDest.get(j).getDir())
-                    && routeStopOrig.get(i).getSeq()<routeStopDest.get(j).getSeq()){
-                        sameRouteIdInOrig.add(routeStopOrig.get(i));
-                        logger.debug("sameRouteIdInOrig: Added{}", routeStopOrig.get(i).toString());
-                        sameRouteIdInDest.add(routeStopOrig.get(i));
-                        logger.debug("sameRouteIdInDest: Added{}", routeStopDest.get(j).toString());
+                        && routeStopOrig.get(i).getDir().equals(routeStopDest.get(j).getDir())
+                        && routeStopOrig.get(i).getSeq() < routeStopDest.get(j).getSeq()) {
+                    SearchBusRoute searchBusRoute = new SearchBusRoute();
+                    searchBusRoute.setCo(routeStopOrig.get(i).getCo());
+                    searchBusRoute.setRoute(routeStopOrig.get(i).getRouteEntity().getRouteId());
+                    searchBusRoute.setDirection(routeStopOrig.get(i).getDir());
+                    searchBusRoute.setOrigName(routeStopOrig.get(i).getRouteEntity().getOrig());
+                    searchBusRoute.setOrigStop(routeStopOrig.get(i).getStopEntity().getStopId());
+                    searchBusRoute.setDestName(routeStopOrig.get(i).getRouteEntity().getDest());
+                    searchBusRoute.setDestStop(routeStopDest.get(i).getStopEntity().getStopId());
+                    busRouteDetails.add(searchBusRoute);
                 }
             }
         }
-        logger.debug("sameRouteIdInOrig: {}", sameRouteIdInOrig.toString());
-        logger.debug("sameRouteIdInDest: {}", sameRouteIdInDest.toString());
-
-        List<SearchBusRoute> busRouteDetails = new ArrayList<>();
-        SearchBusRoute searchBusRoute = new SearchBusRoute();
-        for(int i=0; i<sameRouteIdInOrig.size(); i++){
-            searchBusRoute.setCo(sameRouteIdInOrig.get(i).getCo());
-            searchBusRoute.setRoute(sameRouteIdInOrig.get(i).getRouteEntity().getRouteId());
-            searchBusRoute.setDirection(sameRouteIdInOrig.get(i).getDir());
-            searchBusRoute.setOrigName(sameRouteIdInOrig.get(i).getRouteEntity().getOrig());
-            searchBusRoute.setOrigStop(sameRouteIdInOrig.get(i).getStopEntity().getStopId());
-            for(int j=0; j<sameRouteIdInDest.size(); j++) {
-                if(sameRouteIdInOrig.get(i).getRouteEntity().getRouteId().equals(sameRouteIdInDest.get(j).getRouteEntity().getRouteId())) {
-                    searchBusRoute.setDestName(sameRouteIdInDest.get(j).getRouteEntity().getDest());
-                    searchBusRoute.setDestStop(sameRouteIdInDest.get(j).getStopEntity().getStopId());
-                }
-            }
-            busRouteDetails.add(searchBusRoute);
-        }
+        logger.debug("\nsearchBusRoute: {}", busRouteDetails);
+        logger.debug("go back to PlaceSearchApi");
         return busRouteDetails;
-
-
     }
+
 }

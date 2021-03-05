@@ -14,4 +14,5 @@ public interface RouteStopRepository extends CrudRepository<RouteStopEntity, Int
     List<RouteStopEntity> findAll();
     List<RouteStopEntity> findByStopEntity_StopId(String stopId);
 
+
 }

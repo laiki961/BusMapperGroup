@@ -10,7 +10,6 @@ import com.fsse.busmapper.domain.dto.external.response.BusEta.BusEtaResponseExtD
 import com.fsse.busmapper.domain.dto.internal.response.BusEta.BusEtaResponseDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.SearchBusRouteDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.googleSearchPlace.GoogleSearchPlaceResponseDto;
-import com.fsse.busmapper.domain.entity.PlaceEntity;
 import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
 import com.fsse.busmapper.service.NwfbService;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -57,13 +55,12 @@ public class PlaceSearchApi {
         return new GoogleSearchPlaceResponseDto(placeDO);
     }
 
-    //API 4
+    //API 4 DONE (DON'T TOUCH)
     @GetMapping("/search-bus-route/{origPlaceSearchId}/{destPlaceSearchId}")
     public SearchBusRouteDto searchBusRoute(@PathVariable int origPlaceSearchId, @PathVariable int destPlaceSearchId){
         List<PlaceEntity> placeEntities = new ArrayList<>();
         PlaceEntity placeEntity0 = new PlaceEntity();
         List<SearchBusRoute> busRouteDetails = googlePlaceSearchService.searchBusStopIdWithinRange(origPlaceSearchId, destPlaceSearchId);
-        logger.debug("Finished API 4");
         return new SearchBusRouteDto(busRouteDetails);
     }
 //      api 5
