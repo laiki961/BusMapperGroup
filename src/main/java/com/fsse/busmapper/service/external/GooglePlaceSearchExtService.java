@@ -1,5 +1,6 @@
 package com.fsse.busmapper.service.external;
 
+import com.fsse.busmapper.domain.dto.external.response.BusEta.BusEtaResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceIdResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.place.GoogleSearchPlaceResponseExtDto.GoogleSearchPlaceLatLngResponseExtDto;
 

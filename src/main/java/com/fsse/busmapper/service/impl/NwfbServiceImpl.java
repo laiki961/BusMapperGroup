@@ -1,8 +1,6 @@
 package com.fsse.busmapper.service.impl;
 
-import com.fsse.busmapper.domain.Route;
-import com.fsse.busmapper.domain.RouteStop;
-import com.fsse.busmapper.domain.Stop;
+import com.fsse.busmapper.domain.*;
 import com.fsse.busmapper.domain.dto.external.response.BusEta.BusEtaResponseExtDto;
 import com.fsse.busmapper.domain.dto.internal.response.bus.FetchDataFromCTBResponseDto;
 import com.fsse.busmapper.domain.entity.RouteEntity;
@@ -17,6 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,12 +41,11 @@ public class NwfbServiceImpl implements NwfbService {
             Thread.currentThread().interrupt();
         }
     }
-//
-//    @GetMapping("/{route}/{dir}/{oriStop}/{destStop}")
-//    public BusEtaResponseDto busEta(@PathVariable String route, @PathVariable String dir, @PathVariable String oriStop, @PathVariable String destStop) {
-//        BusEtaResponseDto result = busEtaRequestDto.toBusEtaDto(route ,dir ,oriStop ,destStop);
-//        return result;
-//    }
+
+    public BusEtaIntDO busEta(String route, String dir, String oriStop, String destStop) {
+        BusEtaIntDO busEtaIntDO = nwfbExtService.busEta(oriStop, route);
+        return busEtaIntDO;
+    }
 
 //    @Override
 //    public BusEtaExtDO busEta(String dir, String seq){
@@ -182,6 +181,8 @@ public class NwfbServiceImpl implements NwfbService {
         logger.debug("Finished fetching data from CTB");
         return fetchDataFromCTBResponseDto;
     }
-
+    public BusEtaIntDO toBusEtaIntDO(BusEtaExtDO){
+        //todo
+    }
 
 }

@@ -1,18 +1,22 @@
 package com.fsse.busmapper.domain.dto.external.response.BusEta;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fsse.busmapper.domain.BusEtaExtDO;
 
+import java.util.List;
+@JsonIgnoreProperties
 public class BusEtaResponseExtDto {
     private List<BusEtaDataResponseExtDto> data;
-    private String route;
-    
-    private String dir;
-    private String oriStop;
-    private String destStop;
 
-    private BusEtaResponseExtDto stops;
-    private BusEtaResponseExtDto origin;
 
+    public BusEtaExtDO toBusEtaExtDO(){
+        BusEtaExtDO busEtaExtDO = new BusEtaExtDO();
+        BusEtaDataResponseExtDto busEtaDataResponseExtDto = new BusEtaDataResponseExtDto();
+        busEtaExtDO.setDir(data.get(0).getDir());
+        busEtaExtDO.setSeq(data.get(0).getSeq());
+        busEtaExtDO.setEta(data.get(0).getEta());
+        return busEtaExtDO;
+    }
 
 //    public BusEtaIntDO toBusEtaDto(){
 //        //todo
@@ -40,56 +44,10 @@ public class BusEtaResponseExtDto {
         this.data = data;
     }
 
-    public String getRoute() {
-        return route;
-    }
-
-    public void setRoute(String route) {
-        this.route = route;
-    }
-
-    public String getDir() {
-        return dir;
-    }
-
-    public void setDir(String dir) {
-        this.dir = dir;
-    }
-
-    public BusEtaResponseExtDto getStops() {
-        return stops;
-    }
-
-    public void setStops(BusEtaResponseExtDto stops) {
-        this.stops = stops;
-    }
-
-    public BusEtaResponseExtDto getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(BusEtaResponseExtDto origin) {
-        this.origin = origin;
-    }
-
-    public String getDestStop() {
-        return destStop;
-    }
-
-    public void setDestStop(String destStop) {
-        this.destStop = destStop;
-    }
-
     @Override
     public String toString() {
-        return "BusEtaResponseDto{" +
+        return "BusEtaResponseExtDto{" +
                 "data=" + data +
-                ", route='" + route + '\'' +
-                ", dir='" + dir + '\'' +
-                ", stops=" + stops +
-                ", origin=" + origin +
-                ", destStop='" + destStop + '\'' +
                 '}';
     }
-
 }

@@ -1,15 +1,12 @@
 package com.fsse.busmapper.domain.dto.external.response.BusEta;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fsse.busmapper.domain.BusEtaExtDO;
-
+@JsonIgnoreProperties
 public class BusEtaDataResponseExtDto {
     private String dir;
     private String seq;
     private String eta;
-
-//    public BusEtaExtDO toBusEtaExtDO(){
-//        //todo
-//    }
 
     public String getDir() {
         return dir;

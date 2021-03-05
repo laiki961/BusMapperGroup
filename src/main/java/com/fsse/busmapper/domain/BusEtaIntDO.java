@@ -1,29 +1,38 @@
 package com.fsse.busmapper.domain;
 
+import com.fsse.busmapper.domain.dto.internal.response.BusEta.BusEtaResponseDto;
 import com.fsse.busmapper.domain.entity.RouteStopEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fsse.busmapper.domain.entity.StopEntity;
+import com.fsse.busmapper.service.NwfbService;
 
 public class BusEtaIntDO {
-    @Autowired
-    private RouteStopEntity routeStopEntity;
+
     private String route;
     private String dir;
     private String oriStop;
     private String destStop;
 
-    private String stopsSeq;
-    private String stopsStop;
-    private String stopname;
+    private Integer stopSeq;
+    private Integer routeStopId;
+    private String stopName;
     private Double stopLat;
     private Double stopLng;
 
+    private String eta;
 
-    public RouteStopEntity getRouteStopEntity() {
-        return routeStopEntity;
-    }
+    toBusEtaResponseDto()
 
-    public void setRouteStopEntity(RouteStopEntity routeStopEntity) {
-        this.routeStopEntity = routeStopEntity;
+    public BusEtaIntDO(BusEtaExtDO result, RouteStopEntity routeStopEntity, StopEntity stopEntity){
+        this.route = result.ge;
+        this.dir = routeStopEntity.getDir();
+        this.stopSeq = routeStopEntity.getSeq();
+        this.routeStopId = routeStopEntity.getRouteStopId();
+        this.stopName = stopEntity.getStopname();
+        this.stopLat = stopEntity.getLatitude();
+        this.stopLng = stopEntity.getLongitude();
+        this.oriStop = result.getClass();
+        this.destStop = result.g;
+        this.eta = result.getEta();
     }
 
     public String getRoute() {
@@ -50,14 +59,6 @@ public class BusEtaIntDO {
         this.oriStop = oriStop;
     }
 
-    public String getStopsSeq() {
-        return stopsSeq;
-    }
-
-    public void setStopsSeq(String stopsSeq) {
-        this.stopsSeq = stopsSeq;
-    }
-
     public String getDestStop() {
         return destStop;
     }
@@ -66,20 +67,28 @@ public class BusEtaIntDO {
         this.destStop = destStop;
     }
 
-    public String getStopsStop() {
-        return stopsStop;
+    public String getStopSeq() {
+        return stopSeq;
     }
 
-    public void setStopsStop(String stopsStop) {
-        this.stopsStop = stopsStop;
+    public void setStopSeq(String stopSeq) {
+        this.stopSeq = stopSeq;
     }
 
-    public String getStopname() {
-        return stopname;
+    public String getRouteStopId() {
+        return routeStopId;
     }
 
-    public void setStopname(String stopname) {
-        this.stopname = stopname;
+    public void setRouteStopId(String routeStopId) {
+        this.routeStopId = routeStopId;
+    }
+
+    public String getStopName() {
+        return stopName;
+    }
+
+    public void setStopName(String stopName) {
+        this.stopName = stopName;
     }
 
     public Double getStopLat() {
@@ -98,19 +107,27 @@ public class BusEtaIntDO {
         this.stopLng = stopLng;
     }
 
+    public String getEta() {
+        return eta;
+    }
+
+    public void setEta(String eta) {
+        this.eta = eta;
+    }
+
     @Override
     public String toString() {
         return "BusEtaIntDO{" +
-                "routeStopEntity=" + routeStopEntity +
-                ", route='" + route + '\'' +
+                "route='" + route + '\'' +
                 ", dir='" + dir + '\'' +
                 ", oriStop='" + oriStop + '\'' +
                 ", destStop='" + destStop + '\'' +
-                ", stopsSeq='" + stopsSeq + '\'' +
-                ", stopsStop='" + stopsStop + '\'' +
-                ", stopname='" + stopname + '\'' +
+                ", stopSeq='" + stopSeq + '\'' +
+                ", routeStopId='" + routeStopId + '\'' +
+                ", stopName='" + stopName + '\'' +
                 ", stopLat=" + stopLat +
                 ", stopLng=" + stopLng +
+                ", eta='" + eta + '\'' +
                 '}';
     }
 }

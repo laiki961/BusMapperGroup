@@ -1,8 +1,6 @@
 package com.fsse.busmapper.service.external.impl;
 
-import com.fsse.busmapper.domain.Route;
-import com.fsse.busmapper.domain.RouteStop;
-import com.fsse.busmapper.domain.Stop;
+import com.fsse.busmapper.domain.*;
 import com.fsse.busmapper.domain.dto.external.response.BusEta.BusEtaResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteDataResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteResponseExtDto;
@@ -30,10 +28,13 @@ public class NwfbExtServiceImpl implements NwfbExtService {
 
 
     @Override
-    public BusEtaResponseExtDto busEta(String oriStop, String route){
-        BusEtaResponseExtDto response = restTemplate.getForObject("https://rt.data.gov.hk/v1/transport/citybusnwfb/eta/ctb/"+
-                oriStop + "/" + route, BusEtaResponseExtDto.class );
-        return response;
+    public BusEtaExtDO busEta(String oriStop, String route){
+        BusEtaResponseExtDto response = restTemplate.getForObject(
+                "https://rt.data.gov.hk/v1/transport/citybus-nwfb/eta/ctb/"+
+                oriStop + "/" + route,
+                BusEtaResponseExtDto.class );
+        BusEtaExtDO busEtaExtDO = response.toBusEtaExtDO();
+        return busEtaExtDO;
     }
 
     @Override
