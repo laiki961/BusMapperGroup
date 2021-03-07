@@ -1,12 +1,16 @@
 package com.fsse.busmapper.service.impl;
 
+import com.fsse.busmapper.domain.EstTime;
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.Stop;
+import com.fsse.busmapper.domain.dto.external.response.estTime.CtbEstTimeResponseExtDto;
 import com.fsse.busmapper.domain.dto.internal.response.bus.FetchDataFromCTBResponseDto;
+import com.fsse.busmapper.domain.entity.EstTimeEntity;
 import com.fsse.busmapper.domain.entity.RouteEntity;
 import com.fsse.busmapper.domain.entity.RouteStopEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
+import com.fsse.busmapper.repository.EstTimeRepository;
 import com.fsse.busmapper.repository.RouteRepository;
 import com.fsse.busmapper.repository.RouteStopRepository;
 import com.fsse.busmapper.repository.StopRepository;
@@ -30,6 +34,8 @@ public class NwfbServiceImpl implements NwfbService {
     private RouteStopRepository routeStopRepository;
     @Autowired
     private StopRepository stopRepository;
+    @Autowired
+    private EstTimeRepository estTimeRepository;
 
     Logger logger = LoggerFactory.getLogger(NwfbServiceImpl.class);
 
@@ -49,8 +55,8 @@ public class NwfbServiceImpl implements NwfbService {
 
         // Step 1.1: Convert the routeDO into RouteEntity
         List<RouteEntity> routeEntities = new ArrayList<>();
-        for(int i=0; i<routeDOs.size(); i++) {
-            logger.debug("Adding {}/{} ", i+1, routeDOs.size());
+        for (int i = 0; i < routeDOs.size(); i++) {
+            logger.debug("Adding {}/{} ", i + 1, routeDOs.size());
             Route routeDO = routeDOs.get(i);
             RouteEntity entity = new RouteEntity();
             entity.setRouteId(routeDO.getRoute());
@@ -66,16 +72,16 @@ public class NwfbServiceImpl implements NwfbService {
 
     @Override
     // Step 2.3: let the program run 2 direction itself
-    public List<StopEntity> loadRouteInAndOutboundStop (List<RouteEntity> routeEntities){
+    public List<StopEntity> loadRouteInAndOutboundStop(List<RouteEntity> routeEntities) {
         List<StopEntity> stopEntities = new ArrayList<>();
         List<RouteStopEntity> routeStopEntities = null;
         String[] direction = new String[2];
         direction[0] = "inbound";
         direction[1] = "outbound";
-        for(int i=0; i<routeEntities.size(); i++){
-            for(int j=0; j<direction.length; j++){
-                logger.debug("Total amount of routes: {}, 2 Directions: {}", routeEntities.size(), routeEntities.size()*2);
-                logger.debug("{} routes left: ", routeEntities.size()*2 - j);
+        for (int i = 0; i < routeEntities.size(); i++) {
+            for (int j = 0; j < direction.length; j++) {
+                logger.debug("Total amount of routes: {}, 2 Directions: {}", routeEntities.size(), routeEntities.size() * 2);
+                logger.debug("{} routes left: ", routeEntities.size() * 2 - j);
                 routeStopEntities = loadRouteDirectionStop(routeEntities.get(i), direction[j]);
                 //loadRouteDirectionStop( RouteEntity route, inbound / outbound);
                 logger.debug("saved routeID {}, {} to database", routeEntities.get(i).getRouteId(), direction[j]);
@@ -86,7 +92,7 @@ public class NwfbServiceImpl implements NwfbService {
     }
 
     @Override
-    public List<RouteStopEntity> loadRouteDirectionStop(RouteEntity route, String dir){
+    public List<RouteStopEntity> loadRouteDirectionStop(RouteEntity route, String dir) {
         List<RouteStopEntity> routeStopEntities = new ArrayList<>();
         // Step 2.0: Load RouteStop with a single direction
 
@@ -95,8 +101,8 @@ public class NwfbServiceImpl implements NwfbService {
         logger.debug("Done fetch route {} in {}", route.getRouteId(), dir);
 
         // Step 2.1: Convert routeStopDO into RouteStopEntity
-        for (int i=0; i<routeStopDOs.size(); i++){
-            logger.debug("Setting routeID. {}, stopNo.{} of {}, {} ", route.getRouteId(), i+1, routeStopDOs.size(), dir);
+        for (int i = 0; i < routeStopDOs.size(); i++) {
+            logger.debug("Setting routeID. {}, stopNo.{} of {}, {} ", route.getRouteId(), i + 1, routeStopDOs.size(), dir);
 
             RouteStopEntity routeStopEntity = new RouteStopEntity();
             routeStopEntity.setCo(routeStopDOs.get(i).getCo());
@@ -126,13 +132,13 @@ public class NwfbServiceImpl implements NwfbService {
         List<StopEntity> stopEntities = stopRepository.findAll();
         List<Stop> stopDOs = new ArrayList<>();
 
-        for (int j=0; j<stopEntities.size(); j++){
-            logger.debug("Total stopID amount {}/{}, left: {}, stopID{} ", j+1, stopEntities.size(), stopEntities.size()-(j+1), stopEntities.get(j).getStopId());
+        for (int j = 0; j < stopEntities.size(); j++) {
+            logger.debug("Total stopID amount {}/{}, left: {}, stopID{} ", j + 1, stopEntities.size(), stopEntities.size() - (j + 1), stopEntities.get(j).getStopId());
 
             Stop stopDO = nwfbExtService.loadSpecificStop(stopEntities.get(j).getStopId());
             stopDOs.add(stopDO);
 
-            logger.debug("stopID {}: Setting StopName, Latitude & Longitude", stopEntities.get(j).getStopId() );
+            logger.debug("stopID {}: Setting StopName, Latitude & Longitude", stopEntities.get(j).getStopId());
             StopEntity entity = new StopEntity();
             entity.setStopId(stopDOs.get(j).getStopId());
             entity.setStopname(stopDOs.get(j).getStopName());
@@ -144,8 +150,8 @@ public class NwfbServiceImpl implements NwfbService {
             speedLimit();
         }
     }
-    
-//Final
+
+    //Final
     @Override
     public FetchDataFromCTBResponseDto loadAllBusData() {
         FetchDataFromCTBResponseDto fetchDataFromCTBResponseDto = new FetchDataFromCTBResponseDto();
@@ -162,5 +168,27 @@ public class NwfbServiceImpl implements NwfbService {
         return fetchDataFromCTBResponseDto;
     }
 
+    @Override
+    public EstTime loadEstTime(String origStopId, String routeId) {
+        CtbEstTimeResponseExtDto estTimeDto = nwfbExtService.loadEstTime(origStopId, routeId);
+        EstTime estTimeDo = estTimeDto.toEstTimeDo();
+        EstTimeEntity estTimeEntity = estTimeDo.toEstTimeEntity();
+        estTimeEntity = estTimeRepository.save(estTimeEntity);
+        return estTimeDo;
+    }
 
+    public List<StopEntity> stopEntityList(String routeId, String direction) {
+        List<RouteStopEntity> routeStopEntities = routeStopRepository.findByRouteEntity_RouteIdAndDir(routeId, direction);
+        List<StopEntity> stopEntityList = new ArrayList<>();
+        for (int i = 0; i < routeStopEntities.size(); i++) {
+            StopEntity stopEntities = stopRepository.findByStopId(routeStopEntities.get(i).getStopEntity().getStopId());
+            stopEntityList.add(stopEntities);
+        }
+        return stopEntityList;
+    }
+
+    public List<RouteStopEntity> routeStopEntities(String routeId, String direction) {
+        List<RouteStopEntity> routeStopEntit = routeStopRepository.findByRouteEntity_RouteIdAndDir(routeId, direction);
+        return routeStopEntit;
+    }
 }
