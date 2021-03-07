@@ -57,10 +57,5 @@ public class PlaceSearchApi {
         return new SearchBusRouteDto(busRouteDetails);
     }
 
-    //API 5 (working on)
-//    @GetMapping("/eta/{stopId}/{route}")
-//    public CtbEtaResponseExtDto busRouteDetailsWithOriginEta(@PathVariable Integer stopId, @PathVariable Integer route){
-//        CtbEtaResponseExtDto ctbEtaResponseExtDto = nwfbExtService.busRouteDetailsWithOriginEta(stopId, route);
-//        return ctbEtaResponseExtDto;
-//    }
+
 }

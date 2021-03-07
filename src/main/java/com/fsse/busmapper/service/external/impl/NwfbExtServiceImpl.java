@@ -1,10 +1,8 @@
 package com.fsse.busmapper.service.external.impl;
 
-import com.fsse.busmapper.domain.Eta;
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.Stop;
-import com.fsse.busmapper.domain.dto.external.response.eta.CtbEtaResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteDataResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.route.CtbRouteResponseExtDto;
 import com.fsse.busmapper.domain.dto.external.response.routeStop.CtbRouteStopResponseExtDto;
@@ -72,20 +70,6 @@ public class NwfbExtServiceImpl implements NwfbExtService {
             Stop stopDO = response.toStop();
             logger.debug("stopID {}: Added [StopDO] into [List<Stop>]", stopId);
         return stopDO;
-    }
-
-    @Override
-    public Eta busRouteDetailsWithOriginEta(Integer stopId, Integer route) {
-        CtbEtaResponseExtDto responseExtDto = restTemplate.getForObject(
-                "https://rt.data.gov.hk/" +
-                "/v1/transport/citybus-nwfb/eta/CTB/" +stopId +"/"+ route,
-                CtbEtaResponseExtDto.class
-        );
-        logger.debug("finished calling Ext API");
-
-        Eta etaDO = responseExtDto.toEtaDO();
-//        logger.debug("Converted to DO");
-        return etaDO;
     }
 
 
