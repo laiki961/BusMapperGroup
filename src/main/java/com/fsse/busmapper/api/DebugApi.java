@@ -2,11 +2,8 @@ package com.fsse.busmapper.api;
 
 import com.fsse.busmapper.domain.entity.RouteEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
-import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.repository.RouteRepository;
-import com.fsse.busmapper.repository.RouteStopRepository;
 import com.fsse.busmapper.repository.StopRepository;
-import com.fsse.busmapper.service.GooglePlaceSearchService;
 import com.fsse.busmapper.service.NwfbService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,28 +20,26 @@ public class DebugApi {
     @Autowired
     private NwfbService nwfbService;
     @Autowired
-    private GooglePlaceSearchService googlePlaceSearchService;
-    @Autowired
     private RouteRepository routeRepository;
     @Autowired
-    private RouteStopRepository routeStopRepository;
-    @Autowired
     private StopRepository stopRepository;
-    @Autowired
-    private PlaceRepository placeRepository;
+
     private Logger logger = LoggerFactory.getLogger(DebugApi.class);
 
+    //API 1/4
     @GetMapping("/load/all-route")
     public void loadAllRoutes() {
         nwfbService.loadAllRoutes();
     }
 
+    //API 2/4
     @GetMapping("/load/all-routes-stop")
     public void loadRouteInAndOutboundStop () {
         List<RouteEntity> routeEntities = routeRepository.findAll();
         nwfbService.loadRouteInAndOutboundStop(routeEntities);
     }
 
+    //API 3/4
     @GetMapping("/load/all-stop")
     public void loadAllStops() {
         logger.debug("Start loading [List<StopEntity>] from the database");

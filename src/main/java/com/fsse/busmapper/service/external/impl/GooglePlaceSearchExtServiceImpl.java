@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 
-//API 2 (not yet finished)
+//API 2
 @Service
 public class GooglePlaceSearchExtServiceImpl implements GooglePlaceSearchExtService {
     private RestTemplate restTemplate = new RestTemplate();
@@ -19,18 +19,15 @@ public class GooglePlaceSearchExtServiceImpl implements GooglePlaceSearchExtServ
 
     @Override
     public GoogleSearchPlaceLatLngResponseExtDto googlePlaceSearchByLatLng(Double lat, Double lng) {
-        GoogleSearchPlaceLatLngResponseExtDto response = restTemplate.getForObject(
-                "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
-                        lat + "," + lng +
+        return restTemplate.getForObject(
+                "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng +
                         "&key=" + "AIzaSyCjCVCEaRCewdaqDQE6ocCPC1x_W-EsS-g",
                 GoogleSearchPlaceLatLngResponseExtDto.class
         );
-        logger.debug(response.toString());
-        return response;
     }
 
 
-    //API 3 DONE (Don't touch)
+    //API 3
     @Override
     public GoogleSearchPlaceIdResponseExtDto googlePlaceSearchByPlaceId(String placeId) {
         GoogleSearchPlaceIdResponseExtDto googleSearchPlaceIdResponseExtDto = restTemplate.getForObject(

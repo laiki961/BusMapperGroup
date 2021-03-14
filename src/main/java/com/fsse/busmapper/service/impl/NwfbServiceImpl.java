@@ -169,11 +169,11 @@ public class NwfbServiceImpl implements NwfbService {
     }
 
     @Override
-    public EstTime loadEstTime(String origStopId, String routeId) {
+    public EstTime loadEstTime(String origStopId, String routeId) { //?????
         CtbEstTimeResponseExtDto estTimeDto = nwfbExtService.loadEstTime(origStopId, routeId);
         EstTime estTimeDo = estTimeDto.toEstTimeDo();
         EstTimeEntity estTimeEntity = estTimeDo.toEstTimeEntity();
-        estTimeEntity = estTimeRepository.save(estTimeEntity);
+        estTimeEntity = estTimeRepository.save(estTimeEntity); ///?????
         return estTimeDo;
     }
 

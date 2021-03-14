@@ -35,7 +35,7 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
     Logger logger = LoggerFactory.getLogger(GooglePlaceSearchServiceImpl.class);
 
     //API 2
-    public Place googleSearchLatLng(Double lat, Double lng) {
+    public Place googleSearchByLatLng(Double lat, Double lng) {
         GoogleSearchPlaceLatLngResponseExtDto responseDto = googlePlaceSearchExtService.googlePlaceSearchByLatLng(lat, lng);
         Place placeDo = responseDto.toPlaceExtDo();
         PlaceEntity placeEntity = placeDo.toPlaceEntity();
@@ -46,7 +46,7 @@ public class GooglePlaceSearchServiceImpl implements GooglePlaceSearchService {
 
     //API 3 (DONE Don't touch)
     @Override
-    public Place googleSearchPlaceId(String placeId) {
+    public Place googleSearchByPlaceId(String placeId) {
         // Fetch place detail by searchInput from Google Search Place API
         GoogleSearchPlaceIdResponseExtDto placeDto = googlePlaceSearchExtService.googlePlaceSearchByPlaceId(placeId);
         logger.debug("received 1: {}", placeDto.toString()); //OK

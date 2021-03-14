@@ -9,12 +9,11 @@ import java.util.List;
 
 public interface GooglePlaceSearchService {
     //API 2
-    Place googleSearchLatLng(Double lat, Double lng);
+    Place googleSearchByLatLng(Double lat, Double lng);
 
     //API 3
-    Place googleSearchPlaceId(String placeId);
+    Place googleSearchByPlaceId(String placeId);
 
     //API 4
-    // return what datatype?
     List<SearchBusRoute> searchBusStopIdWithinRange(int origPlaceSearchId, int destPlaceSearchId);
 }

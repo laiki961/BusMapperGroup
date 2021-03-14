@@ -3,12 +3,9 @@ package com.fsse.busmapper.api;
 
 import com.fsse.busmapper.domain.Place;
 import com.fsse.busmapper.domain.SearchBusRoute;
-//import com.fsse.busmapper.domain.dto.external.response.eta.CtbEtaResponseExtDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.SearchBusRouteDto;
 import com.fsse.busmapper.domain.dto.internal.response.place.googleSearchPlace.GoogleSearchPlaceResponseDto;
-import com.fsse.busmapper.repository.PlaceRepository;
 import com.fsse.busmapper.service.GooglePlaceSearchService;
-import com.fsse.busmapper.service.external.NwfbExtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,31 +23,25 @@ public class PlaceSearchApi {
 
     @Autowired
     private GooglePlaceSearchService googlePlaceSearchService;
-    @Autowired
-    private PlaceRepository placeRepository;
 
-    //testing
-    @Autowired
-    private NwfbExtService nwfbExtService;
-
-    //API 2 DONE (DON'T TOUCH)
+    //API 2
     @GetMapping("/byPlaceLatLng/{lat}/{lng}")
     public GoogleSearchPlaceResponseDto loadLocationName(@PathVariable("lat") Double lat, @PathVariable("lng") Double lng){
-        Place placeDO = googlePlaceSearchService.googleSearchLatLng(lat,lng);
+        Place placeDO = googlePlaceSearchService.googleSearchByLatLng(lat,lng);
         logger.debug("received 6: {}", placeDO );
         GoogleSearchPlaceResponseDto dto = new GoogleSearchPlaceResponseDto(placeDO);
         return dto;
     }
 
-    //API 3 DONE (DON'T TOUCH)
+    //API 3
     @GetMapping("/byPlaceId/{placeId}")
     public GoogleSearchPlaceResponseDto searchPlaceCoorResponseDto(@PathVariable("placeId") String placeId) {
-        Place placeDO = googlePlaceSearchService.googleSearchPlaceId(placeId);
+        Place placeDO = googlePlaceSearchService.googleSearchByPlaceId(placeId);
         logger.debug("received 6: {}", placeDO );
         return new GoogleSearchPlaceResponseDto(placeDO);
     }
 
-    //API 4 DONE (DON'T TOUCH)
+    //API 4
     @GetMapping("/search-bus-route/{origPlaceSearchId}/{destPlaceSearchId}")
     public SearchBusRouteDto searchBusRoute(@PathVariable int origPlaceSearchId, @PathVariable int destPlaceSearchId){
         List<SearchBusRoute> busRouteDetails = googlePlaceSearchService.searchBusStopIdWithinRange(origPlaceSearchId, destPlaceSearchId);

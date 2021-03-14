@@ -22,13 +22,9 @@ public class SearchBusRouteDto {
             dto.setCo(busRouteDetails.get(i).getCo());
             dto.setRoute(busRouteDetails.get(i).getRoute());
             dto.setDirection(busRouteDetails.get(i).getDirection());
-            logger.debug(busRouteDetails.get(i).getDirection());
             dto.setOrigName(busRouteDetails.get(i).getOrigName());
-            logger.debug(busRouteDetails.get(i).getOrigName());
             dto.setOrigStop(busRouteDetails.get(i).getOrigStop());
-            logger.debug(busRouteDetails.get(i).getOrigStop());
             dto.setDestName(busRouteDetails.get(i).getDestName());
-            logger.debug(busRouteDetails.get(i).getDestName());
             dto.setDestStop(busRouteDetails.get(i).getDestStop());
             response.add(dto);
         }
