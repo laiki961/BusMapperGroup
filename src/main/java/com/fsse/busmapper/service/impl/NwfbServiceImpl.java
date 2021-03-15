@@ -188,7 +188,7 @@ public class NwfbServiceImpl implements NwfbService {
     }
 
     public List<RouteStopEntity> routeStopEntities(String routeId, String direction) {
-        List<RouteStopEntity> routeStopEntit = routeStopRepository.findByRouteEntity_RouteIdAndDir(routeId, direction);
-        return routeStopEntit;
+        List<RouteStopEntity> routeStopEntity = routeStopRepository.findByRouteEntity_RouteIdAndDir(routeId, direction);
+        return routeStopEntity;
     }
 }

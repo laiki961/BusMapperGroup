@@ -1,5 +1,6 @@
 package com.fsse.busmapper.service.external.impl;
 
+import com.fsse.busmapper.domain.EstTime;
 import com.fsse.busmapper.domain.Route;
 import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.Stop;
@@ -79,6 +80,8 @@ public class NwfbExtServiceImpl implements NwfbExtService {
                 "https://rt.data.gov.hk/v1/transport/citybus-nwfb/eta/CTB/" + origStopId  + "/" + routeId,
                 CtbEstTimeResponseExtDto.class);
         return response;
+
     }
+
 
 }

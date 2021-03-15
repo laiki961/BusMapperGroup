@@ -33,6 +33,6 @@ public class BusSearchingApi {
         EstTime estTimeDo = nwfbService.loadEstTime(origStopId, routeId);
         CtbEstTimeResponseDto dto = new CtbEstTimeResponseDto(estTimeDo, routeId, routeStopEntities, stopEntityList, direction, destStop);
         return dto;
-
     }
+
 }
