@@ -6,11 +6,9 @@ import com.fsse.busmapper.domain.RouteStop;
 import com.fsse.busmapper.domain.Stop;
 import com.fsse.busmapper.domain.dto.external.response.estTime.CtbEstTimeResponseExtDto;
 import com.fsse.busmapper.domain.dto.internal.response.bus.FetchDataFromCTBResponseDto;
-import com.fsse.busmapper.domain.entity.EstTimeEntity;
 import com.fsse.busmapper.domain.entity.RouteEntity;
 import com.fsse.busmapper.domain.entity.RouteStopEntity;
 import com.fsse.busmapper.domain.entity.StopEntity;
-import com.fsse.busmapper.repository.EstTimeRepository;
 import com.fsse.busmapper.repository.RouteRepository;
 import com.fsse.busmapper.repository.RouteStopRepository;
 import com.fsse.busmapper.repository.StopRepository;
@@ -34,8 +32,7 @@ public class NwfbServiceImpl implements NwfbService {
     private RouteStopRepository routeStopRepository;
     @Autowired
     private StopRepository stopRepository;
-    @Autowired
-    private EstTimeRepository estTimeRepository;
+
 
     Logger logger = LoggerFactory.getLogger(NwfbServiceImpl.class);
 
@@ -172,8 +169,6 @@ public class NwfbServiceImpl implements NwfbService {
     public EstTime loadEstTime(String origStopId, String routeId) {
         CtbEstTimeResponseExtDto estTimeDto = nwfbExtService.loadEstTime(origStopId, routeId);
         EstTime estTimeDo = estTimeDto.toEstTimeDo();
-        EstTimeEntity estTimeEntity = estTimeDo.toEstTimeEntity();
-        estTimeEntity = estTimeRepository.save(estTimeEntity);
         return estTimeDo;
     }
 
