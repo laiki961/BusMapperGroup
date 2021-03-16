@@ -15,7 +15,7 @@ public class ScheduledTaskConfig {
 //        nwfbService.loadAllBusData();
 //    }
 
-    @Scheduled(cron = "0 0 0 * * ?", zone = "Asia/Hong Kong")
+    @Scheduled(cron = "0 0 0 * * ?")
     public void syncBusDataPerDay(){
         nwfbService.loadAllBusData();
     }
